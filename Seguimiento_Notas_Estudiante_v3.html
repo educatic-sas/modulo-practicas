@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento a las Notas del Estudiante</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { background-color: #f4f6f9; }
+        .navbar-custom { background-color: #0c4a6e; color: white; padding: 10px; }
+        .navbar-custom span { color: #f1f1f1; font-weight: 500; }
+        .header-card { background-color: #0c4a6e; color: white; }
+        .section-title { background-color: #e9ecef; padding: 8px; font-weight: 600; margin-top: 15px; border-left: 4px solid #0c4a6e; }
+        table td, table th { vertical-align: middle; }
+        .resultados { font-weight: 600; }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-custom px-3">
+    <span>Académico &gt; Prácticas &gt; Seguimiento de Notas</span>
+</nav>
+
+<div class="container mt-4">
+    <div class="card shadow-sm mb-4">
+        <div class="card-header header-card">Seguimiento a las Notas del Estudiante</div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-2 text-center">
+                    <img src="https://via.placeholder.com/120" class="img-fluid rounded-circle shadow-sm" alt="Foto Estudiante">
+                </div>
+                <div class="col-md-10">
+                    <p><strong>Nombres y Apellidos:</strong> Juan Pérez Gómez</p>
+                    <p><strong>Documento:</strong> 123456789</p>
+                    <p><strong>Email:</strong> juan.perez@correo.edu.co</p>
+                    <p><strong>Facultad / Programa / Asignatura:</strong> Ingeniería / Sistemas / Práctica Profesional</p>
+                    <p><strong>Empresa / Dependencia / Jefe Inmediato:</strong> Tech Solutions / Desarrollo / Ana Rodríguez</p>
+                    <p><strong>Docente Asesor:</strong> Laura Martínez</p>
+                </div>
+            </div>
+
+            <div class="section-title">Convenciones de Evaluación</div>
+            <table class="table table-bordered">
+                <thead class="table-secondary">
+                    <tr><th>Nivel</th><th>Descripción</th><th>Rango</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Insuficiente</td><td>No demuestra competencias ni autonomía.</td><td>0 - 2,99</td></tr>
+                    <tr><td>Básico</td><td>Cumple parcialmente las exigencias del rol, requiere guía frecuente.</td><td>3,0 - 3,99</td></tr>
+                    <tr><td>Competente</td><td>Desarrolla competencias esperadas, aplica saberes, se comunica bien.</td><td>4,0 - 4,49</td></tr>
+                    <tr><td>Sobresaliente</td><td>Desempeño excepcional, autonomía y aporte significativo.</td><td>4,5 - 5,0</td></tr>
+                </tbody>
+            </table>
+
+            <div class="section-title">Criterios de Evaluación</div>
+            <table class="table table-striped align-middle text-center">
+                <thead class="table-primary">
+                    <tr><th>#</th><th>CRITERIO</th><th>NOTA</th><th>PORCENTAJE</th><th>EVALUADOR</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Evidencia de conocimiento</td><td>4.2</td><td>20%</td><td>Tutor</td></tr>
+                    <tr><td>2</td><td>Entregable 2</td><td>3.8</td><td>20%</td><td>Tutor</td></tr>
+                    <tr><td>3</td><td>Socialización de la práctica (evaluación del monitor)</td><td>4.0</td><td>10%</td><td>Tutor</td></tr>
+                    <tr><td>4</td><td>Evaluación inicial (adaptación) - visita</td><td>3.2</td><td>15%</td><td>Monitor</td></tr>
+                    <tr><td>5</td><td>Entregable 1</td><td>4.0</td><td>15%</td><td>Monitor</td></tr>
+                    <tr><td>6</td><td>Evaluación final (cierre) - visita</td><td>4.2</td><td>10%</td><td>Monitor</td></tr>
+                    <tr><td>7</td><td>Seguimiento a la práctica</td><td>3.9</td><td>10%</td><td>Monitor</td></tr>
+                </tbody>
+            </table>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <label class="form-label">Nota Acumulada</label>
+                    <input type="text" class="form-control resultados" value="3.9" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Nota Definitiva</label>
+                    <input type="text" class="form-control resultados" value="4.0" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instalación de Práctica Laboral</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body { background-color: #f4f6f9; }
+    .navbar-custom { background-color: #0c4a6e; color: white; padding: 10px; }
+    .navbar-custom span { color: #f1f1f1; font-weight: 500; }
+    .topbar {
+      height: 50px;
+      background-color: #212529;
+      color: white;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 1rem;
+    }
+    .topbar i, .topbar span {
+      margin-left: 20px;
+      font-size: 16px;
+    }
+    .header-card { background-color: #0c4a6e; color: white; }
+    .section-title { background-color: #e9ecef; padding: 8px; font-weight: 600; margin-top: 15px; border-left: 4px solid #0c4a6e; }
+    .btn-action { min-width: 120px; }
+    .form-text { font-size: 0.85rem; color: #6c757d; }
+  </style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <i class="fas fa-exclamation-triangle"></i>
+  <span class="badge bg-warning text-dark">0</span>
+
+  <!-- Dropdown de Rol -->
+  <div class="dropdown ms-3">
+    <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="rolDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fas fa-user-shield"></i> Rol
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="rolDropdown">
+      <li><a class="dropdown-item" href="Practicas_Estudiante.html">Practicante / Estudiante</a></li>
+      <li><a class="dropdown-item" href="Practicas_Monitor.html?modo=0">Docente / Tutor</a></li>
+      <li><a class="dropdown-item" href="Practicas_Empresa_Cooperador.html">Empresa / Cooperador</a></li>
+    </ul>
+  </div>
+
+  <i class="fas fa-wifi ms-3"></i>
+</div>
+
+<!-- Breadcrumb -->
+<nav class="navbar navbar-custom px-3">
+  <span>Académico &gt; Prácticas &gt; Instalación</span>
+</nav>
+
+<div class="container mt-4">
+  <div class="card shadow-sm mb-4">
+    <div class="card-header header-card">Formulario de Instalación de la Práctica</div>
+    <div class="card-body">
+      <form id="instalacionForm">
+
+        <div class="section-title">1. Datos del Practicante</div>
+        <div class="row">
+          <div class="col-md-6"><p><strong>Nombres y apellidos:</strong> Juan Pérez Gómez</p></div>
+          <div class="col-md-6"><p><strong>Documento de identidad:</strong> 123456789</p></div>
+          <div class="col-md-6"><p><strong>Facultad:</strong> Ingeniería</p></div>
+          <div class="col-md-6"><p><strong>Programa:</strong> Sistemas</p></div>
+          <div class="col-md-6"><p><strong>Correo institucional:</strong> juan.perez@correo.edu.co</p></div>
+          <div class="col-md-6"><p><strong>Teléfono:</strong> 3001234567</p></div>
+        </div>
+
+        <div class="section-title">2. Datos del Docente Asesor</div>
+        <div class="row">
+          <div class="col-md-6"><p><strong>Nombres y apellidos:</strong> Laura Martínez</p></div>
+          <div class="col-md-6"><p><strong>Teléfono:</strong> 3019876543</p></div>
+          <div class="col-md-6"><p><strong>Correo institucional:</strong> laura.martinez@correo.edu.co</p></div>
+        </div>
+
+        <div class="section-title">3. Datos de la Empresa</div>
+        <div class="row">
+          <div class="col-md-6"><p><strong>Nombre:</strong> Tech Solutions S.A.S</p></div>
+          <div class="col-md-6"><p><strong>NIT:</strong> 900123456-7</p></div>
+          <div class="col-md-6"><p><strong>Dirección:</strong> Calle 123 #45-67</p></div>
+          <div class="col-md-6"><p><strong>Ciudad:</strong> Medellín</p></div>
+          <div class="col-md-6"><p><strong>Teléfono:</strong> 6041234567</p></div>
+          <div class="col-md-6"><p><strong>Correo:</strong> contacto@techsolutions.com</p></div>
+          <div class="col-md-6"><p><strong>Página Web:</strong> www.techsolutions.com</p></div>
+        </div>
+
+        <div class="section-title">4. Datos del Cooperador o Jefe Inmediato</div>
+        <div class="row">
+          <div class="col-md-6"><p><strong>Nombres y apellidos:</strong> Ana Rodríguez</p></div>
+          <div class="col-md-6"><p><strong>Cargo:</strong> Jefe de Desarrollo</p></div>
+          <div class="col-md-6"><p><strong>Profesión:</strong> Ingeniera de Software</p></div>
+          <div class="col-md-6"><p><strong>Teléfono:</strong> 3115558899</p></div>
+          <div class="col-md-6"><p><strong>Correo electrónico:</strong> ana.rodriguez@techsolutions.com</p></div>
+        </div>
+
+        <div class="section-title">5. Actividades o Responsabilidades de la Práctica</div>
+        <div class="row">
+          <div class="col-md-6"><p><strong>Fecha inicio:</strong> 01/08/2025</p></div>
+          <div class="col-md-6"><p><strong>Fecha fin:</strong> 30/11/2025</p></div>
+          <div class="col-md-6"><p><strong>Modalidad:</strong> Interinstitucional</p></div>
+          <div class="col-md-6"><p><strong>Tipo:</strong> Pasantía remunerada</p></div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label"><i class="fas fa-clock text-primary"></i> Horario de la práctica *</label>
+          <textarea class="form-control" id="horario" rows="2" placeholder="Profesor, por favor indique con claridad el horario definido (días y franjas horarias)."></textarea>
+          <div class="form-text">Esta información es clave para la organización académica y administrativa del proceso.</div>
+          <div class="invalid-feedback">Debe especificar el horario de la práctica.</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label"><i class="fas fa-tasks text-primary"></i> Actividades o responsabilidades *</label>
+          <textarea class="form-control" id="actividades" rows="3" placeholder="Liste y describa las funciones o actividades que el estudiante desarrollará durante su práctica."></textarea>
+          <div class="form-text">Esta información es fundamental para el seguimiento y la identificación de posibles riesgos laborales (ARL).</div>
+          <div class="invalid-feedback">Debe detallar las actividades.</div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-danger me-2 btn-action"><i class="fas fa-times"></i> Declinar</button>
+          <button type="submit" class="btn btn-success btn-action"><i class="fas fa-check"></i> Aceptar</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const modo = urlParams.get('modo');
+
+  const horarioField = document.getElementById('horario');
+  const actividadesField = document.getElementById('actividades');
+  const editable = modo === '1';
+
+  horarioField.disabled = !editable;
+  actividadesField.disabled = !editable;
+
+  document.getElementById('instalacionForm').addEventListener('submit', function(event){
+    event.preventDefault();
+    if (!editable) return;
+
+    let valid = true;
+    [horarioField, actividadesField].forEach(campo => {
+      if (campo.value.trim() === '') {
+        campo.classList.add('is-invalid');
+        valid = false;
+      } else {
+        campo.classList.remove('is-invalid');
+      }
+    });
+
+    if (valid) {
+      alert('Formulario enviado correctamente.');
+    }
+  });
+</script>
+</body>
+</html>

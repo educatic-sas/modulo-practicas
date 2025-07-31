@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de Prácticas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body { background-color: #f8f9fa; margin: 0; }
+    .sidebar {
+      width: 250px;
+      background-color: #1c1f26;
+      color: white;
+      height: 100vh;
+      position: fixed;
+      padding: 1rem;
+    }
+    .sidebar .user-info {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .sidebar .user-info img {
+      width: 80px;
+      border-radius: 50%;
+      background-color: white;
+    }
+    .sidebar a {
+      color: white;
+      display: block;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      background-color: #343a40;
+    }
+    .topbar {
+      height: 50px;
+      background-color: #212529;
+      color: white;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 1rem;
+      margin-left: 250px;
+    }
+    .topbar i {
+      margin-left: 20px;
+      font-size: 18px;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 1rem;
+    }
+    .navbar-custom {
+      background-color: #0d6efd;
+      color: white;
+      padding: 0.5rem 1rem;
+    }
+    .navbar-custom a {
+      color: white;
+      text-decoration: none;
+    }
+    .table thead {
+      background-color: #0d6efd;
+      color: white;
+    }
+    .btn-action {
+      font-size: 0.85rem;
+      padding: 4px 8px;
+    }
+    .text-sm {
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="user-info">
+      <img src="https://via.placeholder.com/80" alt="Avatar" />
+      <h6>Yusepe Ramirez</h6>
+      <p>CC: 34353455334</p>
+      <p><i class="fas fa-phone"></i> 234233344</p>
+      <p><i class="fas fa-envelope"></i> yusepe.ramirez@tdea.com.co</p>
+    </div>
+    <a href="#">Inicio</a>
+    <a href="#">Hoja de Vida</a>
+    <a href="#">Info.</a>
+    <a href="#">Tableros de Control</a>
+    <a href="#">Académico</a>
+    <a href="#" style="background-color: #0d6efd;">Gestión</a>
+    <a href="#">Servicios</a>
+    <a href="#">LMS</a>
+  </div>
+
+  <!-- Topbar -->
+  <div class="topbar">
+  <i class="fas fa-exclamation-triangle"></i>
+  <span class="badge bg-warning text-dark">0</span>
+
+  <!-- Dropdown de Rol -->
+  <div class="dropdown ms-3">
+    <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="rolDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fas fa-user-shield"></i> Rol
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="rolDropdown">
+      <li><a class="dropdown-item" href="Practicas_Estudiante.html">Practicante / Estudiante</a></li>
+      <li><a class="dropdown-item" href="Practicas_Monitor.html">Docente / Monitor</a></li>
+      <li><a class="dropdown-item" href="Practicas_Empresa_Cooperador.html">Empresa / Tutor Cooperador</a></li>
+    </ul>
+  </div>
+
+  <i class="fas fa-wifi ms-3"></i>
+</div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <nav class="navbar-custom mb-3">
+      <strong>Académico</strong> &gt; Prácticas &gt; Gestionar
+    </nav>
+
+    <div class="d-flex justify-content-between mb-3">
+      <h4>Lista de Prácticas</h4>
+      <div>
+        <button class="btn btn-primary btn-sm"><i class="fas fa-folder-open"></i> Ver Prácticas Activas</button>
+        <button class="btn btn-secondary btn-sm"><i class="fas fa-archive"></i> Ver Prácticas Cerradas</button>
+      </div>
+    </div>
+
+    <table class="table table-hover align-middle text-center">
+      <thead>
+        <tr>
+          <th>Año / Periodo</th>
+          <th>Programa / Asignatura</th>
+          <th>Documento</th>
+          <th>Nombre y Apellidos</th>
+          <th>Escenario<br><span class="text-sm">Dependencia, Tutor, Tipo, Horario</span></th>
+          <th>Docente</th>
+          <th>Grupo</th>
+          <th>Plan de Práctica<br><span class="text-sm">(Visualiza)</span></th>
+          <th>Instalación<br><span class="text-sm">(Se Firma)</span></th>
+		  <th>Seguimiento Practica<br><span class="text-sm"></span></th>
+          <th>Evaluar<br><span class="text-sm">(Comentario y Califica)</span></th>		 
+          <th>Evaluación<br><span class="text-sm">(Evaluar Asignatura 360°)</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2025-1</td>
+          <td>Ingeniería de Sistemas / Práctica Profesional</td>
+          <td>123456789</td>
+          <td>Juan Pérez Gómez</td>
+          <td>
+            Tech Solutions S.A.S<br/>
+            Desarrollo de Software<br/>
+            Ing. Laura Pérez<br/>
+            Interinstitucional / Lun-Vie 8:00-12:00
+          </td>
+          <td>Juan Torres</td>
+          <td>A1</td>
+          <td><a class="dropdown-item" href="Revision_Plan_Practica.html"><button class="btn btn-outline-primary btn-action"><i class="fas fa-eye"></i> Ver</button></a></td>
+          <td><a class="dropdown-item" href="InstalacionPracticas.html?modo=1"><button class="btn btn-outline-success btn-action"><i class="fas fa-pen-fancy"></i>
+		  Firmar
+		  </button></a></td>
+		    <td><a class="dropdown-item" href="Evidencia_Conocimiento.html"><button class="btn btn-outline-warning btn-action"> Seguimiento </button></a></td>
+          <td><a class="dropdown-item" href="Seguimiento_Entregables_Monitor_Simplificado.html"><button class="btn btn-outline-info btn-action"></i> Evaluar</button></a></td>        
+		 <td> <a class="dropdown-item" href="Evaluacion_Practica_Laboral.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Evaluacion 360</button></a></td>
+        </tr>
+        <tr>
+          <td>2025-1</td>
+          <td>Administración / Práctica Organizacional</td>
+          <td>1000000002</td>
+          <td>Carlos Gómez</td>
+          <td>
+            Banco Nacional<br/>
+            Recursos Humanos<br/>
+            Lic. María Torres<br/>
+            Institucional / Mar-Jue 2:00-6:00
+          </td>
+          <td>Andrea Morales</td>
+          <td>B2</td>
+           <td><a class="dropdown-item" href="Revision_Plan_Practica.html"><button class="btn btn-outline-primary btn-action"><i class="fas fa-eye"></i> Ver</button></a></td>
+          <td><a class="dropdown-item" href="InstalacionPracticas.html?modo=1"><button class="btn btn-outline-success btn-action"><i class="fas fa-pen-fancy"></i>
+		  Firmar
+		  </button></a></td>
+		  <td> </td>
+          <td><a class="dropdown-item" href="Seguimiento_Entregables_Monitor_Simplificado.html"><button class="btn btn-outline-info btn-action"> Evaluar</button></a></td>          
+		   <td><a class="dropdown-item" href="Evaluacion_Practica_Laboral.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Evaluacion 360</button></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
