@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prácticas Laborales</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+
+  <style>
+    body {
+      background-color: #f4f4f4;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .header-bar {
+      background-color: #990000;
+      color: white;
+      padding: 0.75rem 1rem;
+      font-weight: bold;
+    }
+
+    .nav-tabs-custom {
+      background-color: #d9d9d9;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .nav-tabs-custom .btn {
+      margin-right: 10px;
+    }
+
+    .table thead {
+      background-color: #0d6efd;
+      color: white;
+      font-size: 0.95rem;
+    }
+
+    .table td, .table th {
+      vertical-align: middle;
+      font-size: 0.9rem;
+    }
+
+    .btn-sm-custom {
+      padding: 4px 10px;
+      font-size: 0.85rem;
+    }
+
+    .footer-bar {
+      background-color: #990000;
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .top-bar {
+      padding: 0.5rem 1rem;
+      background-color: #f0f0f0;
+      font-size: 0.9rem;
+    }
+
+    .top-bar a {
+      margin-right: 10px;
+    }
+    .table thead input {
+  width: 100%;
+  font-size: 0.75rem;
+  padding: 0.25rem;
+  text-align: center;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+<div class="topbar d-flex justify-content-between align-items-center" style="background-color: #212529; color: white; height: 50px; padding: 0 1rem;">
+  <!-- Texto a la izquierda -->
+  <div class="fw-bold">
+    Tecnológico de Antioquia
+  </div>
+
+  <!-- Íconos y dropdowns a la derecha -->
+  <div class="d-flex align-items-center">
+    <i class="fas fa-exclamation-triangle"></i>
+    <span class="badge bg-warning text-dark ms-1">0</span>
+
+    <!-- Dropdown de Plataformas -->
+    <div class="dropdown ms-3">
+    <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="plataformaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fas fa-network-wired"></i> Plataformas
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="plataformaDropdown">
+      <li><a class="dropdown-item" href="../Practicas_Estudiante.html">Comunica</a></li>
+      <li><a class="dropdown-item" href="PracticaLaboral.html">Administra</a></li>
+    </ul>
+  </div>
+    <i class="fas fa-wifi ms-3"></i>
+  </div>
+</div>
+
+  <!-- Encabezado -->
+  <div class="header-bar">
+    Gestión de Práctica
+  </div>
+
+</br>
+</br>
+
+    <!-- Tabla -->
+    <!-- Tabs simuladas -->
+<div class=" d-flex justify-content-between align-items-center">
+  <div>
+    <button class="btn btn-light btn-sm" disabled>Empresa - Escenarios</button>
+    <button class="btn btn-danger btn-sm">Prácticas Laborales</button>
+  </div>
+  <div>
+    <a href="crearOferta.html">
+      <button class="btn btn-danger btn-sm">
+        <i class="fas fa-plus"></i> Nueva Oferta
+      </button>
+    </a>
+  </div>
+
+</div>
+
+<!-- Subtítulo -->
+<div class="container mt-3">
+  <h6>Prácticas Laborales Cerradas</h6>
+
+  <!-- Tabla -->
+  <div class="table-responsive mt-3">
+    <table class="table table-bordered table-hover text-center align-middle rounded-3 overflow-hidden" style="border-radius: 10px;">
+      <thead class="align-middle">
+        <tr>
+          <th>Año - Periodo <i class="fas fa-filter ms-1 text-secondary"></i></th>
+          <th>Empresa <i class="fas fa-filter ms-1 text-secondary"></i></th>
+          <th>Dependencia <i class="fas fa-filter ms-1 text-secondary"></i></th>
+          <th>Modalidad y Tipo <i class="fas fa-filter ms-1 text-secondary"></i></th>
+          <th>Estado Oferta <i class="fas fa-filter ms-1 text-secondary"></i></th>
+          <th>Relacionar</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2025-2</td>
+          <td>Artifex Tech S.A.S</td>
+          <td>Tecnología</td>
+          <td>Escenario - Pasantía remunerada</td>
+          <td>Ejecución</td>
+          <td><a href="oferta.html"><button class="btn btn-info btn-sm-custom"><i class="fas fa-link"></i></button></a></td>
+          <td><button class="btn btn-warning btn-sm-custom"><i class="fas fa-edit"></i></button></td>
+          <td><button class="btn btn-danger btn-sm-custom"><i class="fas fa-trash"></i></button></td>
+        </tr>
+        <tr>
+          <td>2025-2</td>
+          <td>Nova Solutions</td>
+          <td>Recursos Humanos</td>
+          <td>Autónoma - Práctica de Emprendimiento, Transferencia e Innovación</td>
+          <td>Ejecución</td>
+          <td><a href="#"><button class="btn btn-info btn-sm-custom"><i class="fas fa-link"></i></button></a></td>
+          <td><button class="btn btn-warning btn-sm-custom"><i class="fas fa-edit"></i></button></td>
+          <td><button class="btn btn-danger btn-sm-custom"><i class="fas fa-trash"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-bar mt-4">
+    2025 © Todos los Derechos Reservados - <a href="#" class="text-white text-decoration-underline">Términos y condiciones</a> - Educatic - Administra V31072025-01
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

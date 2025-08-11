@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aplicantes a Oferta – EDUCATIC</title>
+
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- DataTables 1.10.9 (CSS core) -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
+
+  <style>
+    body {background:#f5f7f9;font-size:13px;}
+    .box-info {padding:15px;border:1px solid #ddd;border-radius:4px;background:#fff;margin-bottom:15px;min-height:100px;}
+    .table-responsive {overflow-x:auto;width:100%;}
+    table.dataTable thead th, table.dataTable tbody td {padding:6px 10px;}
+  </style>
+</head>
+<body>
+<div class="container-fluid">
+  <!-- Resumen Empresa -->
+  <h2 class="text-uppercase">Resumen de la Empresa</h2>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-3"><div class="box-info"><small class="text-muted">ESCENARIO – EMPRESA</small><br><strong>Artifex Tech S.A.S</strong></div></div>
+    <div class="col-xs-12 col-sm-6 col-md-3"><div class="box-info"><small class="text-muted">DEPENDENCIA</small><br><strong>Departamento de Tecnología</strong></div></div>
+    <div class="col-xs-12 col-sm-6 col-md-3"><div class="box-info"><small class="text-muted">TUTOR</small><br><strong>Ing. Saori Aikido</strong></div></div>
+    <div class="col-xs-12 col-sm-6 col-md-3"><div class="box-info"><small class="text-muted">NÚMERO DE OFERTAS</small><br><strong>6/10</strong></div></div>
+  </div>
+
+
+  <a href="PracticaLaboral.html" class="box-info">
+  <i class="fas fa-arrow-left"></i> Volver
+</a>
+
+  <!-- Tabla de aplicantes -->
+  <div class="table-responsive">
+    <table id="aspirantes" class="table table-bordered display" cellspacing="0" width="100%">
+      <colgroup>
+        <col style="width:5%"><!-- check -->
+        <col style="width:28%"><!-- programa -->
+        <col style="width:40%"><!-- nombre -->
+        <col style="width:27%"><!-- documento -->
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="text-center"><input type="checkbox" id="checkAll"></th>
+          <th>Programa</th>
+          <th>Nombre Aplicante</th>
+          <th>Documento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Primeros tres registros chequeados -->
+        <tr>
+          <td class="text-center"><input type="checkbox" checked></td>
+          <td>ADMINISTRACIÓN FINANCIERA Nivel: 10</td>
+          <td>GUARIN GARCES BIBIANA ANDREA</td>
+          <td>1026131968</td>
+        </tr>
+        <tr>
+          <td class="text-center"><input type="checkbox" checked></td>
+          <td>ADMINISTRACIÓN FINANCIERA Nivel: 10</td>
+          <td>Alvarez Ruiz Natalia Andrea</td>
+          <td>43264606</td>
+        </tr>
+        <tr>
+          <td class="text-center"><input type="checkbox" checked></td>
+          <td>ADMINISTRACIÓN FINANCIERA Nivel: 10</td>
+          <td>BETANCUR GOMEZ NATALIA JOHANNA</td>
+          <td>43923600</td>
+        </tr>
+        <!-- Resto registros -->
+        <tr>
+          <td class="text-center"><input type="checkbox"></td>
+          <td>ADMINISTRACIÓN FINANCIERA Nivel: 10</td>
+          <td>CANO GIRALDO JOHN ALEJANDRO</td>
+          <td>98761154</td>
+        </tr>
+        <tr>
+          <td class="text-center"><input type="checkbox"></td>
+          <td>ADMINISTRACIÓN FINANCIERA Nivel: 10</td>
+          <td>Rios Alvarez Denys Elena</td>
+          <td>43832841</td>
+        </tr>
+        <tr>
+          <td class="text-center"><input type="checkbox"></td>
+          <td>ADMINISTRACIÓN FINANCIERA Nivel: 10</td>
+          <td>JIMENEZ VILLA LISBED</td>
+          <td>42693089</td>
+        </tr>
+        <tr>
+          <td class="text-center"><input type="checkbox"></td>
+          <td>ADMINISTRACIÓN COMERCIAL Nivel: 10</td>
+          <td>QUINTERO OSORIO MARILYN JOHANA</td>
+          <td>1036651803</td>
+        </tr>
+        <tr>
+          <td class="text-center"><input type="checkbox"></td>
+          <td>ADMINISTRACIÓN COMERCIAL Nivel: 10</td>
+          <td>ROMAN ROJAS LIZETH</td>
+          <td>43274531</td>
+        </tr>
+        <tr>
+          <td class="text-center"><input type="checkbox"></td>
+          <td>ADMINISTRACIÓN COMERCIAL Nivel: 10</td>
+          <td>AMARILES CEBALLOS VIVIANA</td>
+          <td>1020402681</td>
+        </tr>
+        <tr>
+          <td class="text-center"><input type="checkbox"></td>
+          <td>ADMINISTRACIÓN COMERCIAL Nivel: 10</td>
+          <td>GARCÍA SÁNCHEZ ALEXANDRA</td>
+          <td>1037269220</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>window.jQuery||document.write('<script src="./jquery-1.12.0.js"><\\/script>');</script>
+<script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(function(){
+    // DataTable con buscador y paginación en español
+    var table = $('#aspirantes').DataTable({
+      paging:true,
+      pageLength:10,
+      lengthChange:false,
+      searching:true,
+      ordering:true,
+      info:true,
+      language:{
+        url:'/sao/jsNew/Spanish.json', // Ajusta ruta a tu JSON español
+        search:'Buscar:'
+      }
+    });
+
+    // Alinear buscador a la derecha y estilo input
+    $('#aspirantes_filter').addClass('text-right');
+    $('#aspirantes_filter input').addClass('form-control input-sm').css({width:'260px',display:'inline-block'});
+
+    // Check general
+    $('#checkAll').on('change',function(){
+      $('#aspirantes tbody input[type="checkbox"]').prop('checked',this.checked);
+    });
+  });
+</script>
+</body>
+</html>

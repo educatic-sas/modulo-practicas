@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Prácticas Laborales</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Select2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container py-4">
+    <h1 class="mb-4">Registro de Prácticas Laborales</h1>
+    <form>
+      <div class="row g-3">
+        <!-- Fecha -->
+        <div class="col-md-4">
+          <label for="fecha" class="form-label">Fecha</label>
+          <input type="date" id="fecha" class="form-control" required>
+        </div>
+        <!-- Tipo de Oferta -->
+        <div class="col-md-4">
+          <label for="tipoOferta" class="form-label">Tipo de Oferta</label>
+          <select id="tipoOferta" class="form-select" required>
+            <option value="practica">Práctica Laboral</option>
+          </select>
+        </div>
+        <!-- NIT y Empresa -->
+        <div class="col-md-4">
+          <label for="empresa" class="form-label">NIT &amp; Empresa</label>
+          <select id="empresa" class="form-select select2" data-placeholder="Seleccione la empresa">
+            <option></option>
+            <option value="123456789">123456789 – Empresa A</option>
+            <option value="987654321">987654321 – Empresa B</option>
+            <option value="111222333">111222333 – Empresa C</option>
+          </select>
+        </div>
+        <!-- Dependencia -->
+        <div class="col-md-6">
+          <label for="dependencia" class="form-label">Dependencia</label>
+          <input type="text" id="dependencia" class="form-control" placeholder="Dependencia responsable" required>
+        </div>
+        <!-- Modalidad -->
+        <div class="col-md-3">
+          <label for="modalidad" class="form-label">Modalidad</label>
+          <select id="modalidad" class="form-select" required>
+            <option selected disabled>Seleccione...</option>
+            <option value="Autónoma">Autónoma</option>
+            <option value="Escenario">Escenario</option>
+          </select>
+        </div>
+        <!-- Tipo -->
+        <div class="col-md-3">
+          <label for="tipo" class="form-label">Tipo</label>
+          <select id="tipo" class="form-select" required>
+            <option selected disabled>Seleccione...</option>
+            <optgroup label="Autónoma">
+              <option value="Investigativa">Investigativa</option>
+              <option value="Práctica de Emprendimiento, Transferencia e Innovación">Práctica de Emprendimiento, Transferencia e Innovación</option>
+              <option value="Práctica de creación">Práctica de creación</option>
+            </optgroup>
+            <optgroup label="Escenario">
+              <option value="Escenario interno">Escenario interno</option>
+              <option value="Contrato de aprendizaje SENA">Contrato de aprendizaje SENA</option>
+              <option value="Prácticas por Resolución">Prácticas por Resolución</option>
+              <option value="Convenio de cooperación voluntariado">Convenio de cooperación voluntariado</option>
+              <option value="Practicante trabajador">Practicante trabajador</option>
+              <option value="Pasantía remunerada">Pasantía remunerada</option>
+              <option value="Convenio Docencia Servicio">Convenio Docencia Servicio</option>
+            </optgroup>
+          </select>
+        </div>
+        <!-- Vacantes -->
+        <div class="col-md-3">
+          <label for="vacantes" class="form-label">N° de Vacantes</label>
+          <input type="number" id="vacantes" class="form-control" min="1" required>
+        </div>
+        <!-- Profesiones -->
+        <div class="col-md-9">
+          <label for="profesiones" class="form-label">Profesiones</label>
+          <select id="profesiones" class="form-select select2" multiple="multiple" data-placeholder="Seleccione profesiones">
+            <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
+            <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+            <option value="Diseño Gráfico">Diseño Gráfico</option>
+            <option value="Administración de Empresas">Administración de Empresas</option>
+            <option value="Economía">Economía</option>
+            <option value="Psicología">Psicología</option>
+          </select>
+        </div>
+        <!-- Descripción -->
+        <div class="col-12">
+          <label for="descripcion" class="form-label">Descripción de la práctica</label>
+          <textarea id="descripcion" class="form-control" rows="4" placeholder="Descripción detallada" required></textarea>
+        </div>
+      </div>
+     <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="reset" class="btn btn-secondary">Limpiar</button>
+        <a href="PracticaLaboral.html" class="btn btn-danger">
+          <i class="fas fa-arrow-left"></i> Volver
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Select2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    $(function () {
+      $('.select2').select2({
+        placeholder: function(){
+          return $(this).data('placeholder');
+        },
+        allowClear: true,
+        width: '100%'
+      });
+    });
+  </script>
+</body>
+</html>
