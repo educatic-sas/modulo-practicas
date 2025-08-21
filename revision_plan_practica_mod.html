@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revisión de Plan de Práctica + Evaluación Entregable 1</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    body { background-color: #f4f6f9; }
+    .navbar-custom { background-color: #0c4a6e; color: white; padding: 10px; }
+    .navbar-custom span { color: #f1f1f1; font-weight: 500; }
+    .header-card { background-color: #0c4a6e; color: white; }
+    .info-text { font-size: 0.9rem; color: #6c757d; }
+    .file-preview { background-color: #ffffff; border: 1px solid #ccc; padding: 10px; border-radius: 5px; margin-top: 10px; }
+    .btn-action { min-width: 120px; }
+    .comment-box { margin-top: 20px; }
+    .comment-list { max-height: 200px; overflow-y: auto; }
+    .comment-item { background-color: #f8f9fa; border-left: 4px solid #0c4a6e; padding: 8px; margin-bottom: 8px; }
+    .comment-date { font-size: 0.8rem; color: #6c757d; }
+    .table thead th { background: #eef2f7; }
+    .score-cell { max-width: 160px; }
+    .calc-badge { font-size: .95rem; }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-custom px-3">
+    <span>Académico &gt; Prácticas &gt; Revisión Plan de Práctica</span>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="card shadow-sm mb-4">
+      <div class="card-header header-card">Revisión del Plan de Práctica</div>
+      <div class="card-body">
+        <p class="info-text">
+          Aquí podrá visualizar el archivo cargado por el estudiante, aprobarlo o rechazarlo y dejar sus comentarios correspondientes.
+        </p>
+
+        <!-- Vista previa del archivo cargado -->
+        <div class="mb-3">
+          <label class="form-label"><strong>Documento cargado por el estudiante:</strong></label>
+          <div class="file-preview">
+            <i class="fas fa-file-word text-primary"></i>
+            <span id="fileUploaded">Plan_Practica_Alumno.docx</span>
+            <a href="#" class="btn btn-sm btn-link">Ver documento</a>
+          </div>
+        </div>
+
+        <!-- Botones de Aceptar/Rechazar y Comentarios -->
+        <div class="comment-box">
+          <label for="comentario" class="form-label"><strong>Comentario:</strong></label>
+          <textarea id="comentario" class="form-control" rows="3" placeholder="Ingrese el motivo de aceptación o rechazo del documento"></textarea>
+
+          <div class="mt-3">
+            <button class="btn btn-success btn-action me-2" onclick="addComment('Aceptado')"><i class="fas fa-check"></i> Aceptar</button>
+            <button class="btn btn-danger btn-action" onclick="addComment('Rechazado')"><i class="fas fa-times"></i> Rechazar</button>
+          </div>
+        </div>
+
+        <!-- Historial de comentarios -->
+        <div class="mt-4">
+          <h6>Historial de comentarios:</h6>
+          <div id="commentList" class="comment-list"><!-- Los comentarios aparecerán aquí --></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NUEVA SECCIÓN: Evaluación del Entregable 1 -->
+    <div class="card shadow-sm">
+      <div class="card-header header-card">Evaluación del Entregable 1 — Revisión de Plan de Práctica</div>
+      <div class="card-body">
+        <p class="mb-2">
+          <strong>Instrucción:</strong> El estudiante describe adecuadamente las generalidades del escenario, área y funciones en las que desarrolla la práctica (contexto, funciones y planeación). Incluye anexos y referencias cuando aplica. 
+          Este entregable corresponde al <strong>50%</strong> del plan de prácticas. Ingrese el <em>puntaje logrado</em> en cada criterio respetando el <em>puntaje máximo</em>.
+        </p>
+
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle" id="tablaEntregable">
+            <thead>
+              <tr>
+                <th style="width: 18%">Apartado a evaluar</th>
+                <th style="width: 22%">Propósito del apartado</th>
+                <th>Contenido</th>
+                <th class="text-center" style="width: 140px">Puntaje máximo</th>
+                <th class="text-center score-cell">Puntaje logrado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Contextualización (3 ítems) -->
+              <tr>
+                <td rowspan="3" class="fw-semibold">Contextualización del escenario de práctica</td>
+                <td rowspan="3">Que el practicante reconozca y se empodere del escenario donde realizará sus prácticas.</td>
+                <td>a) El estudiante describe con sus palabras los aspectos organizacionales del escenario de prácticas que considere relevantes. <em>(Evitar copiar/pegar de la web del escenario)</em>.</td>
+                <td class="text-center"><span class="badge text-bg-light">0.5</span></td>
+                <td>
+                  <label for="ctx_a" class="visually-hidden">Puntaje logrado — Contextualización a</label>
+                  <input id="ctx_a" type="number" step="0.1" min="0" max="0.5" class="form-control score-input" data-max="0.5" />
+                  <div class="invalid-feedback">Valor entre 0 y 0.5</div>
+                </td>
+              </tr>
+              <tr>
+                <td>b) El estudiante describe las actividades asignadas por su cooperador para realizar en su proceso de prácticas. Las actividades o funciones son acordes a su perfil profesional.</td>
+                <td class="text-center"><span class="badge text-bg-light">0.8</span></td>
+                <td>
+                  <label for="ctx_b" class="visually-hidden">Puntaje logrado — Contextualización b</label>
+                  <input id="ctx_b" type="number" step="0.1" min="0" max="0.8" class="form-control score-input" data-max="0.8" />
+                  <div class="invalid-feedback">Valor entre 0 y 0.8</div>
+                </td>
+              </tr>
+              <tr>
+                <td>c) El estudiante describe el área donde desarrolla la práctica, las áreas, personas y recursos que se relacionan con su proceso de prácticas.</td>
+                <td class="text-center"><span class="badge text-bg-light">0.5</span></td>
+                <td>
+                  <label for="ctx_c" class="visually-hidden">Puntaje logrado — Contextualización c</label>
+                  <input id="ctx_c" type="number" step="0.1" min="0" max="0.5" class="form-control score-input" data-max="0.5" />
+                  <div class="invalid-feedback">Valor entre 0 y 0.5</div>
+                </td>
+              </tr>
+
+              <!-- Planeación (3 ítems) -->
+              <tr>
+                <td rowspan="3" class="fw-semibold">Planeación</td>
+                <td rowspan="3">Que el estudiante presente de forma coherente, organizada y planificada las actividades a desarrollar en la práctica.</td>
+                <td>a) El estudiante relaciona las actividades que desarrolla en su práctica, y cómo contribuyen a su formación como tecnólogo o profesional.</td>
+                <td class="text-center"><span class="badge text-bg-light">1.5</span></td>
+                <td>
+                  <label for="pln_a" class="visually-hidden">Puntaje logrado — Planeación a</label>
+                  <input id="pln_a" type="number" step="0.1" min="0" max="1.5" class="form-control score-input" data-max="1.5" />
+                  <div class="invalid-feedback">Valor entre 0 y 1.5</div>
+                </td>
+              </tr>
+              <tr>
+                <td>b) El estudiante evidencia planificación coherente y pertinente a las necesidades de su escenario.</td>
+                <td class="text-center"><span class="badge text-bg-light">1.5</span></td>
+                <td>
+                  <label for="pln_b" class="visually-hidden">Puntaje logrado — Planeación b</label>
+                  <input id="pln_b" type="number" step="0.1" min="0" max="1.5" class="form-control score-input" data-max="1.5" />
+                  <div class="invalid-feedback">Valor entre 0 y 1.5</div>
+                </td>
+              </tr>
+              <tr>
+                <td>c) El estudiante relaciona las actividades que desarrolla en su práctica, y cómo contribuyen a los objetivos del escenario y del cargo.</td>
+                <td class="text-center"><span class="badge text-bg-light">1.5</span></td>
+                <td>
+                  <label for="pln_c" class="visually-hidden">Puntaje logrado — Planeación c</label>
+                  <input id="pln_c" type="number" step="0.1" min="0" max="1.5" class="form-control score-input" data-max="1.5" />
+                  <div class="invalid-feedback">Valor entre 0 y 1.5</div>
+                </td>
+              </tr>
+
+              <!-- Formato (1 ítem) -->
+              <tr>
+                <td class="fw-semibold">Formato</td>
+                <td>Que el estudiante entregue su informe organizado, profesional y según las normas APA.</td>
+                <td>
+                  El estudiante cumple con el formato de presentación y la norma APA. 
+                  <ul class="mb-0">
+                    <li>Tipo de letra: Times New Roman 12</li>
+                    <li>Interlineado 1.5</li>
+                    <li>Texto justificado</li>
+                    <li>Normas APA (7ª ed.): citas, referencias, tablas y figuras</li>
+                  </ul>
+                </td>
+                <td class="text-center"><span class="badge text-bg-light">0.2</span></td>
+                <td>
+                  <label for="fmt" class="visually-hidden">Puntaje logrado — Formato</label>
+                  <input id="fmt" type="number" step="0.1" min="0" max="0.2" class="form-control score-input" data-max="0.2" />
+                  <div class="invalid-feedback">Valor entre 0 y 0.2</div>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="table-light">
+                <th colspan="3" class="text-end">Totales</th>
+                <th class="text-center"><span id="totalMax" class="badge text-bg-secondary">0,0</span></th>
+                <th class="text-center"><span id="totalLogrado" class="badge text-bg-primary calc-badge">0,0</span></th>
+              </tr>
+              <tr class="table-light">
+                <th colspan="3" class="text-end">Promedio (escala 0–5)</th>
+                <th colspan="2" class="text-center">
+                  <span id="promedio5" class="badge text-bg-success calc-badge" aria-live="polite">0,0</span>
+                </th>
+              </tr>
+              <tr class="table-light">
+                <th colspan="3" class="text-end">Aporte al plan (50% de la nota)</th>
+                <th colspan="2" class="text-center">
+                  <span id="aporte50" class="badge text-bg-dark calc-badge" aria-live="polite">0,0</span>
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="mt-3">
+          <label for="observaciones" class="form-label">Observaciones (opcional)</label>
+          <textarea id="observaciones" class="form-control" rows="3" placeholder="Anote hallazgos o recomendaciones…"></textarea>
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+          <button class="btn btn-primary" type="button" id="btnGuardar"><i class="fas fa-save me-1"></i> Guardar (demo)</button>
+          <button class="btn btn-outline-secondary" type="reset" id="btnReset"><i class="fas fa-eraser me-1"></i> Restablecer</button>
+        </div>
+
+        <p class="text-muted small mt-3 mb-0">Los campos de "Puntaje logrado" aceptan valores con coma o punto decimal y se limitan automáticamente al tope máximo permitido.</p>
+      </div>
+    </div>
+
+    <footer class="text-center text-muted small py-4">Campus EDUCATIC • Revisión de Plan de Práctica</footer>
+  </div>
+
+  <script>
+    function addComment(status) {
+      const commentText = document.getElementById('comentario').value;
+      if (commentText.trim() === '') {
+        alert('Por favor, ingrese un comentario antes de continuar.');
+        return;
+      }
+      const commentList = document.getElementById('commentList');
+      const date = new Date().toLocaleString('es-CO');
+      const newComment = document.createElement('div');
+      newComment.className = 'comment-item';
+      newComment.innerHTML = `<strong>${status}</strong> - ${commentText}<div class='comment-date'>${date}</div>`;
+      commentList.prepend(newComment);
+      document.getElementById('comentario').value = '';
+    }
+
+    (function(){
+      const $$ = (s,root=document)=>Array.from(root.querySelectorAll(s));
+      const toNum = (v)=>{
+        if(v===undefined||v===null) return NaN;
+        const n = String(v).replace(',','.').trim();
+        const f = parseFloat(n);
+        return Number.isFinite(f) ? f : NaN;
+      }
+      const fmt = (n)=> (Number.isFinite(n)? n : 0).toLocaleString('es-CO', {minimumFractionDigits:1, maximumFractionDigits:2});
+
+      // Precalcular total máximo desde data-max de cada input
+      const inputs = $$('.score-input');
+      let totalMax = inputs.reduce((acc, el)=> acc + toNum(el.dataset.max), 0);
+      const totalMaxEl = document.getElementById('totalMax');
+      const totalLogradoEl = document.getElementById('totalLogrado');
+      const promedio5El = document.getElementById('promedio5');
+      const aporte50El = document.getElementById('aporte50');
+
+      function clampToMax(el){
+        const max = toNum(el.dataset.max);
+        let v = toNum(el.value);
+        if(!Number.isFinite(v)){ el.classList.add('is-invalid'); return 0; }
+        if(v < 0) v = 0;
+        if(v > max) v = max;
+        // normalizar visual con coma
+        el.value = v.toString().replace('.', ',');
+        el.classList.toggle('is-invalid', v<0 || v>max);
+        return v;
+      }
+
+      function recompute(){
+        const sum = inputs.reduce((acc, el)=> acc + clampToMax(el), 0);
+        const promedio5 = totalMax ? (sum / totalMax) * 5 : 0;
+        const aporte50 = promedio5 * 0.5;
+        totalMaxEl.textContent = fmt(totalMax);
+        totalLogradoEl.textContent = fmt(sum);
+        promedio5El.textContent = fmt(promedio5);
+        aporte50El.textContent = fmt(aporte50);
+      }
+
+      inputs.forEach(el=>{
+        el.addEventListener('input', recompute);
+        el.addEventListener('blur', recompute);
+      });
+
+      document.getElementById('btnGuardar').addEventListener('click', ()=>{
+        recompute();
+        alert('Evaluación guardada (demostración).');
+      });
+
+      document.getElementById('btnReset').addEventListener('click', ()=>{
+        setTimeout(recompute, 0);
+      });
+
+      // Inicial
+      document.addEventListener('DOMContentLoaded', ()=>{
+        // Mostrar total máximo al cargar
+        totalMaxEl.textContent = fmt(totalMax);
+        recompute();
+      });
+    })();
+  </script>
+</body>
+</html>
