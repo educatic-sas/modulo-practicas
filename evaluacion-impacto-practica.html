@@ -1,84 +1,36 @@
+<!-- evaluacion-impacto-practica.html (sin permitir pendientes + alarma en navbar) -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Evaluación de impacto de la práctica</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
   <style>
-    body { background-color: #f8f9fa; margin: 0; }
-    .sidebar {
-      width: 250px;
-      background-color: #1c1f26;
-      color: white;
-      height: 100vh;
-      position: fixed;
-      padding: 1rem;
-    }
-    .sidebar .user-info {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .sidebar .user-info img {
-      width: 80px;
-      border-radius: 50%;
-      background-color: white;
-    }
-    .sidebar a {
-      color: white;
-      display: block;
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-    }
-    .sidebar a:hover {
-      background-color: #343a40;
-    }
-    .topbar {
-      height: 50px;
-      background-color: #212529;
-      color: white;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 0 1rem;
-      margin-left: 250px;
-    }
-    .topbar i {
-      margin-left: 20px;
-      font-size: 18px;
-    }
-    .main-content {
-      margin-left: 250px;
-      padding: 1rem;
-    }
-    .navbar-custom {
-      background-color: #0d6efd;
-      color: white;
-      padding: 0.5rem 1rem;
-    }
-    .navbar-custom a {
-      color: white;
-      text-decoration: none;
-    }
-    .table thead {
-      background-color: #0d6efd;
-      color: white;
-    }
-    .btn-action {
-      font-size: 0.85rem;
-      padding: 4px 8px;
-    }
-    .text-sm {
-      font-size: 0.85rem;
-    }
+    body{background:#f8f9fa;margin:0}
+    .sidebar{width:250px;background:#1c1f26;color:#fff;height:100vh;position:fixed;padding:1rem}
+    .sidebar a{color:#fff;display:block;padding:.5rem 1rem;text-decoration:none}
+    .sidebar a:hover{background:#343a40}
+    .user-info{text-align:center;margin-bottom:1rem}
+    .user-info img{width:80px;border-radius:50%;background:#fff}
+    .topbar{height:50px;background:#212529;color:#fff;display:flex;justify-content:space-between;align-items:center;padding:0 1rem;margin-left:250px;gap:12px}
+    .main-content{margin-left:250px;padding:1rem}
+    .navbar-custom{background:#0d6efd;color:#fff;padding:.5rem 1rem}
+    .table thead{background:#0d6efd;color:#fff}
+    .btn-action{font-size:.85rem;padding:4px 8px}
+    .pill{padding:.2rem .5rem;border-radius:999px;font-size:.75rem;border:1px solid transparent}
+    .pill-ok{background:#d1e7dd;color:#0f5132;border-color:#a3cfbb}
+    .pill-pend{background:#fff3cd;color:#664d03;border-color:#ffe69c}
+    .alarm{display:flex;align-items:center;gap:.5rem}
+    .alarm .dot{width:8px;height:8px;border-radius:50%;background:#ffc107;display:inline-block}
+    .alarm-text{font-size:.85rem;font-weight:600}
   </style>
 </head>
 <body>
-  <!-- Sidebar -->
-    <div class="sidebar">
+  <div class="sidebar">
     <div class="user-info">
-      <img src="https://via.placeholder.com/80" alt="Avatar" />
+      <img src="https://via.placeholder.com/80" alt="Avatar"/>
       <h6>Tech Solutions S.A.S</h6>
       <p>NIT: 890900842</p>
       <p><i class="fas fa-phone"></i> 333333244</p>
@@ -86,82 +38,170 @@
     </div>
     <a href="#">Inicio</a>
     <a href="#">Hoja de Vida</a>
-    <a href="Practicas_Empresa_Cooperador.html" >Gestión</a>
-    <a href="evaluacion-impacto-practica.html" style="background-color: #0d6efd;" >Gestion evalucion impacto de la practica</a>
+    <a href="Practicas_Empresa_Cooperador.html">Gestión</a>
+    <a href="evaluacion-impacto-practica.html" style="background:#0d6efd;">Gestión evaluación impacto</a>
   </div>
 
-  <!-- Topbar -->
+  <!-- NAVBAR con alarma -->
   <div class="topbar">
-  <i class="fas fa-exclamation-triangle"></i>
-  <span class="badge bg-warning text-dark">0</span>
-
-  <!-- Dropdown de Plataformas -->
-<div class="dropdown ms-3">
-  <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="plataformaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fas fa-network-wired"></i> Plataformas
-  </a>
-  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="plataformaDropdown">
-    <li><a class="dropdown-item" href="Practicas_Estudiante.html">Comunica</a></li>
-    <li><a class="dropdown-item" href="PracticasAdministra/PracticaLaboral.html">Administra</a></li>
-  </ul>
-</div>
-
-  <!-- Dropdown de Rol -->
-  <div class="dropdown ms-3">
-    <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="rolDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="fas fa-user-shield"></i> Rol
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="rolDropdown">
-      <li><a class="dropdown-item" href="Practicas_Estudiante.html">Practicante / Estudiante</a></li>
-      <li><a class="dropdown-item" href="Practicas_Monitor.html?modo=0">Docente / Monitor</a></li>
-      <li><a class="dropdown-item" href="Practicas_Empresa_Cooperador.html">Empresa / Tutor Cooperador</a></li>
-    </ul>
-  </div>
-
-  <i class="fas fa-wifi ms-3"></i>
-</div>
-
-  <!-- Content -->
-   <div class="main-content">
-    <h4><strong>Evaluación de impacto de la práctica</strong></h4>
-    <div class="card mt-4">
-      <div class="card-body">
-            <div class="d-flex justify-content-between mb-3">
-      <h4>Lista de Prácticas</h4>
-      <div>
-        <a href="PracticasAdministra/crearOferta.html">
-            <button class="btn btn-danger btn-sm">
-            <i class="fas fa-plus"></i> Nueva practica
-      </button>
-    </a>
-      </div>
+    <div id="alarmWrap" class="alarm text-warning-emphasis" style="visibility:hidden">
+      <span class="dot"></span>
+      <i class="fa-regular fa-bell"></i>
+      <span id="alarmText" class="alarm-text"></span>
     </div>
 
-        <table class="table table-bordered align-middle">
-          <thead class="table-light">
+    <div class="d-flex align-items-center gap-3">
+      <div class="dropdown">
+        <a class="text-white dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">
+          <i class="fas fa-network-wired"></i> Plataformas
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="Practicas_Estudiante.html">Comunica</a></li>
+          <li><a class="dropdown-item" href="PracticasAdministra/PracticaLaboral.html">Administra</a></li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <a class="text-white dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">
+          <i class="fas fa-user-shield"></i> Rol
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="Practicas_Estudiante.html">Practicante / Estudiante</a></li>
+          <li><a class="dropdown-item" href="Practicas_Monitor.html?modo=0">Docente / Monitor</a></li>
+          <li><a class="dropdown-item" href="Practicas_Empresa_Cooperador.html">Empresa / Tutor Cooperador</a></li>
+        </ul>
+      </div>
+      <i class="fas fa-wifi"></i>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <nav class="navbar-custom mb-3"><strong>Académico</strong> &gt; Prácticas &gt; Impacto por Programa</nav>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h4 class="mb-0"><strong>Evaluación de impacto de la práctica</strong></h4>
+      <a id="btnNueva" class="btn btn-danger btn-sm disabled" href="PracticasAdministra/crearOferta.html" tabindex="-1" aria-disabled="true" data-bs-toggle="tooltip" data-bs-title="No puedes crear nuevas prácticas si existe alguna evaluación de impacto pendiente.">
+        <i class="fas fa-plus"></i> Nueva práctica
+      </a>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-body">
+        <div class="alert alert-info mb-3">
+          El tutor debe evaluar <strong>todos</strong> los programas de la empresa. <strong>No se permite ninguna pendiente</strong>; si hay al menos una, el botón <em>Nueva práctica</em> se deshabilita.
+        </div>
+
+        <table class="table table-hover align-middle text-center" id="tablaProgramas">
+          <thead>
             <tr>
               <th>Programa</th>
-              <th>Acción</th>
+              <th class="text-nowrap">Estado</th>
+              <th class="text-nowrap">Acción</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr data-id="1" data-completado="true" data-nombre="Ingeniería de Sistemas">
               <td>Ingeniería de Sistemas</td>
-                  <td><a href="impacto_practicas_tutores.html"><button class="btn btn-warning btn-action"> Evaluar</button></a></td>
+              <td class="estado"><span class="pill pill-ok">Completada</span></td>
+              <td><a class="btn btn-outline-secondary btn-action" href="impacto_practicas_tutores.html?programaId=1&programa=Ingenier%C3%ADa%20de%20Sistemas"><i class="fa-solid fa-eye"></i> Ver</a></td>
             </tr>
-            <tr>
+            <tr data-id="2" data-completado="true" data-nombre="Administración de Empresas">
               <td>Administración de Empresas</td>
-                  <td><a href="impacto_practicas_tutores.html"><button class="btn btn-warning btn-action"> Evaluar</button></a></td>
-        </tr>
-            <tr>
+              <td class="estado"><span class="pill pill-ok">Completada</span></td>
+              <td><a class="btn btn-outline-secondary btn-action" href="impacto_practicas_tutores.html?programaId=2&programa=Administraci%C3%B3n%20de%20Empresas"><i class="fa-solid fa-eye"></i> Ver</a></td>
+            </tr>
+            <!-- Deja esta fila como PENDIENTE para ver el bloqueo/alarma; al volver con ?evaluado=3 se marcará como completada -->
+            <tr data-id="3" data-completado="false" data-nombre="Contaduría Pública">
               <td>Contaduría Pública</td>
-                 <td><a href="impacto_practicas_tutores.html"><button class="btn btn-warning btn-action"> Evaluar</button></a></td>
-        
+              <td class="estado"><span class="pill pill-pend">Pendiente</span></td>
+              <td><a class="btn btn-warning btn-action evaluar" href="impacto_practicas_tutores.html?programaId=3&programa=Contadur%C3%ADa%20P%C3%BAblica"><i class="fa-regular fa-clipboard"></i> Evaluar</a></td>
             </tr>
           </tbody>
         </table>
+
+        <div class="small text-muted">
+          * Los resultados son visibles para el coordinador de prácticas por programa y la coordinación general.
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="toastOk" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto"><i class="fa-regular fa-circle-check me-1"></i>Listo</strong>
+        <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+      </div>
+      <div class="toast-body" id="toastMsg">Acción completada.</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const btnNueva = document.getElementById('btnNueva');
+    const tabla = document.querySelector('#tablaProgramas tbody');
+    const toast = new bootstrap.Toast(document.getElementById('toastOk'));
+    const toastMsg = document.getElementById('toastMsg');
+    new bootstrap.Tooltip(btnNueva);
+
+    // Semana ISO
+    function isoWeek(d=new Date()){
+      const dt = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+      const dayNum = dt.getUTCDay() || 7;
+      dt.setUTCDate(dt.getUTCDate() + 4 - dayNum);
+      const yearStart = new Date(Date.UTC(dt.getUTCFullYear(),0,1));
+      return Math.ceil((((dt - yearStart) / 86400000) + 1) / 7);
+    }
+
+    // Alarma en navbar: si hay al menos 1 pendiente, mostrar mensaje
+    function updateAlarm(){
+      const alarmWrap = document.getElementById('alarmWrap');
+      const alarmText = document.getElementById('alarmText');
+      const pendientes = [...tabla.querySelectorAll('tr')].filter(tr => tr.dataset.completado === 'false');
+      if (pendientes.length > 0){
+        const semana = isoWeek();
+        alarmText.textContent = `Tienes evaluaciones de impacto pendientes para la semana ${semana}`;
+        alarmWrap.style.visibility = 'visible';
+      } else {
+        alarmWrap.style.visibility = 'hidden';
+      }
+    }
+
+    // Bloqueo: NO se permite NINGUNA pendiente
+    function checkBloqueo() {
+      const filas = [...tabla.querySelectorAll('tr')];
+      const pendientes = filas.filter(tr => tr.dataset.completado === 'false').length;
+      if (pendientes > 0) {
+        btnNueva.classList.add('disabled');
+        btnNueva.setAttribute('aria-disabled','true');
+        btnNueva.setAttribute('data-bs-title','No puedes crear nuevas prácticas: existen evaluaciones de impacto pendientes.');
+      } else {
+        btnNueva.classList.remove('disabled');
+        btnNueva.removeAttribute('aria-disabled');
+        btnNueva.setAttribute('data-bs-title','Crear nueva práctica');
+      }
+      bootstrap.Tooltip.getOrCreateInstance(btnNueva).setContent({ '.tooltip-inner': btnNueva.getAttribute('data-bs-title') });
+    }
+
+    // Marcar completado desde query (?evaluado=ID) y reorganizar UI
+    (function marcarCompletadoPorQuery(){
+      const q = new URLSearchParams(location.search);
+      const id = q.get('evaluado');
+      if (!id) { checkBloqueo(); updateAlarm(); return; }
+      const tr = tabla.querySelector(`tr[data-id="${id}"]`);
+      if (!tr) { checkBloqueo(); updateAlarm(); return; }
+      tr.dataset.completado = 'true';
+      tr.querySelector('.estado').innerHTML = '<span class="pill pill-ok">Completada</span>';
+      tr.querySelector('td:last-child').innerHTML =
+        `<a class="btn btn-outline-secondary btn-action" href="impacto_practicas_tutores.html?programaId=${id}&programa=${encodeURIComponent(tr.dataset.nombre)}"><i class="fa-solid fa-eye"></i> Ver</a>`;
+      toastMsg.textContent = 'Evaluación de impacto marcada como completada para el programa.';
+      toast.show();
+      history.replaceState(null, '', location.pathname);
+      checkBloqueo();
+      updateAlarm();
+    })();
+
+    checkBloqueo();
+    updateAlarm();
+  </script>
 </body>
 </html>

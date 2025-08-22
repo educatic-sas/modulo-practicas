@@ -3,271 +3,259 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Impacto de las Prácticas Laborales — Tutores</title>
+  <title>Impacto de las prácticas laborales - tutores</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-    :root{ --brand:#0ea5e9; }
-    body{ background:#f8fafc; }
-    .card{ box-shadow:0 6px 20px rgba(2,6,23,.06); border:1px solid #e5e7eb; }
-    .brand-accent{ color:var(--brand); }
-    .table thead th{ background:#f1f5f9; }
-    .section-title{ font-weight:600; }
-    .required::after{ content:" *"; color:#dc3545; }
-    .chip{ display:inline-block; padding:.25rem .5rem; border-radius:1rem; background:#eef2f7; margin:.15rem 0; font-size:.85rem; }
+    body{background:#f8f9fa}
+    .form-section{margin-bottom:2rem}
+    .required::after{content:" *"; color:#dc3545}
+    .title{font-weight:700; line-height:1.15; letter-spacing:.2px}
   </style>
 </head>
 <body>
   <div class="container py-4">
-    <header class="mb-4">
-      <h1 class="h3 mb-1">Impacto de las Prácticas Laborales <span class="text-muted">— Tutores</span></h1>
-      <p class="mb-0">Le agradecemos su participación en esta evaluación de impacto. Su retroalimentación es fundamental para analizar los resultados y fortalecer nuestras estrategias de formación. Responda con objetividad y precisión; la información será usada con fines académicos y de mejora continua.</p>
-      <div class="mt-2 small text-muted">Para esta evaluación, <span class="fw-semibold">impacto</span> se entiende como los cambios positivos y medibles generados en el escenario de práctica por la intervención del estudiante, que pueden reflejarse en mejoras de procesos, productos o servicios; condiciones laborales; conocimientos o bienestar; y que se mantienen o pueden mantenerse en el tiempo.</div>
-    </header>
+    <!-- Título visual igual (peso, interlineado y posible salto en “- tutores”) -->
+    <h1 class="h3 title mb-3">
+      Impacto de las prácticas laborales -<br class="d-sm-none"> tutores
+    </h1>
 
-    <form id="formImpacto" novalidate>
-      <!-- Datos del tutor -->
-      <section class="card mb-4" aria-labelledby="datosTitulo">
-        <div class="card-header section-title" id="datosTitulo">Datos del tutor</div>
-        <div class="card-body">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="nombreTutor" class="form-label required">Nombre y apellido completo</label>
-              <input id="nombreTutor" name="nombreTutor" type="text" class="form-control" required />
-              <div class="invalid-feedback">Ingrese el nombre completo.</div>
-            </div>
-            <div class="col-md-3">
-              <label for="docTutor" class="form-label required">Documento de identidad</label>
-              <input id="docTutor" name="docTutor" type="text" inputmode="numeric" class="form-control" required />
-              <div class="invalid-feedback">Ingrese el documento.</div>
-            </div>
-            <div class="col-md-3">
-              <label for="telTutor" class="form-label required">Teléfono</label>
-              <input id="telTutor" name="telTutor" type="tel" class="form-control" required />
-              <div class="invalid-feedback">Ingrese el teléfono.</div>
-            </div>
-            <div class="col-md-6">
-              <label for="correoTutor" class="form-label required">Correo</label>
-              <input id="correoTutor" name="correoTutor" type="email" class="form-control" required />
-              <div class="invalid-feedback">Ingrese un correo válido.</div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- Introducción: texto completo, sin recortes -->
+    <p>
+      Le agradecemos su participación en esta evaluación de impacto. Su
+      retroalimentación es fundamental para analizar los resultados obtenidos y
+      fortalecer nuestras estrategias de formación. Le solicitamos responder con
+      objetividad y precisión, ya que la información recopilada será utilizada con fines
+      académicos y de mejora continua.
+    </p>
+    <p>
+      Para esta evaluación, se entiende por <em>impacto</em> el conjunto de cambios positivos
+      y medibles generados en el escenario de práctica gracias a la intervención del
+      estudiante, que pueden reflejarse en mejoras de procesos, productos, servicios,
+      condiciones laborales, conocimientos o bienestar de las personas, y que se
+      mantienen o tienen potencial de mantenerse en el tiempo.
+    </p>
+    <p>
+      Todos los datos proporcionados serán tratados con estricta confidencialidad.
+      Agradecemos de antemano su tiempo y valiosa contribución a este proceso.
+    </p>
 
-      <!-- Programa -->
-      <section class="card mb-4" aria-labelledby="programaTitulo">
-        <div class="card-header section-title" id="programaTitulo">Programa sobre el cual realiza la evaluación</div>
-        <div class="card-body">
-          <div class="row g-3 align-items-end">
-            <div class="col-md-6">
-              <label for="programa" class="form-label required">Programa</label>
-              <select id="programa" name="programa" class="form-select" required>
-                <option value="" selected disabled>Seleccione…</option>
-                <option>Tecnología en Gestión de Comercio Exterior y Logística</option>
-                <option>Contaduría Pública</option>
-                <option>Tecnología en Gestión Comercial</option>
-                <option>Tecnología en Gestión Financiera</option>
-                <option>Negocios Internacionales</option>
-                <option>Profesional en Administración Comercial</option>
-                <option>Profesional en Administración Financiera</option>
-                <option>Licenciatura en Literatura y Lengua Castellana</option>
-                <option>Licenciatura en Educación Infantil</option>
-                <option>Trabajo Social</option>
-                <option>Psicología campos no clínicos</option>
-                <option>Psicología campo clínico</option>
-                <option>Profesional en Gestión de la Seguridad y Salud en el Trabajo</option>
-                <option>Profesional en Criminalística</option>
-                <option>Derecho</option>
-                <option>Ingeniería Ambiental</option>
-                <option>Ingeniería en Software</option>
-                <option>Tecnología en Investigación Judicial</option>
-                <option>Tecnología en Histocitotecnología</option>
-                <option>Tecnología en Diseño y Desarrollo Web</option>
-                <option>Tecnología en Gestión Agroambiental</option>
-                <option>Tecnología en Gestión Informatica</option>
-                <option>Tecnología en Sistemas</option>
-              </select>
-              <div class="invalid-feedback">Seleccione el programa.</div>
-            </div>
-          </div>
-          <p class="text-muted small mt-2">Diligencie este formulario por cada programa que tuvo asignado en el semestre.</p>
-        </div>
-      </section>
+    <form id="formImpacto">
+      <!-- 1 -->
+      <div class="form-section">
+        <label class="form-label required">1. Nombre y Apellido Completo del tutor</label>
+        <input type="text" class="form-control" required>
+      </div>
+      <!-- 2 -->
+      <div class="form-section">
+        <label class="form-label required">2. Documento de Identidad del tutor</label>
+        <input type="text" class="form-control" required>
+      </div>
+      <!-- 3 -->
+      <div class="form-section">
+        <label class="form-label required">3. Teléfono del tutor</label>
+        <input type="tel" class="form-control" required>
+      </div>
+      <!-- 4 -->
+      <div class="form-section">
+        <label class="form-label required">4. Correo del tutor</label>
+        <input type="email" class="form-control" required>
+      </div>
 
-      <!-- Categorías de impacto -->
-      <section class="card mb-4" aria-labelledby="categoriasTitulo">
-        <div class="card-header section-title" id="categoriasTitulo">Categorías de impacto</div>
-        <div class="card-body">
-          <p class="mb-2">Seleccione las categorías que mejor describen los impactos generados por los practicantes de este programa. Puede marcar todas las que apliquen.</p>
-          <div class="row row-cols-1 row-cols-md-2 g-3">
-            <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" id="imp_social"><label class="form-check-label" for="imp_social"><span class="fw-semibold">Impacto social y comunitario:</span> mejora en calidad de vida y fortalecimiento de redes.</label></div></div>
-            <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" id="imp_institucional"><label class="form-check-label" for="imp_institucional"><span class="fw-semibold">Impacto institucional:</span> optimización de procesos, calidad del servicio y capacidad de respuesta.</label></div></div>
-            <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" id="imp_economico"><label class="form-check-label" for="imp_economico"><span class="fw-semibold">Impacto económico:</span> ahorro de recursos, reducción de costos o aumento de productividad/ingresos.</label></div></div>
-            <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" id="imp_tecnico"><label class="form-check-label" for="imp_tecnico"><span class="fw-semibold">Impacto técnico y operativo:</span> mejoras en procedimientos, herramientas o actualización tecnológica.</label></div></div>
-            <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" id="imp_educativo"><label class="form-check-label" for="imp_educativo"><span class="fw-semibold">Impacto educativo y formativo:</span> transferencia de conocimiento y desarrollo de capacidades.</label></div></div>
-            <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" id="imp_ambiental"><label class="form-check-label" for="imp_ambiental"><span class="fw-semibold">Impacto ambiental:</span> prácticas de sostenibilidad y disminución de residuos o uso de recursos.</label></div></div>
-            <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" id="imp_innovacion"><label class="form-check-label" for="imp_innovacion"><span class="fw-semibold">Impacto en innovación y desarrollo:</span> nuevos productos/servicios o adaptación creativa de recursos.</label></div></div>
-            <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" id="imp_cultural"><label class="form-check-label" for="imp_cultural"><span class="fw-semibold">Impacto cultural y organizacional:</span> promoción de valores, buenas prácticas y mejora del clima laboral.</label></div></div>
-            <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" id="imp_cobertura"><label class="form-check-label" for="imp_cobertura"><span class="fw-semibold">Impacto en cobertura y acceso:</span> ampliación de servicios y eliminación de barreras.</label></div></div>
-            <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" id="imp_gestion"><label class="form-check-label" for="imp_gestion"><span class="fw-semibold">Impacto en gestión de la información:</span> organización/sistematización de datos y creación de reportes útiles.</label></div></div>
-          </div>
+      <!-- 5 -->
+      <div class="form-section">
+        <label class="form-label required">5. Programa sobre cual realiza la evaluación</label>
+        <div class="vstack gap-4" id="radiosPrograma">
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Tecnología en Gestión de Comercio Exterior y Logística" required><label class="form-check-label">Tecnología en Gestión de Comercio Exterior y Logística</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Contaduría Pública"><label class="form-check-label">Contaduría Pública</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Tecnología en Gestión Comercial"><label class="form-check-label">Tecnología en Gestión Comercial</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Tecnología en Gestión Financiera"><label class="form-check-label">Tecnología en Gestión Financiera</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Negocios Internacionales"><label class="form-check-label">Negocios Internacionales</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Profesional en Administración Comercial"><label class="form-check-label">Profesional en Administración Comercial</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Profesional en Administración Financiera"><label class="form-check-label">Profesional en Administración Financiera</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Licenciatura en Literatura y Lengua Castellana"><label class="form-check-label">Licenciatura en Literatura y Lengua Castellana</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Licenciatura en Educación Infantil"><label class="form-check-label">Licenciatura en Educación Infantil</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Trabajo Social"><label class="form-check-label">Trabajo Social</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Psicología campos no clínicos"><label class="form-check-label">Psicología campos no clínicos</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Psicología campo clínico"><label class="form-check-label">Psicología campo clínico</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Profesional en Gestión de la Seguridad y Salud en el Trabajo"><label class="form-check-label">Profesional en Gestión de la Seguridad y Salud en el Trabajo</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Profesional en Criminalística"><label class="form-check-label">Profesional en Criminalística</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Derecho"><label class="form-check-label">Derecho</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Ingeniería Ambiental"><label class="form-check-label">Ingeniería Ambiental</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Ingeniería en Software"><label class="form-check-label">Ingeniería en Software</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Tecnología en Investigación Judicial"><label class="form-check-label">Tecnología en Investigación Judicial</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Tecnología en Histocitotecnología"><label class="form-check-label">Tecnología en Histocitotecnología</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Tecnología en Diseño y Desarrollo Web"><label class="form-check-label">Tecnología en Diseño y Desarrollo Web</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Tecnología en Gestión Agroambiental"><label class="form-check-label">Tecnología en Gestión Agroambiental</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Tecnología en Gestión Informatica"><label class="form-check-label">Tecnología en Gestión Informatica</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="programa" value="Tecnología en Sistemas"><label class="form-check-label">Tecnología en Sistemas</label></div>
         </div>
-      </section>
+      </div>
 
-      <!-- Preguntas abiertas -->
-      <section class="card mb-4" aria-labelledby="abiertasTitulo">
-        <div class="card-header section-title" id="abiertasTitulo">Descripción de impactos</div>
-        <div class="card-body">
-          <div class="mb-3">
-            <label for="cambios" class="form-label required">Cambios o impactos significativos logrados durante la práctica</label>
-            <textarea id="cambios" name="cambios" class="form-control" rows="4" required></textarea>
-            <div class="invalid-feedback">Describa los cambios o impactos logrados.</div>
-          </div>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="beneficiados" class="form-label required">Cantidad aproximada de personas beneficiadas</label>
-              <input id="beneficiados" name="beneficiados" type="number" min="0" step="1" class="form-control" required />
-              <div class="invalid-feedback">Indique un número válido.</div>
-            </div>
-          </div>
+      <!-- 6 -->
+      <div class="form-section">
+        <p class="form-label required m-0">6. Seleccione las categorías que mejor describen los impactos generados por los
+          practicantes de este programa durante su proceso de práctica. Puede marcar
+          todas las opciones que considere aplican.</p>
+        <div class="vstack gap-2 mt-2">
+          <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">
+            Impacto social y comunitario: mejora en la calidad de vida de comunidades o grupos
+            poblacionales y fortalecimiento de redes y capital social.
+          </label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">
+            Impacto institucional: optimización de procesos internos, mejora en la calidad del servicio y
+            aumento de la capacidad de respuesta de la institución.
+          </label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">
+            Impacto económico: ahorro de recursos o reducción de costos e incremento de ingresos o
+            productividad.
+          </label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">
+            Impacto técnico y operativo: innovaciones o mejoras en procedimientos técnicos,
+            implementación de herramientas o metodologías y actualización tecnológica.
+          </label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">
+            Impacto educativo y formativo: transferencia de conocimiento a otros miembros de la
+            organización y desarrollo de capacidades en usuarios o beneficiarios.
+          </label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">
+            Impacto ambiental: prácticas que favorecen la sostenibilidad y disminución de residuos o uso
+            de recursos.
+          </label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">
+            Impacto en innovación y desarrollo: creación de nuevos productos, servicios o prototipos y
+            adaptación creativa de recursos existentes.
+          </label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">
+            Impacto cultural y organizacional: promoción de valores y buenas prácticas y mejora del clima
+            laboral o de la cohesión de equipo.
+          </label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">
+            Impacto en cobertura y acceso: ampliación de servicios a más usuarios o territorios y eliminación de barreras de acceso.
+          </label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">
+            Impacto en gestión de la información: organización y sistematización de datos y creación de bases de datos o reportes útiles para la toma de decisiones.
+          </label></div>
         </div>
-      </section>
+      </div>
 
-      <!-- Continuidad de acciones -->
-      <section class="card mb-4" aria-labelledby="continuidadTitulo">
-        <div class="card-header section-title" id="continuidadTitulo">Continuidad de acciones</div>
-        <div class="card-body">
-          <div class="d-flex gap-3 align-items-center mb-3">
-            <span class="me-2 required">¿El escenario continuará aplicando las propuestas o acciones planteadas por los practicantes después de su práctica?</span>
-            <div class="form-check"><input class="form-check-input" type="radio" name="continuidad" id="cont_si" value="Si" required><label class="form-check-label" for="cont_si">Sí</label></div>
-            <div class="form-check"><input class="form-check-input" type="radio" name="continuidad" id="cont_no" value="No" required><label class="form-check-label" for="cont_no">No</label></div>
-          </div>
-          <div>
-            <label for="motivoContinuidad" class="form-label required">¿Por qué?</label>
-            <textarea id="motivoContinuidad" name="motivoContinuidad" class="form-control" rows="3" required></textarea>
-            <div class="invalid-feedback">Explique brevemente su respuesta.</div>
-          </div>
-        </div>
-      </section>
+      <!-- 7 -->
+      <div class="form-section">
+        <label class="form-label required">
+          7. ¿Cuáles han sido los cambios o impactos significativos que los practicantes de
+          este programa han logrado en el escenario durante su periodo de práctica?
+          Puede profundizar con base en las categorías que seleccionó en la pregunta
+          anterior.
+        </label>
+        <textarea class="form-control" rows="4" required></textarea>
+      </div>
 
-      <!-- Recomendaciones (mínimo 2) -->
-      <section class="card mb-4" aria-labelledby="recomendacionesTitulo">
-        <div class="card-header section-title" id="recomendacionesTitulo">Recomendaciones para la formación continua (mínimo 2)</div>
-        <div class="card-body">
-          <div id="recomendacionesWrap" class="vstack gap-2">
-            <div class="input-group">
-              <span class="input-group-text">1</span>
-              <input type="text" class="form-control rec" placeholder="Recomendación 1" required>
-              <div class="invalid-feedback">Obligatoria.</div>
-            </div>
-            <div class="input-group">
-              <span class="input-group-text">2</span>
-              <input type="text" class="form-control rec" placeholder="Recomendación 2" required>
-              <div class="invalid-feedback">Obligatoria.</div>
-            </div>
-          </div>
-          <button type="button" id="addRec" class="btn btn-sm btn-outline-primary mt-2">Añadir otra recomendación</button>
-          <div id="recError" class="text-danger small mt-2" hidden>Incluya al menos <strong>dos</strong> recomendaciones.</div>
-        </div>
-      </section>
+      <!-- 8 -->
+      <div class="form-section">
+        <label class="form-label required">
+          8. Indique la cantidad aproximada de personas beneficiadas o impactadas por el
+          ejercicio realizado por los practicantes de este programa que usted evalúa.
+        </label>
+        <input type="number" class="form-control" min="0" required>
+      </div>
 
-      <!-- Nivel de desempeño -->
-      <section class="card mb-4" aria-labelledby="nivelTitulo">
-        <div class="card-header section-title" id="nivelTitulo">Nivel de desempeño del practicante</div>
-        <div class="card-body">
-          <div class="row g-3">
-            <div class="col-12 d-flex flex-wrap gap-3">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="nivel" id="niv_bajo" value="Bajo" required>
-                <label class="form-check-label" for="niv_bajo"><span class="chip">Bajo (0 a 2.99)</span> — No asiste / no cumple mínimos.</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="nivel" id="niv_basico" value="Básico" required>
-                <label class="form-check-label" for="niv_basico"><span class="chip">Básico (3 a 3.99)</span> — Cumple mínimos esperados.</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="nivel" id="niv_alto" value="Alto" required>
-                <label class="form-check-label" for="niv_alto"><span class="chip">Alto (4 a 4.49)</span> — Desempeño eficiente y responsable.</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="nivel" id="niv_superior" value="Superior" required>
-                <label class="form-check-label" for="niv_superior"><span class="chip">Superior (4.5 a 5.0)</span> — Desempeño destacado, por encima de mínimos.</label>
-              </div>
-            </div>
-          </div>
+      <!-- 9 -->
+      <div class="form-section">
+        <label class="form-label required">
+          9. El escenario continuará aplicando las propuestas o acciones planteadas por los
+          practicantes después de terminada su práctica
+        </label>
+        <div class="d-flex gap-3">
+          <div class="form-check"><input class="form-check-input" type="radio" name="continuidad" required><label class="form-check-label">Sí</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="continuidad"><label class="form-check-label">No</label></div>
         </div>
-      </section>
+      </div>
 
-      <!-- Satisfacción del escenario -->
-      <section class="card mb-4" aria-labelledby="satisfaccionTitulo">
-        <div class="card-header section-title" id="satisfaccionTitulo">Grado de satisfacción del escenario</div>
-        <div class="card-body">
-          <div class="d-flex gap-3 flex-wrap">
-            <div class="form-check"><input class="form-check-input" type="radio" name="satisfaccion" id="sat_muy" value="Muy satisfecho" required><label class="form-check-label" for="sat_muy">Muy satisfecho</label></div>
-            <div class="form-check"><input class="form-check-input" type="radio" name="satisfaccion" id="sat_sat" value="Satisfecho" required><label class="form-check-label" for="sat_sat">Satisfecho</label></div>
-            <div class="form-check"><input class="form-check-input" type="radio" name="satisfaccion" id="sat_nada" value="Nada satisfecho" required><label class="form-check-label" for="sat_nada">Nada satisfecho</label></div>
-            <div class="form-check"><input class="form-check-input" type="radio" name="satisfaccion" id="sat_poco" value="Poco satisfecho" required><label class="form-check-label" for="sat_poco">Poco satisfecho</label></div>
-          </div>
-        </div>
-      </section>
+      <!-- 10 -->
+      <div class="form-section">
+        <label class="form-label required">10. ¿Por qué?</label>
+        <textarea class="form-control" rows="3" required></textarea>
+      </div>
 
-      <!-- Sugerencias adicionales -->
-      <section class="card mb-4" aria-labelledby="sugerenciasTitulo">
-        <div class="card-header section-title" id="sugerenciasTitulo">Sugerencias adicionales</div>
-        <div class="card-body">
-          <label for="sugerencias" class="form-label required">Comparta sugerencias para fortalecer el proceso</label>
-          <textarea id="sugerencias" name="sugerencias" class="form-control" rows="3" required></textarea>
-          <div class="invalid-feedback">Este campo es obligatorio.</div>
+      <!-- 11 -->
+      <div class="form-section">
+        <label class="form-label required">
+          11. En el TdeA reconocemos que el contexto laboral es cambiante y se requiere de
+          actualización constante. Al respecto, por favor, mencione mínimo dos
+          recomendaciones para la formación continua de los practicantes de este
+          programa, que se asocien a las necesidades del contexto laboral actual y a
+          futuro:
+        </label>
+        <textarea class="form-control" rows="3" required></textarea>
+      </div>
+
+      <!-- 12 -->
+      <div class="form-section">
+        <label class="form-label required">12. El nivel de desempeño del practicante es</label>
+        <div class="vstack gap-4">
+          <div class="form-check"><input class="form-check-input" type="radio" name="nivel" required><label class="form-check-label">Bajo (0 a 2.99). No asiste a la práctica, no cumple con los mínimos esperados.</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="nivel"><label class="form-check-label">Básico (3 a 3.99). Asiste a la práctica, cumple con los mínimos esperados.</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="nivel"><label class="form-check-label">Alto (4 a 4.49). Se desempeña de forma eficiente y responsable.</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="nivel"><label class="form-check-label">Superior (4.5 a 5.0). Se desempeña de forma destacada, realiza acciones por encima de los mínimos esperados.</label></div>
         </div>
-      </section>
+      </div>
+
+      <!-- 13 -->
+      <div class="form-section">
+        <label class="form-label required">13. El grado de satisfacción del escenario con el desempeño del practicante es</label>
+        <div class="vstack gap-1"><!-- corregido dvstack -> vstack -->
+          <div class="form-check"><input class="form-check-input" type="radio" name="satisfaccion" required><label class="form-check-label">Muy satisfecho</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="satisfaccion"><label class="form-check-label">Satisfecho</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="satisfaccion"><label class="form-check-label">Nada satisfecho</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="satisfaccion"><label class="form-check-label">Poco satisfecho</label></div>
+        </div>
+      </div>
+
+      <!-- 14 -->
+      <div class="form-section">
+        <label class="form-label required">
+          14. Muchas gracias por su compromiso y la contribución en la formación de
+          nuestros estudiantes. Aquí puede relacionar sugerencias adicionales.
+        </label>
+        <textarea class="form-control" rows="3" required></textarea>
+      </div>
 
       <div class="d-flex gap-2">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <button type="reset" class="btn btn-outline-secondary">Restablecer</button>
+        <a href="evaluacion-impacto-practica.html" class="btn btn-outline-secondary" >Volver</a>
       </div>
-
-      <p class="text-muted small mt-3 mb-0">Diseño alineado con la línea gráfica de Campus EDUCATIC (Bootstrap 5).</p>
     </form>
-
-    <footer class="text-center text-muted small py-4">Campus EDUCATIC • Evaluación de Impacto — Tutores</footer>
   </div>
 
   <script>
-    (function(){
-      const form = document.getElementById('formImpacto');
-      const wrap = document.getElementById('recomendacionesWrap');
-      const addRecBtn = document.getElementById('addRec');
-      const recError = document.getElementById('recError');
+    // Mapeo simple nombre -> id (ajusta según tus IDs reales de la lista)
+    const MAPA_PROG_ID = {
+      'Ingeniería de Sistemas': '1',
+      'Administración de Empresas': '2',
+      'Contaduría Pública': '3'
+    };
 
-      addRecBtn.addEventListener('click', () => {
-        const count = wrap.querySelectorAll('.rec').length + 1;
-        const group = document.createElement('div');
-        group.className = 'input-group mt-2';
-        group.innerHTML = `<span class="input-group-text">${count}</span>
-          <input type="text" class="form-control rec" placeholder="Recomendación ${count}">
-          <button class="btn btn-outline-danger" type="button" title="Quitar">&times;</button>`;
-        wrap.appendChild(group);
-        group.querySelector('button').addEventListener('click', ()=> group.remove());
-      });
-
-      function atLeastTwoRecommendations(){
-        const values = Array.from(wrap.querySelectorAll('.rec')).map(i => i.value.trim()).filter(Boolean);
-        const ok = values.length >= 2;
-        recError.hidden = ok;
-        return ok;
+    // Si viene por query, preselecciona el programa
+    (function preselectDesdeQuery(){
+      const q = new URLSearchParams(location.search);
+      const prog = q.get('programa');
+      if (!prog) return;
+      const radios = document.querySelectorAll('input[name="programa"]');
+      for (const r of radios) {
+        if (r.value === prog) { r.checked = true; break; }
       }
-
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity() || !atLeastTwoRecommendations()) {
-          event.preventDefault();
-          event.stopPropagation();
-        } else {
-          event.preventDefault();
-          alert('Formulario validado y listo para enviar. (Demo)');
-        }
-        form.classList.add('was-validated');
-      }, false);
     })();
+
+    // Al guardar, redirige a la lista marcando evaluado=<id> (habilita botón allá)
+    document.getElementById('formImpacto').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const sel = document.querySelector('input[name="programa"]:checked');
+      if (!sel) { alert('Selecciona un programa.'); return; }
+      const nombre = sel.value;
+      const id = MAPA_PROG_ID[nombre] || '3'; // por defecto usar 3 (Contaduría Pública)
+      const url = new URL('evaluacion-impacto-practica.html', location.href);
+      url.searchParams.set('evaluado', id);
+      location.href = url.toString();
+    });
   </script>
 </body>
 </html>

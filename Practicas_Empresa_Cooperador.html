@@ -8,70 +8,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
   <style>
     body { background-color: #f8f9fa; margin: 0; }
-    .sidebar {
-      width: 250px;
-      background-color: #1c1f26;
-      color: white;
-      height: 100vh;
-      position: fixed;
-      padding: 1rem;
-    }
-    .sidebar .user-info {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .sidebar .user-info img {
-      width: 80px;
-      border-radius: 50%;
-      background-color: white;
-    }
-    .sidebar a {
-      color: white;
-      display: block;
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-    }
-    .sidebar a:hover {
-      background-color: #343a40;
-    }
-    .topbar {
-      height: 50px;
-      background-color: #212529;
-      color: white;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 0 1rem;
-      margin-left: 250px;
-    }
-    .topbar i {
-      margin-left: 20px;
-      font-size: 18px;
-    }
-    .main-content {
-      margin-left: 250px;
-      padding: 1rem;
-    }
-    .navbar-custom {
-      background-color: #0d6efd;
-      color: white;
-      padding: 0.5rem 1rem;
-    }
-    .navbar-custom a {
-      color: white;
-      text-decoration: none;
-    }
-    .table thead {
-      background-color: #0d6efd;
-      color: white;
-    }
-    .btn-action {
-      font-size: 0.85rem;
-      padding: 4px 8px;
-    }
-    .text-sm {
-      font-size: 0.85rem;
-    }
+    .sidebar { width: 250px; background-color: #1c1f26; color: white; height: 100vh; position: fixed; padding: 1rem; }
+    .sidebar .user-info { text-align: center; margin-bottom: 1rem; }
+    .sidebar .user-info img { width: 80px; border-radius: 50%; background-color: white; }
+    .sidebar a { color: white; display: block; padding: 0.5rem 1rem; text-decoration: none; }
+    .sidebar a:hover { background-color: #343a40; }
+    .topbar { height: 50px; background-color: #212529; color: white; display: flex; justify-content: flex-end; align-items: center; padding: 0 1rem; margin-left: 250px; }
+    .topbar i { margin-left: 20px; font-size: 18px; }
+    .main-content { margin-left: 250px; padding: 1rem; }
+    .navbar-custom { background-color: #0d6efd; color: white; padding: 0.5rem 1rem; }
+    .navbar-custom a { color: white; text-decoration: none; }
+    .table thead { background-color: #0d6efd; color: white; }
+    .btn-action { font-size: 0.85rem; padding: 4px 8px; }
+    .text-sm { font-size: 0.85rem; }
   </style>
 </head>
 <body>
@@ -87,40 +36,33 @@
     </div>
     <a href="#">Inicio</a>
     <a href="#">Hoja de Vida</a>
-    <a href="Practicas_Empresa_Cooperador.html" style="background-color: #0d6efd;" >Gestión</a>
-    <a href="evaluacion-impacto-practica.html" >Gestion evalucion impacto de la practica</a>
+    <a href="Practicas_Empresa_Cooperador.html" style="background-color: #0d6efd;">Gestión</a>
+    <a href="evaluacion-impacto-practica.html">Gestion evalucion impacto de la practica</a>
   </div>
 
-  <!-- Topbar -->
+  <!-- Topbar (sin ícono de alerta) -->
   <div class="topbar">
-  <i class="fas fa-exclamation-triangle"></i>
-  <span class="badge bg-warning text-dark">0</span>
-
-  <!-- Dropdown de Plataformas -->
-<div class="dropdown ms-3">
-  <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="plataformaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fas fa-network-wired"></i> Plataformas
-  </a>
-  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="plataformaDropdown">
-    <li><a class="dropdown-item" href="Practicas_Estudiante.html" >Comunica</a></li>
-    <li><a class="dropdown-item" href="PracticasAdministra/PracticaLaboral.html">Administra</a></li>
-  </ul>
-</div>
-
-  <!-- Dropdown de Rol -->
-  <div class="dropdown ms-3">
-    <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="rolDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="fas fa-user-shield"></i> Rol
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="rolDropdown">
-      <li><a class="dropdown-item" href="Practicas_Estudiante.html">Practicante / Estudiante</a></li>
-      <li><a class="dropdown-item" href="Practicas_Monitor.html?modo=0">Docente / Monitor</a></li>
-      <li><a class="dropdown-item" href="Practicas_Empresa_Cooperador.html">Empresa / Tutor Cooperador</a></li>
-    </ul>
+    <div class="dropdown ms-3">
+      <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="plataformaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-network-wired"></i> Plataformas
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="plataformaDropdown">
+        <li><a class="dropdown-item" href="Practicas_Estudiante.html">Comunica</a></li>
+        <li><a class="dropdown-item" href="PracticasAdministra/PracticaLaboral.html">Administra</a></li>
+      </ul>
+    </div>
+    <div class="dropdown ms-3">
+      <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="rolDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-user-shield"></i> Rol
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="rolDropdown">
+        <li><a class="dropdown-item" href="Practicas_Estudiante.html">Practicante / Estudiante</a></li>
+        <li><a class="dropdown-item" href="Practicas_Monitor.html?modo=0">Docente / Monitor</a></li>
+        <li><a class="dropdown-item" href="Practicas_Empresa_Cooperador.html">Empresa / Tutor Cooperador</a></li>
+      </ul>
+    </div>
+    <i class="fas fa-wifi ms-3"></i>
   </div>
-
-  <i class="fas fa-wifi ms-3"></i>
-</div>
 
   <!-- Main Content -->
   <div class="main-content">
@@ -131,6 +73,9 @@
     <div class="d-flex justify-content-between mb-3">
       <h4>Lista de Prácticas</h4>
       <div>
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#alertModal">
+          <i class="fas fa-bell"></i> Alerta de práctica
+        </button>
         <button class="btn btn-primary btn-sm"><i class="fas fa-folder-open"></i> Ver Prácticas Activas</button>
         <button class="btn btn-secondary btn-sm"><i class="fas fa-archive"></i> Ver Prácticas Cerradas</button>
       </div>
@@ -145,10 +90,11 @@
           <th>Nombre y Apellidos</th>
           <th>Escenario<br><span class="text-sm">Dependencia, Tutor, Tipo, Horario</span></th>
           <th>Tutor<br><span class="text-sm">Datos del Docente</span></th>
-          <th>Instalación de la practica<br><span class="text-sm">(Se Firma)</span></th>
-          <th>Evaluación semana 5<br><span class="text-sm"></span></th>
-		  <th>Evaluación semana 15<br><span class="text-sm"></span></th>
-		  <th>Seguimiento Tutor<br><span class="text-sm"></span></th>
+          <th>Instalación de la práctica</th>
+          <th>Evaluación semana 5</th>
+          <th>Evaluación semana 15</th>
+          <th>Seguimiento Tutor</th>
+          <th>Alerta</th>
         </tr>
       </thead>
       <tbody>
@@ -168,13 +114,24 @@
             laura.perez@universidad.edu.co<br/>
             Cel: 3101234567
           </td>
-          <td><a class="dropdown-item" href="InstalacionPracticas.html"><button class="btn btn-outline-success btn-action"><i class="fas fa-pen-fancy"></i>
-		  Firmar
-		  </button></a></td>
+          <td><a class="dropdown-item" href="InstalacionPracticas.html"><button class="btn btn-outline-success btn-action"><i class="fas fa-pen-fancy"></i> Firmar</button></a></td>
           <td><a class="dropdown-item" href="Seguimiento_Evaluacion_Practica.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Semana 5</button></a></td>
-		  <td><a class="dropdown-item" href="Seguimiento_Evaluacion_Practica.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Semana 15</button></a></td>
-		  <td><a class="dropdown-item" href="Seguimiento_Entregables_Tutor.html"><button class="btn btn-outline-info btn-action">Seguimiento</button></a></td>
+          <td><a class="dropdown-item" href="Seguimiento_Evaluacion_Practica.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Semana 15</button></a></td>
+          <td><a class="dropdown-item" href="Seguimiento_Entregables_Tutor.html"><button class="btn btn-outline-info btn-action">Seguimiento</button></a></td>
+          <td>
+            <button
+              class="btn btn-outline-danger btn-action btn-alerta"
+              data-bs-toggle="modal" data-bs-target="#alertModal"
+              data-doc="123456789"
+              data-name="Juan Pérez Gómez"
+              data-student-email="juan.perez@correo.edu.co"
+              data-tutor-email="laura.perez@universidad.edu.co"
+              data-coord-email="coordinacion.practicas@universidad.edu.co">
+              <i class="fas fa-triangle-exclamation"></i> Alerta
+            </button>
+          </td>
         </tr>
+
         <tr>
           <td>2025-1</td>
           <td>Administración / Práctica Organizacional</td>
@@ -191,17 +148,200 @@
             maria.torres@universidad.edu.co<br/>
             Cel: 3119876543
           </td>
-          <td><a class="dropdown-item" href="InstalacionPracticas.html?"><button class="btn btn-outline-success btn-action"><i class="fas fa-pen-fancy"></i>
-		  Firmar
-		  </button></a></td>
+          <td><a class="dropdown-item" href="InstalacionPracticas.html?"><button class="btn btn-outline-success btn-action"><i class="fas fa-pen-fancy"></i> Firmar</button></a></td>
           <td><a class="dropdown-item" href="Seguimiento_Evaluacion_Practica.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Semana 5</button></a></td>
-		  <td><a class="dropdown-item" href="Seguimiento_Evaluacion_Practica.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Semana 15</button></a></td>
-		  <td><a class="dropdown-item" href="Seguimiento_Entregables_Tutor.html"><button class="btn btn-outline-info btn-action"> Seguimiento</button></a></td>
+          <td><a class="dropdown-item" href="Seguimiento_Evaluacion_Practica.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Semana 15</button></a></td>
+          <td><a class="dropdown-item" href="Seguimiento_Entregables_Tutor.html"><button class="btn btn-outline-info btn-action">Seguimiento</button></a></td>
+          <td>
+            <button
+              class="btn btn-outline-danger btn-action btn-alerta"
+              data-bs-toggle="modal" data-bs-target="#alertModal"
+              data-doc="1000000002"
+              data-name="Carlos Gómez"
+              data-student-email="carlos.gomez@correo.edu.co"
+              data-tutor-email="maria.torres@universidad.edu.co"
+              data-coord-email="coordinacion.practicas@universidad.edu.co">
+              <i class="fas fa-triangle-exclamation"></i> Alerta
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 
+  <!-- Modal Alerta -->
+  <div class="modal fade" id="alertModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <form class="modal-content" id="formAlerta">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fas fa-bell me-2"></i>Reporte de alerta de práctica</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="border rounded p-3 mb-3">
+            <div class="row g-2 align-items-end">
+              <div class="col-md-6">
+                <label for="docInput" class="form-label">Documento del estudiante</label>
+                <input type="text" id="docInput" class="form-control" placeholder="Ingresa documento" required>
+              </div>
+              <div class="col-md-3">
+                <button type="button" id="btnBuscar" class="btn btn-primary w-100">
+                  <i class="fas fa-search"></i> Buscar
+                </button>
+              </div>
+              <div class="col-md-3 text-md-end">
+                <span id="estadoBusqueda" class="text-muted small"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="border rounded p-3 mb-3">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Estudiante</label>
+                <input type="text" id="nombreEstudiante" class="form-control" placeholder="—" readonly>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Correo del estudiante</label>
+                <input type="email" id="correoEstudiante" class="form-control" placeholder="—" readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="border rounded p-3">
+            <label for="descripcion" class="form-label">Descripción de la situación</label>
+            <textarea id="descripcion" class="form-control" rows="5" placeholder="Detalla la situación..." required></textarea>
+          </div>
+
+          <div class="mt-3">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label">Correo del tutor</label>
+                <input type="email" id="correoTutor" class="form-control" readonly>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Correo del coordinador</label>
+                <input type="email" id="correoCoordinador" class="form-control" readonly>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">CC a estudiante</label>
+                <input type="email" id="correoCcEst" class="form-control" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-danger" type="submit" id="btnEnviar">
+            <i class="fas fa-paper-plane"></i> Enviar alerta
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast éxito -->
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="toastOk" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">Alerta enviada por correo al tutor, estudiante y coordinador.</div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const students = [
+      { doc: '123456789', name: 'Juan Pérez Gómez', email: 'juan.perez@correo.edu.co', tutorEmail: 'laura.perez@universidad.edu.co', coordEmail: 'coordinacion.practicas@universidad.edu.co' },
+      { doc: '1000000002', name: 'Carlos Gómez', email: 'carlos.gomez@correo.edu.co', tutorEmail: 'maria.torres@universidad.edu.co', coordEmail: 'coordinacion.practicas@universidad.edu.co' }
+    ];
+
+    const modalEl = document.getElementById('alertModal');
+    const form = document.getElementById('formAlerta');
+    const docInput = document.getElementById('docInput');
+    const btnBuscar = document.getElementById('btnBuscar');
+    const estadoBusqueda = document.getElementById('estadoBusqueda');
+    const nombreEstudiante = document.getElementById('nombreEstudiante');
+    const correoEstudiante = document.getElementById('correoEstudiante');
+    const correoTutor = document.getElementById('correoTutor');
+    const correoCoordinador = document.getElementById('correoCoordinador');
+    const correoCcEst = document.getElementById('correoCcEst');
+    const toastOk = new bootstrap.Toast(document.getElementById('toastOk'));
+    const btnEnviar = document.getElementById('btnEnviar');
+
+    modalEl.addEventListener('show.bs.modal', (ev) => {
+      const trigger = ev.relatedTarget;
+      resetModal();
+      if (trigger && trigger.classList.contains('btn-alerta')) {
+        const doc = trigger.getAttribute('data-doc');
+        const name = trigger.getAttribute('data-name');
+        const studentEmail = trigger.getAttribute('data-student-email');
+        const tutorEmail = trigger.getAttribute('data-tutor-email');
+        const coordEmail = trigger.getAttribute('data-coord-email');
+
+        docInput.value = doc;
+        nombreEstudiante.value = name;
+        correoEstudiante.value = studentEmail;
+        correoTutor.value = tutorEmail || '';
+        correoCoordinador.value = coordEmail || '';
+        correoCcEst.value = studentEmail || '';
+        estadoBusqueda.textContent = 'Estudiante precargado desde la tabla.';
+      }
+    });
+
+    btnBuscar.addEventListener('click', () => buscarPorDocumento(docInput.value.trim()));
+    docInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); buscarPorDocumento(docInput.value.trim()); }
+    });
+
+    function buscarPorDocumento(doc) {
+      if (!doc) return;
+      estadoBusqueda.textContent = 'Buscando...';
+      const found = students.find(s => s.doc === doc);
+      if (!found) {
+        estadoBusqueda.textContent = 'No se encontró el estudiante.';
+        nombreEstudiante.value = '';
+        correoEstudiante.value = '';
+        correoCcEst.value = '';
+        correoTutor.value = '';
+        correoCoordinador.value = '';
+        return;
+      }
+      estadoBusqueda.textContent = 'Estudiante encontrado.';
+      nombreEstudiante.value = found.name;
+      correoEstudiante.value = found.email;
+      correoCcEst.value = found.email;
+      correoTutor.value = found.tutorEmail || '';
+      correoCoordinador.value = found.coordEmail || '';
+    }
+
+    function resetModal() {
+      form.reset();
+      estadoBusqueda.textContent = '';
+      nombreEstudiante.value = '';
+      correoEstudiante.value = '';
+      correoCcEst.value = '';
+      correoTutor.value = '';
+      correoCoordinador.value = '';
+      btnEnviar.disabled = false;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const doc = docInput.value.trim();
+      const desc = document.getElementById('descripcion').value.trim();
+      const found = students.find(s => s.doc === doc);
+      if (!found || !desc) { estadoBusqueda.textContent = 'Completa la búsqueda y la descripción.'; return; }
+
+      btnEnviar.disabled = true;
+      await new Promise(r => setTimeout(r, 600)); // simulación de envío
+
+      bootstrap.Modal.getInstance(modalEl).hide();
+      toastOk.show();
+    });
+  </script>
 </body>
 </html>
