@@ -67,7 +67,8 @@
               <tr>
                 <th style="width:18%">Criterio</th>
                 <th>Descripción</th>
-                <th class="text-center" style="width:190px">Calificación (1 a 5)</th>
+                <th class="text-center" style="width:190px">Calificación Monitor(1 a 5)</th>
+                <th class="text-center" style="width:190px">Calificación Tutor(1 a 5)</th>
               </tr>
             </thead>
             <tbody>
@@ -75,6 +76,11 @@
                 <td class="fw-semibold">Contenido</td>
                 <td>
                   Descripción detallada y completa de la experiencia, destacando los aspectos relevantes del ejercicio de prácticas y los aprendizajes. Debe abordar de manera articulada los temas establecidos en el plan de prácticas y evidenciar los impactos alcanzados como resultado de su desarrollo.
+                </td>
+                <td class="score-cell">
+                  <label for="c1" class="visually-hidden">Calificación Contenido</label>
+                  <input id="c1" name="c1" class="form-control calificacion" type="number" min="1" max="5" step="1" inputmode="numeric" value="3" />
+                  <div class="invalid-feedback">Ingrese un número entre 1 y 5.</div>
                 </td>
                 <td class="score-cell">
                   <label for="c1" class="visually-hidden">Calificación Contenido</label>
@@ -92,6 +98,11 @@
                   <input id="c2" name="c2" class="form-control calificacion" type="number" min="1" max="5" step="1" inputmode="numeric" value="3" />
                   <div class="invalid-feedback">Ingrese un número entre 1 y 5.</div>
                 </td>
+                <td class="score-cell">
+                  <label for="c1" class="visually-hidden">Calificación Contenido</label>
+                  <input id="c1" name="c1" class="form-control calificacion" type="number" min="1" max="5" step="1" inputmode="numeric" value="3" />
+                  <div class="invalid-feedback">Ingrese un número entre 1 y 5.</div>
+                </td>
               </tr>
               <tr>
                 <td class="fw-semibold">Habilidades de Comunicación</td>
@@ -101,6 +112,11 @@
                 <td class="score-cell">
                   <label for="c3" class="visually-hidden">Calificación Habilidades de Comunicación</label>
                   <input id="c3" name="c3" class="form-control calificacion" type="number" min="1" max="5" step="1" inputmode="numeric" value="4" />
+                  <div class="invalid-feedback">Ingrese un número entre 1 y 5.</div>
+                </td>
+                <td class="score-cell">
+                  <label for="c1" class="visually-hidden">Calificación Contenido</label>
+                  <input id="c1" name="c1" class="form-control calificacion" type="number" min="1" max="5" step="1" inputmode="numeric" value="3" />
                   <div class="invalid-feedback">Ingrese un número entre 1 y 5.</div>
                 </td>
               </tr>
@@ -114,6 +130,11 @@
                   <input id="c4" name="c4" class="form-control calificacion" type="number" min="1" max="5" step="1" inputmode="numeric" value="3" />
                   <div class="invalid-feedback">Ingrese un número entre 1 y 5.</div>
                 </td>
+                <td class="score-cell">
+                  <label for="c1" class="visually-hidden">Calificación Contenido</label>
+                  <input id="c1" name="c1" class="form-control calificacion" type="number" min="1" max="5" step="1" inputmode="numeric" value="3" />
+                  <div class="invalid-feedback">Ingrese un número entre 1 y 5.</div>
+                </td>
               </tr>
               <tr>
                 <td class="fw-semibold">Tiempo de Presentación</td>
@@ -125,10 +146,21 @@
                   <input id="c5" name="c5" class="form-control calificacion" type="number" min="1" max="5" step="1" inputmode="numeric" value="3" />
                   <div class="invalid-feedback">Ingrese un número entre 1 y 5.</div>
                 </td>
+                <td class="score-cell">
+                  <label for="c1" class="visually-hidden">Calificación Contenido</label>
+                  <input id="c1" name="c1" class="form-control calificacion" type="number" min="1" max="5" step="1" inputmode="numeric" value="3" />
+                  <div class="invalid-feedback">Ingrese un número entre 1 y 5.</div>
+                </td>
               </tr>
               <tr>
                 <td class="fw-semibold">Promedio — nota final</td>
                 <td class="text-muted">Se calcula automáticamente con base en las calificaciones anteriores.</td>
+                <td>
+                  <div class="input-group">
+                    <span class="input-group-text">★</span>
+                    <input id="promedioInput" class="form-control" value="3,2" readonly aria-live="polite" />
+                  </div>
+                </td>
                 <td>
                   <div class="input-group">
                     <span class="input-group-text">★</span>
