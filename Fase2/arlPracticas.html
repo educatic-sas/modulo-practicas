@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datos ARL</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding: 1rem;
+    }
+    .step-menu {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background-color: #0d6efd;
+      color: white;
+      border-radius: 0.5rem;
+      margin-right: 0.5rem;
+      font-weight: 500;
+    }
+    .step i {
+      margin-left: 0.5rem;
+    }
+    .step.inactive {
+      background-color: #6c757d;
+    }
+    .form-section {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menú de pasos -->
+  <div class="step-menu">
+    <div class="step inactive">1. Validación de Prerrequisitos <i class="fas fa-arrow-right"></i></div>
+    <div class="step inactive">2. Actualizar datos <i class="fas fa-arrow-right"></i></div>
+    <div class="step active">3. Datos para la ARL <i class="fas fa-arrow-right"></i></div>
+    <div class="step inactive">4. Disponibilidad, modalidad y confirmación</div>
+  </div>
+
+  <div class="form-section">
+    <h4 class="mb-4">Datos de ARL</h4>
+
+    <form>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="nombreARL" class="form-label">Nombre ARL</label>
+          <input type="text" class="form-control" id="nombreARL" placeholder="Ej. Seguros XYZ">
+        </div>
+
+        <div class="col-md-6">
+          <label for="numAfiliacion" class="form-label">Número de afiliación</label>
+          <input type="text" class="form-control" id="numAfiliacion" placeholder="Ej. ARL-987654321">
+        </div>
+
+        <div class="col-md-6">
+          <label for="tipoContrato" class="form-label">Tipo de contrato</label>
+          <select class="form-select" id="tipoContrato">
+            <option selected>Seleccionar</option>
+            <option>Estudiante</option>
+            <option>Pasantía remunerada</option>
+            <option>Pasantía no remunerada</option>
+            <option>Otro</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="eps" class="form-label">EPS</label>
+          <input type="text" class="form-control" id="eps" placeholder="Ej. Salud Vida">
+        </div>
+
+        <div class="col-md-6">
+          <label for="contactoEmergencia" class="form-label">Contacto de emergencia</label>
+          <input type="text" class="form-control" id="contactoEmergencia" placeholder="Nombre y teléfono">
+        </div>
+
+        <div class="col-md-6">
+          <label for="telefonoEmergencia" class="form-label">Teléfono de emergencia</label>
+          <input type="text" class="form-control" id="telefonoEmergencia" placeholder="Ej. 3123456789">
+        </div>
+      </div>
+
+      <!-- Botón continuar -->
+      <div class="d-flex justify-content-end mt-4">
+        <button type="button" class="btn btn-primary" id="btnContinue">
+          <i class="fas fa-arrow-right"></i> Continuar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const btnContinue = document.getElementById('btnContinue');
+
+    btnContinue.addEventListener('click', () => {
+      // Redirige al siguiente paso del wizard
+      window.location.href = "disponibilidadModalidad.html";
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

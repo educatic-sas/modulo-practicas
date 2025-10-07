@@ -77,23 +77,32 @@
 <body>
 
   <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="user-info">
-      <img src="https://via.placeholder.com/80" alt="Avatar" />
-      <h6>Yusepe Ramirez</h6>
+ <div class="sidebar">
+  <div class="user-info">
+    <img src="Estudiante.jpeg" alt="Avatar" />
+    <h6>Yusepe Ramirez</h6>
       <p>CC: 34353455334</p>
       <p><i class="fas fa-phone"></i> 234233344</p>
       <p><i class="fas fa-envelope"></i> yusepe.ramirez@tdea.com.co</p>
-    </div>
-    <a href="#">Inicio</a>
-    <a href="#">Hoja de Vida</a>
-    <a href="#">Info.</a>
-    <a href="#">Tableros de Control</a>
-    <a href="#">Académico</a>
-    <a href="#" style="background-color: #0d6efd;">Gestión</a>
-    <a href="#">Servicios</a>
-    <a href="#">LMS</a>
   </div>
+
+  <a href="Fase2/Inicio.html">Inicio</a>
+  <a href="#">Hoja de Vida</a>
+  <a href="#">Info.</a>
+  <a href="#">Académico</a>
+
+  <!-- Gestión con submenú -->
+  <a class="d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#gestionSubmenu" role="button" aria-expanded="false" aria-controls="gestionSubmenu" style="background-color: #0d6efd; color: white;">
+    Gestión <i class="fas fa-chevron-down"></i>
+  </a>
+  <div class="collapse ps-3" id="gestionSubmenu">
+    <a href="Practicas_Monitor.html" class="d-block py-1 text-white text-decoration-none"  style="background-color: #0d6efd; color: white;">Prácticas</a>
+    <a href="Fase2Coordinador/listaSolicitudPracticas.html" class="d-block py-1 text-white text-decoration-none">Gestionar Solicitud Prácticas</a>
+  </div>
+
+  <a href="#">Servicios</a>
+  <a href="#">LMS</a>
+</div>
 
   <!-- Topbar -->
   <div class="topbar">
@@ -129,7 +138,7 @@
   <!-- Main Content -->
   <div class="main-content">
     <nav class="navbar-custom mb-3">
-      <strong>Académico</strong> &gt; Prácticas &gt; Gestionar
+      <strong>Gestion</strong> &gt; Prácticas
     </nav>
 
     <div class="d-flex justify-content-between mb-3">

@@ -24,21 +24,31 @@
   </style>
 </head>
 <body>
-
-  <!-- Sidebar -->
+  
+   <!-- Sidebar -->
   <div class="sidebar">
-    <div class="user-info">
+<div class="user-info">
       <img src="https://via.placeholder.com/80" alt="Avatar" />
       <h6>Tech Solutions S.A.S</h6>
       <p>NIT: 890900842</p>
       <p><i class="fas fa-phone"></i> 333333244</p>
       <p><i class="fas fa-envelope"></i> recursos.tecch@techSolution.com.co</p>
     </div>
-    <a href="#">Inicio</a>
-    <a href="#">Hoja de Vida</a>
-    <a href="Practicas_Empresa_Cooperador.html" style="background-color: #0d6efd;">Gestión</a>
-    <a href="evaluacion-impacto-practica.html">Gestion evalucion impacto de la practica</a>
+
+  <a href="#">Inicio</a>
+  <a href="#">Hoja de Vida</a>
+
+  <!-- Gestión con submenú -->
+  <a class="d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#gestionSubmenu" role="button" aria-expanded="false" aria-controls="gestionSubmenu" style="background-color: #0d6efd; color: white;">
+    Gestión <i class="fas fa-chevron-down"></i>
+  </a>
+  <div class="collapse ps-3" id="gestionSubmenu">
+     <a href="Fase2Empresas/conveniosEmpresa.html" class="d-block py-1 text-white text-decoration-none"  >Convenios</a>
+    <a href="#" class="d-block py-1 text-white text-decoration-none" style="background-color: #0d6efd; color: white;" >Prácticas</a>
+    <a href="Fase2Empresas/gestionarOfertas.html" class="d-block py-1 text-white text-decoration-none" >Gestion ofertas</a>
   </div>
+  <a href="evaluacion-impacto-practica.html">Gestion evaluacion de impacto</a>
+</div>
 
   <!-- Topbar (sin ícono de alerta) -->
   <div class="topbar">
@@ -67,7 +77,7 @@
   <!-- Main Content -->
   <div class="main-content">
     <nav class="navbar-custom mb-3">
-      <strong>Académico</strong> &gt; Prácticas &gt; Gestionar
+      <strong>Gestion</strong> &gt; Prácticas 
     </nav>
 
     <div class="d-flex justify-content-between mb-3">
@@ -94,7 +104,6 @@
           <th>Evaluación semana 5</th>
           <th>Evaluación semana 15</th>
           <th>Seguimiento Tutor</th>
-          <th>Alerta</th>
         </tr>
       </thead>
       <tbody>
@@ -118,18 +127,7 @@
           <td><a class="dropdown-item" href="Seguimiento_Evaluacion_Practica.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Semana 5</button></a></td>
           <td><a class="dropdown-item" href="Seguimiento_Evaluacion_Practica.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Semana 15</button></a></td>
           <td><a class="dropdown-item" href="Seguimiento_Entregables_Tutor.html"><button class="btn btn-outline-info btn-action">Seguimiento</button></a></td>
-          <td>
-            <button
-              class="btn btn-outline-danger btn-action btn-alerta"
-              data-bs-toggle="modal" data-bs-target="#alertModal"
-              data-doc="123456789"
-              data-name="Juan Pérez Gómez"
-              data-student-email="juan.perez@correo.edu.co"
-              data-tutor-email="laura.perez@universidad.edu.co"
-              data-coord-email="coordinacion.practicas@universidad.edu.co">
-              <i class="fas fa-triangle-exclamation"></i> Alerta
-            </button>
-          </td>
+
         </tr>
 
         <tr>
@@ -152,18 +150,6 @@
           <td><a class="dropdown-item" href="Seguimiento_Evaluacion_Practica.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Semana 5</button></a></td>
           <td><a class="dropdown-item" href="Seguimiento_Evaluacion_Practica.html"><button class="btn btn-outline-warning btn-action"><i class="fas fa-star-half-alt"></i> Semana 15</button></a></td>
           <td><a class="dropdown-item" href="Seguimiento_Entregables_Tutor.html"><button class="btn btn-outline-info btn-action">Seguimiento</button></a></td>
-          <td>
-            <button
-              class="btn btn-outline-danger btn-action btn-alerta"
-              data-bs-toggle="modal" data-bs-target="#alertModal"
-              data-doc="1000000002"
-              data-name="Carlos Gómez"
-              data-student-email="carlos.gomez@correo.edu.co"
-              data-tutor-email="maria.torres@universidad.edu.co"
-              data-coord-email="coordinacion.practicas@universidad.edu.co">
-              <i class="fas fa-triangle-exclamation"></i> Alerta
-            </button>
-          </td>
         </tr>
       </tbody>
     </table>
