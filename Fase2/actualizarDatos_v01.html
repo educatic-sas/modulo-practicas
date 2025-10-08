@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualizar Datos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding: 1rem;
+    }
+    .step-menu {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background-color: #0d6efd;
+      color: white;
+      border-radius: 0.5rem;
+      margin-right: 0.5rem;
+      font-weight: 500;
+    }
+    .step i {
+      margin-left: 0.5rem;
+    }
+    .step.inactive {
+      background-color: #6c757d;
+    }
+    .form-section {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menú de pasos -->
+  <div class="step-menu">
+    <div class="step inactive">1. Validación de Prerrequisitos <i class="fas fa-arrow-right"></i></div>
+    <div class="step active">2. Actualizar datos <i class="fas fa-arrow-right"></i></div>
+    <div class="step inactive">3. Datos para la ARL <i class="fas fa-arrow-right"></i></div>
+    <div class="step inactive">4. Disponibilidad, modalidad y confirmación</div>
+  </div>
+
+  <div class="form-section">
+    <h4 class="mb-4">Actualizar Datos Personales</h4>
+
+    <form>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="nombre" class="form-label">Nombre completo</label>
+          <input type="text" class="form-control" id="nombre" value="Juan Pérez Gómez">
+        </div>
+
+        <div class="col-md-6">
+          <label for="cc" class="form-label">Cédula de Ciudadanía</label>
+          <input type="text" class="form-control" id="cc" value="123456789">
+        </div>
+
+        <div class="col-md-6">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input type="email" class="form-control" id="email" value="juan.perez@correo.edu.co">
+        </div>
+
+        <div class="col-md-6">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input type="text" class="form-control" id="telefono" value="324455758343">
+        </div>
+
+        <div class="col-md-6">
+          <label for="direccion" class="form-label">Dirección</label>
+          <input type="text" class="form-control" id="direccion" value="Calle 123 #45-67">
+        </div>
+
+        <div class="col-md-6">
+          <label for="barrio" class="form-label">Barrio</label>
+          <input type="text" class="form-control" id="barrio" value="San Juan">
+        </div>
+
+        <div class="col-md-6">
+          <label for="ciudad" class="form-label">Ciudad</label>
+          <input type="text" class="form-control" id="ciudad" value="Medellín">
+        </div>
+
+        <div class="col-md-6">
+          <label for="departamento" class="form-label">Departamento</label>
+          <input type="text" class="form-control" id="departamento" value="Antioquia">
+        </div>
+
+        <div class="col-md-6">
+          <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+          <input type="date" class="form-control" id="fechaNacimiento" value="2000-01-15">
+        </div>
+
+        <div class="col-md-6">
+          <label for="genero" class="form-label">Género</label>
+          <select class="form-select" id="genero">
+            <option selected>Masculino</option>
+            <option>Femenino</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Botón continuar -->
+      <div class="d-flex justify-content-end mt-4">
+  <button type="button" class="btn btn-primary" id="btnContinue">
+    <i class="fas fa-arrow-right"></i> Continuar
+  </button>
+</div>
+
+<script>
+  const btnContinue = document.getElementById('btnContinue');
+
+  btnContinue.addEventListener('click', () => {
+    // Redirige al siguiente formulario
+    window.location.href = "arlPracticas.html";
+  });
+</script>
+
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
