@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de Solicitudes de Prácticas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      margin: 0;
+    }
+    .sidebar {
+      width: 250px;
+      background-color: #1c1f26;
+      color: white;
+      height: 100vh;
+      position: fixed;
+      padding: 1rem;
+    }
+    .sidebar .user-info {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .sidebar .user-info img {
+      width: 80px;
+      border-radius: 50%;
+      background-color: white;
+    }
+    .sidebar a {
+      color: white;
+      display: block;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      background-color: #343a40;
+    }
+    .topbar {
+      height: 50px;
+      background-color: #212529;
+      color: white;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 1rem;
+      margin-left: 250px;
+    }
+    .topbar i {
+      margin-left: 20px;
+      font-size: 18px;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 1rem;
+    }
+    .navbar-custom {
+      background-color: #0d6efd;
+      color: white;
+      padding: 0.5rem 1rem;
+    }
+    .navbar-custom a {
+      color: white;
+      text-decoration: none;
+    }
+    .table thead {
+      background-color: #0d6efd;
+      color: white;
+    }
+    .btn-action {
+      font-size: 0.9rem;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+
+   <!-- Sidebar -->
+<div class="sidebar">
+  <div class="user-info">
+    <img src="https://via.placeholder.com/80" alt="Avatar" />
+    <h6>Coordinador general practicas</h6>
+    <p>CC: 12354456</p>
+    <p><i class="fas fa-phone"></i> 333333244</p>
+    <p><i class="fas fa-envelope"></i> coordinadorpracticas@tdea.com.co</p>
+  </div>
+
+  <!-- Gestión con submenú -->
+  <a class="d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#gestionSubmenu" role="button" aria-expanded="false" aria-controls="gestionSubmenu" style="background-color: #0d6efd; color: white;">
+    Gestión <i class="fas fa-chevron-down"></i>
+  </a>
+  <div class="collapse ps-3" id="gestionSubmenu">
+    <a href="#" class="d-block py-1 text-white text-decoration-none"
+     style="background-color: #0d6efd; color: white;">Gestionar Solicitud Prácticas</a>
+    <a href="listaSolicitudPracticas.html" class="d-block py-1 text-white text-decoration-none">Gestion ofertas</a>
+    <a href="../Fase2AreJuridica/conveniosVer.html" class="d-block py-1 text-white text-decoration-none">Gestion Convenios</a>
+  </div>
+</div>
+
+
+  <!-- Topbar -->
+  <div class="topbar">
+  <i class="fas fa-exclamation-triangle"></i>
+  <span class="badge bg-warning text-dark">0</span>
+
+<!-- Dropdown de Plataformas -->
+<div class="dropdown ms-3">
+  <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="plataformaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fas fa-network-wired"></i> Plataformas
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="plataformaDropdown">
+    <li><a class="dropdown-item" href="Practicas_Estudiante.html">Comunica</a></li>
+    <li><a class="dropdown-item" href="PracticasAdministra/PracticaLaboral.html">Administra</a></li>
+  </ul>
+</div>
+
+  <!-- Dropdown de Rol -->
+  <div class="dropdown ms-3">
+    <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="rolDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fas fa-user-shield"></i> Rol
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="rolDropdown">
+      <li><a class="dropdown-item" href="../Practicas_Estudiante.html">Practicante / Estudiante</a></li>
+      <li><a class="dropdown-item" href="../Practicas_Monitor.html">Docente / Monitor</a></li>
+      <li><a class="dropdown-item" href="../Practicas_Empresa_Cooperador.html">Empresa / Tutor sCooperador</a></li>
+      <li><a class="dropdown-item" href="#">CGP / Coordinador practicas</a></li>
+    </ul>
+  </div>
+
+  <i class="fas fa-wifi ms-3"></i>
+</div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <h4 class="mb-3">Lista de Solicitudes de Prácticas</h4>
+
+    <div class="card p-3 mb-3 shadow-sm">
+  <div class="d-flex align-items-center">
+    <!-- Select de filtros -->
+    <select class="form-select me-2" style="width: 200px;">
+      <option value="">Estado solicitud</option>
+      <option value="Pendiente Confirmación CGP">Pendiente Confirmación CGP</option>
+      <option value="En Proceso">En Proceso</option>
+      <option value="Inicio">Inicio</option>
+      <option value="Aprobado">Aprobado</option>
+    </select>
+
+    <!-- Botón de aplicar -->
+    <button class="btn btn-primary">
+      <i class="fas fa-filter"></i> Aplicar
+    </button>
+
+  </div>
+</div>
+
+
+    <div class="d-flex justify-content-end my-3">
+  <button class="btn btn-info btn-lg">
+    <i class="fas fa-file-alt"></i> Consolidado Solicitudes Prácticas
+  </button>
+</div>
+
+
+    <table class="table table-hover table-bordered align-middle text-center">
+      <thead>
+        <tr>
+          <th>Estudiante</th>
+          <th>Programa</th>
+          <th>Estado Solicitud</th>
+          <th>Formularios Finalizados</th>
+          <th>Acceso a Formularios</th>
+          <th>Cumplió 'Acercamiento a Prácticas'</th>
+          <th>Integración con ARL</th>
+          <th>Generación de cartas / Presentación</th>
+          <th>Aprobacion</th>
+          <th>Asignar practicas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Juan Pérez Gómez</td>
+          <td>Ingeniería de Sistemas</td>
+          <td><span class="badge bg-warning">Pendiente Confirmación CGP</span></td>
+          <td>4</td>
+          <td>
+            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#procesoModal">
+                <i class="fas fa-edit"></i> Editar
+            </button>
+
+           <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#observacionesFormulariosModal">
+  <i class="fas fa-comment-alt"></i> Observaciones
+</button>
+
+
+          </td>
+          <td><span class="text-danger"><i class="fas fa-times"></i></span></td>
+          <td>
+            <button class="btn btn-outline-success btn-sm"><i class="fas fa-download"></i> Descargar</button>
+          </td>
+          <td>
+            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>Carta Aval</button>
+            <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-download"></i>Presentación</button>
+          </td>
+          <td>
+            <!-- Botón Aprobar -->
+            <button class="btn btn-success btn-sm me-1">
+                <i class="fas fa-check"></i> Aprobar
+            </button>
+
+            <!-- Botón Rechazar que abre modal -->
+            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#rechazarModal">
+                <i class="fas fa-times"></i> Rechazar
+            </button>
+        </td>
+        </tr>
+
+        <tr>
+          <td>Ana Martínez</td>
+          <td>Ingeniería Industrial</td>
+          <td><span class="badge bg-info">En Proceso</span></td>
+          <td>2</td>
+          <td>
+            <a href="#" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i> Editar</a>
+          </td>
+          <td><span class="text-success"><i class="fas fa-check"></i></span></td>
+          <td>
+           
+          </td>
+          <td>
+            
+          </td>
+           <td>
+            <button class="btn btn-info btn-sm me-1">
+  <i class="fas fa-clock"></i> Pendiente
+</button>
+        </td>   
+        </tr>
+
+        <tr>
+          <td>Carlos Torres</td>
+          <td>Administración de Empresas</td>
+          <td><span class="badge bg-info">Inicio</span></td>
+          <td>1</td>
+          <td>
+            <a href="#" class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i> Ver</a>
+          </td>
+          <td><span class="text-success"><i class="fas fa-check"></i></span></td>
+          <td>
+            
+          </td>
+          <td>
+          
+          </td>
+           <td>
+            <button class="btn btn-info btn-sm me-1">
+  <i class="fas fa-clock"></i> Pendiente
+</button>
+        </td>   
+        </tr>
+
+        <tr>
+          <td>Laura Rivas</td>
+          <td>Ingeniería de Sistemas</td>
+          <td><span class="badge bg-success">Aprobado</span></td>
+          <td>4</td>
+          <td>
+            <a href="#" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i> Editar</a>
+          </td>
+          <td><span class="text-success"><i class="fas fa-check"></i></span></td>
+          <td>
+            <button class="btn btn-outline-success btn-sm"><i class="fas fa-download"></i> Descargar</button>
+          </td>
+          <td>
+            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>Carta Aval</button>
+            <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-download"></i>Presentación</button>
+          </td>
+           <td>
+            <button class="btn btn-success btn-sm me-1">
+  <i class="fas fa-check"></i> Aprobado
+</button>
+        </td>   
+        <td>
+        <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#relacionarModal">
+        <i class="fas fa-link"></i> Relacionar Oferta
+        </button>
+        </td>
+        </tr>
+
+        <tr>
+          <td>Diego Ramírez</td>
+          <td>Contaduría Pública</td>
+          <td><span class="badge bg-info">En Proceso</span></td>
+          <td>3</td>
+          <td>
+            <a href="#" class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i> Ver</a>
+          </td>
+          <td><span class="text-danger"><i class="fas fa-times"></i></span></td>
+          <td>
+            <button class="btn btn-outline-success btn-sm"><i class="fas fa-download"></i> Descargar</button>
+          </td>
+          <td>
+            
+          </td>
+          <td>
+            <button class="btn btn-info btn-sm me-1">
+  <i class="fas fa-clock"></i> Pendiente
+</button>
+        </td>  
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+    <!-- Modal de Rechazo -->
+  <div class="modal fade" id="rechazarModal" tabindex="-1" aria-labelledby="rechazarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="rechazarModalLabel">Rechazar Solicitud</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="motivo" class="form-label">Motivo del rechazo</label>
+            <textarea class="form-control" id="motivo" rows="3" placeholder="Ingrese el motivo del rechazo..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="guardarMotivoBtn">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const guardarMotivoBtn = document.getElementById('guardarMotivoBtn');
+  guardarMotivoBtn.addEventListener('click', () => {
+    const motivo = document.getElementById('motivo').value;
+    if(motivo.trim() === "") {
+      alert("Debe ingresar un motivo para el rechazo.");
+      return;
+    }
+    alert("Solicitud rechazada con motivo: " + motivo);
+    const modal = bootstrap.Modal.getInstance(document.getElementById('rechazarModal'));
+    modal.hide();
+  });
+</script>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="procesoModal" tabindex="-1" aria-labelledby="procesoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" style="max-width:90%;">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="procesoModalLabel">Proceso de Práctica</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body" style="height:80vh;">
+                <!-- iframe que carga la página -->
+                <iframe src="../Fase2/procesoPractica.html" style="width:100%; height:100%; border:none;"></iframe>
+            </div>
+            </div>
+        </div>
+        </div>
+
+
+      <!-- Agrega más tarjetas según sea necesario -->
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+window.addEventListener('message', (event) => {
+  if (event.data && event.data.action === 'closeModal') {
+    const modalEl = document.getElementById('procesoModal');
+    if (modalEl) {
+      const modalInstance = bootstrap.Modal.getInstance(modalEl);
+      if (modalInstance) {
+        modalInstance.hide();
+      }
+    }
+  }
+});
+</script>
+
+<!-- Modal Observaciones -->
+<div class="modal fade" id="observacionesFormulariosModal" tabindex="-1" aria-labelledby="observacionesFormulariosLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title" id="observacionesFormulariosLabel">
+          <i class="fas fa-comment-dots"></i> Observaciones a los formularios
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Campo para agregar nueva observación -->
+        <div class="mb-3">
+          <label for="observacionInput" class="form-label fw-bold">Agregar observación:</label>
+          <textarea class="form-control" id="observacionInput" rows="3" placeholder="Escriba aquí el motivo o la observación..."></textarea>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-info" id="guardarObservacionBtn">
+            <i class="fas fa-save"></i> Guardar
+          </button>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Panel de histórico -->
+        <h6 class="fw-bold"><i class="fas fa-history"></i> Histórico de Observaciones</h6>
+        <div class="table-responsive mt-3">
+          <table class="table table-bordered table-striped align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Fecha de Observación</th>
+                <th>Observación</th>
+                <th>Visto por el Solicitante</th>
+                <th>Respondido Solicitante</th>
+                <th>Fecha de Respuesta</th>
+              </tr>
+            </thead>
+            <tbody id="historialObservaciones">
+              <tr>
+                <td>2025-10-06</td>
+                <td>Faltan datos de ARL en el formulario 3.</td>
+                <td><i class="fas fa-times text-danger"></i> No</td>
+                <td></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>2025-09-30</td>
+                <td>Faltan datos en el formulario 2</td>
+                <td><i class="fas fa-check text-success"></i> Sí</td>
+                <td>Datos actualizados</td>
+                <td>2025-10-02</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="fas fa-times"></i> Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('guardarObservacionBtn').addEventListener('click', () => {
+    const observacion = document.getElementById('observacionInput').value.trim();
+    if (!observacion) {
+      alert("Por favor ingrese una observación antes de guardar.");
+      return;
+    }
+
+    const fecha = new Date().toLocaleDateString();
+    const nuevaFila = `
+      <tr>
+        <td>${fecha}</td>
+        <td>${observacion}</td>
+        <td><i class="fas fa-times text-danger"></i> No</td>
+        <td><i class="fas fa-times text-danger"></i> No</td>
+        <td>—</td>
+      </tr>
+    `;
+    document.getElementById('historialObservaciones').insertAdjacentHTML('beforeend', nuevaFila);
+    document.getElementById('observacionInput').value = '';
+    alert("Observación guardada correctamente.");
+  });
+</script>
+
+<!-- Modal Relacionar Ofertas -->
+<div class="modal fade" id="relacionarModal" tabindex="-1" aria-labelledby="relacionarModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title" id="relacionarModalLabel">
+          <i class="fas fa-building me-2"></i> Relacionar Ofertas
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-sm table-bordered text-center align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Seleccionar</th>
+                <th>Nombre Empresa</th>
+                <th>NIT</th>
+                <th>Nombre Oferta</th>
+                <th>Observaciones</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Finalización</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="radio"></td>
+                <td>Artifex Tech S.A.S</td>
+                <td>900123456</td>
+                <td>Pasantía Remunerada</td>
+                <td>Apoyo en desarrollo de software</td>
+                <td>2025-08-01</td>
+                <td>2025-11-30</td>
+              </tr>
+              <tr>
+                <td><input type="radio"></td>
+                <td>Nova Solutions</td>
+                <td>901234567</td>
+                <td>Práctica de Innovación</td>
+                <td>Proyecto de emprendimiento</td>
+                <td>2025-09-01</td>
+                <td>2025-12-15</td>
+              </tr>
+              <tr>
+                <td><input type="radio"></td>
+                <td>Global Tech</td>
+                <td>900987654</td>
+                <td>Escenario Interno</td>
+                <td>Soporte en infraestructura TI</td>
+                <td>2025-07-15</td>
+                <td>2025-10-15</td>
+              </tr>
+              <tr>
+                <td><input type="radio"></td>
+                <td>EcoEnergy</td>
+                <td>901112233</td>
+                <td>Práctica Ambiental</td>
+                <td>Monitoreo de impacto ambiental</td>
+                <td>2025-08-15</td>
+                <td>2025-11-15</td>
+              </tr>
+              <tr>
+                <td><input type="radio"></td>
+                <td>DataMind</td>
+                <td>900334455</td>
+                <td>Analítica de Datos</td>
+                <td>Procesamiento de información</td>
+                <td>2025-09-01</td>
+                <td>2025-12-01</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="fas fa-times"></i> Cancelar
+        </button>
+        <button type="button" class="btn btn-success">
+          <i class="fas fa-save"></i> Guardar Selección
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

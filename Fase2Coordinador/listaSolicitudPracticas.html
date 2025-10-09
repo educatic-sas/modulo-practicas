@@ -1,89 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lista de Solicitudes de Prácticas</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestión de Asignaciones — Coordinador (v6)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
-    body {
-      background-color: #f8f9fa;
-      margin: 0;
+    :root{
+      --brand-primary:#0d6efd;
+      --brand-success:#198754;
+      --brand-dark:#0b2239;
     }
-    .sidebar {
-      width: 250px;
-      background-color: #1c1f26;
-      color: white;
-      height: 100vh;
-      position: fixed;
-      padding: 1rem;
-    }
-    .sidebar .user-info {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .sidebar .user-info img {
-      width: 80px;
-      border-radius: 50%;
-      background-color: white;
-    }
-    .sidebar a {
-      color: white;
-      display: block;
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-    }
-    .sidebar a:hover {
-      background-color: #343a40;
-    }
-    .topbar {
-      height: 50px;
-      background-color: #212529;
-      color: white;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 0 1rem;
-      margin-left: 250px;
-    }
-    .topbar i {
-      margin-left: 20px;
-      font-size: 18px;
-    }
-    .main-content {
-      margin-left: 250px;
-      padding: 1rem;
-    }
-    .navbar-custom {
-      background-color: #0d6efd;
-      color: white;
-      padding: 0.5rem 1rem;
-    }
-    .navbar-custom a {
-      color: white;
-      text-decoration: none;
-    }
-    .table thead {
-      background-color: #0d6efd;
-      color: white;
-    }
-    .btn-action {
-      font-size: 0.9rem;
-      padding: 5px 10px;
-    }
+    body{ background:#f7f9fb; }
+    .container-narrow{ max-width: 1400px; }
+    .card-rounded{ border-radius:1rem; }
+    .sticky-topbar{ position: sticky; top:0; z-index:1030; background:#fff; border-bottom:1px solid #e9ecef; }
+    .kpi{ border-radius:.8rem; background:#fff; border:1px solid #e9ecef; padding:1rem; }
+    .kpi .value{ font-size:1.6rem; font-weight:700; }
+    .companies-strip{ display:flex; gap:.75rem; overflow-x:auto; padding-bottom:.5rem; }
+    .company-card{ min-width: 320px; border:1px solid #e9ecef; background:#fff; border-radius:.85rem; padding: .9rem; cursor:pointer; }
+    .company-card.active{ outline: 2px solid var(--brand-primary); box-shadow: 0 0 0 3px rgba(13,110,253,.15); }
+    .company-header{ display:flex; justify-content:space-between; align-items:center; }
+    .company-title{ font-weight:700; }
+    .company-sub{ font-size:.9rem; color:#6c757d; }
+    .stats{ display:flex; gap:1rem; margin-top:.25rem; }
+    .stat{ background:#f1f3f5; border-radius:.5rem; padding:.25rem .5rem; font-size:.85rem; }
+    .table thead th{ background:#0d6efd; color:#fff; }
+    .table-sm td, .table-sm th{ padding:.45rem .55rem; }
+    .match-good{ background:#e8f8ef; border:1px solid #bfe3cf; }
+    .match-bad{ background:#fdecea; border:1px solid #f5c2c7; }
+    .badge-role{ background:#e9ecef; color:#495057; }
+    .explain{ border-left:4px solid #0d6efd; background:#eef5ff; }
+    .pager{ display:flex; align-items:center; justify-content:flex-end; gap:.5rem; }
+  </style>
+  <style>
+    body { background-color: #f8f9fa; margin: 0; }
+    .sidebar { width: 250px; background-color: #1c1f26; color: white; height: 100vh; position: fixed; padding: 1rem; }
+    .sidebar .user-info { text-align: center; margin-bottom: 1rem; }
+    .sidebar .user-info img { width: 80px; border-radius: 50%; background-color: white; }
+    .sidebar a { color: white; display: block; padding: 0.5rem 1rem; text-decoration: none; }
+    .sidebar a:hover { background-color: #343a40; }
+    .topbar { height: 50px; background-color: #212529; color: white; display: flex; justify-content: flex-end; align-items: center; padding: 0 1rem; margin-left: 250px; }
+    .topbar i { margin-left: 20px; font-size: 18px; }
+    .main-content { margin-left: 250px; padding: 1rem; }
+    .navbar-custom { background-color: #0d6efd; color: white; padding: 0.5rem 1rem; }
+    .navbar-custom a { color: white; text-decoration: none; }
+    .table thead { background-color: #0d6efd; color: white; }
+    .btn-action { font-size: 0.85rem; padding: 4px 8px; }
+    .text-sm { font-size: 0.85rem; }
   </style>
 </head>
 <body>
-
-   <!-- Sidebar -->
-  <div class="sidebar">
+  
+<!-- Sidebar -->
+<div class="sidebar">
   <div class="user-info">
-    <img src="Estudiante.jpeg" alt="Avatar" />
-    <h6>Yusepe Ramirez</h6>
-      <p>CC: 34353455334</p>
-      <p><i class="fas fa-phone"></i> 234233344</p>
-      <p><i class="fas fa-envelope"></i> yusepe.ramirez@tdea.com.co</p>
+    <img src="https://via.placeholder.com/80" alt="Avatar" />
+    <h6>Coordinador general practicas</h6>
+    <p>CC: 12354456</p>
+    <p><i class="fas fa-phone"></i> 333333244</p>
+    <p><i class="fas fa-envelope"></i> coordinadorpracticas@tdea.com.co</p>
   </div>
 
   <!-- Gestión con submenú -->
@@ -91,484 +68,828 @@
     Gestión <i class="fas fa-chevron-down"></i>
   </a>
   <div class="collapse ps-3" id="gestionSubmenu">
-    <a href="../Practicas_Monitor.html" class="d-block py-1 text-white text-decoration-none" >Prácticas</a>
-    <a href="#" class="d-block py-1 text-white text-decoration-none"
-     style="background-color: #0d6efd; color: white;">Gestionar Solicitud Prácticas</a>
-          <a href="../Fase2AreJuridica/conveniosVer.html" class="d-block py-1 text-white text-decoration-none">Gestion ofertas</a>
+    <a href="listaSolicitudPracticas01.html" class="d-block py-1 text-white text-decoration-none">Gestionar Solicitud Prácticas</a>
+    <a href="#" class="d-block py-1 text-white text-decoration-none" style="background-color: #0d6efd; color: white;">Gestion ofertas</a>
+    <a href="../Fase2AreJuridica/conveniosVer.html" class="d-block py-1 text-white text-decoration-none">Gestion Convenios</a>
+  </div>  
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="dropdown ms-3">
+    <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="plataformaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fas fa-network-wired"></i> Plataformas
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="plataformaDropdown">
+      <li><a class="dropdown-item" href="../Practicas_Estudiante.html">Comunica</a></li>
+      <li><a class="dropdown-item" href="../PracticasAdministra/PracticaLaboral.html">Administra</a></li>
+    </ul>
   </div>
-</div>
-
-
-  <!-- Topbar -->
-  <div class="topbar">
-  <i class="fas fa-exclamation-triangle"></i>
-  <span class="badge bg-warning text-dark">0</span>
-
-<!-- Dropdown de Plataformas -->
-<div class="dropdown ms-3">
-  <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="plataformaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fas fa-network-wired"></i> Plataformas
-  </a>
-  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="plataformaDropdown">
-    <li><a class="dropdown-item" href="Practicas_Estudiante.html">Comunica</a></li>
-    <li><a class="dropdown-item" href="PracticasAdministra/PracticaLaboral.html">Administra</a></li>
-  </ul>
-</div>
-
-  <!-- Dropdown de Rol -->
   <div class="dropdown ms-3">
     <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" id="rolDropdown" data-bs-toggle="dropdown" aria-expanded="false">
       <i class="fas fa-user-shield"></i> Rol
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="rolDropdown">
       <li><a class="dropdown-item" href="../Practicas_Estudiante.html">Practicante / Estudiante</a></li>
-      <li><a class="dropdown-item" href="../Practicas_Monitor.html">Docente / Monitor</a></li>
-      <li><a class="dropdown-item" href="../Practicas_Empresa_Cooperador.html">Empresa / Tutor sCooperador</a></li>
+      <li><a class="dropdown-item" href="../Practicas_Monitor.html?modo=0">Docente / Monitor</a></li>
+      <li><a class="dropdown-item" href="../Practicas_Empresa_Cooperador.html">Empresa / Tutor Cooperador</a></li>
+      <li><a class="dropdown-item" href="#">CGP / Coordinador practicas</a></li>
     </ul>
   </div>
-
   <i class="fas fa-wifi ms-3"></i>
 </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <nav class="navbar-custom mb-3">
-      <strong>Académico</strong> &gt; Prácticas &gt; Lista de Solicitudes
-    </nav>
-
-    <h4 class="mb-3">Lista de Solicitudes de Prácticas</h4>
-
-    <div class="card p-3 mb-3 shadow-sm">
-  <div class="d-flex align-items-center">
-    <!-- Select de filtros -->
-    <select class="form-select me-2" style="width: 200px;">
-      <option value="">Estado solicitud</option>
-      <option value="Pendiente Confirmación CGP">Pendiente Confirmación CGP</option>
-      <option value="En Proceso">En Proceso</option>
-      <option value="Inicio">Inicio</option>
-      <option value="Aprobado">Aprobado</option>
-    </select>
-
-    <!-- Botón de aplicar -->
-    <button class="btn btn-primary">
-      <i class="fas fa-filter"></i> Aplicar
-    </button>
-
-  </div>
-</div>
-
-
-    <div class="d-flex justify-content-end my-3">
-  <button class="btn btn-info btn-lg">
-    <i class="fas fa-file-alt"></i> Consolidado Solicitudes Prácticas
-  </button>
-</div>
-
-
-    <table class="table table-hover table-bordered align-middle text-center">
-      <thead>
-        <tr>
-          <th>Estudiante</th>
-          <th>Programa</th>
-          <th>Estado Solicitud</th>
-          <th>Formularios Finalizados</th>
-          <th>Acceso a Formularios</th>
-          <th>Cumplió 'Acercamiento a Prácticas'</th>
-          <th>Integración con ARL</th>
-          <th>Generación de cartas / Presentación</th>
-          <th>Aprobacion</th>
-          <th>Asignar practicas</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Juan Pérez Gómez</td>
-          <td>Ingeniería de Sistemas</td>
-          <td><span class="badge bg-warning">Pendiente Confirmación CGP</span></td>
-          <td>4</td>
-          <td>
-            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#procesoModal">
-                <i class="fas fa-edit"></i> Editar
-            </button>
-
-           <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#observacionesFormulariosModal">
-  <i class="fas fa-comment-alt"></i> Observaciones
-</button>
-
-
-          </td>
-          <td><span class="text-danger"><i class="fas fa-times"></i></span></td>
-          <td>
-            <button class="btn btn-outline-success btn-sm"><i class="fas fa-download"></i> Descargar</button>
-          </td>
-          <td>
-            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>Carta Aval</button>
-            <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-download"></i>Presentación</button>
-          </td>
-          <td>
-            <!-- Botón Aprobar -->
-            <button class="btn btn-success btn-sm me-1">
-                <i class="fas fa-check"></i> Aprobar
-            </button>
-
-            <!-- Botón Rechazar que abre modal -->
-            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#rechazarModal">
-                <i class="fas fa-times"></i> Rechazar
-            </button>
-        </td>
-        </tr>
-
-        <tr>
-          <td>Ana Martínez</td>
-          <td>Ingeniería Industrial</td>
-          <td><span class="badge bg-info">En Proceso</span></td>
-          <td>2</td>
-          <td>
-            <a href="#" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i> Editar</a>
-          </td>
-          <td><span class="text-success"><i class="fas fa-check"></i></span></td>
-          <td>
-           
-          </td>
-          <td>
-            
-          </td>
-           <td>
-            <button class="btn btn-info btn-sm me-1">
-  <i class="fas fa-clock"></i> Pendiente
-</button>
-        </td>   
-        </tr>
-
-        <tr>
-          <td>Carlos Torres</td>
-          <td>Administración de Empresas</td>
-          <td><span class="badge bg-info">Inicio</span></td>
-          <td>1</td>
-          <td>
-            <a href="#" class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i> Ver</a>
-          </td>
-          <td><span class="text-success"><i class="fas fa-check"></i></span></td>
-          <td>
-            
-          </td>
-          <td>
-          
-          </td>
-           <td>
-            <button class="btn btn-info btn-sm me-1">
-  <i class="fas fa-clock"></i> Pendiente
-</button>
-        </td>   
-        </tr>
-
-        <tr>
-          <td>Laura Rivas</td>
-          <td>Ingeniería de Sistemas</td>
-          <td><span class="badge bg-success">Aprobado</span></td>
-          <td>4</td>
-          <td>
-            <a href="#" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i> Editar</a>
-          </td>
-          <td><span class="text-success"><i class="fas fa-check"></i></span></td>
-          <td>
-            <button class="btn btn-outline-success btn-sm"><i class="fas fa-download"></i> Descargar</button>
-          </td>
-          <td>
-            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>Carta Aval</button>
-            <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-download"></i>Presentación</button>
-          </td>
-           <td>
-            <button class="btn btn-success btn-sm me-1">
-  <i class="fas fa-check"></i> Aprobado
-</button>
-        </td>   
-        <td>
-        <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#relacionarModal">
-        <i class="fas fa-link"></i> Relacionar Oferta
-        </button>
-        </td>
-        </tr>
-
-        <tr>
-          <td>Diego Ramírez</td>
-          <td>Contaduría Pública</td>
-          <td><span class="badge bg-info">En Proceso</span></td>
-          <td>3</td>
-          <td>
-            <a href="#" class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i> Ver</a>
-          </td>
-          <td><span class="text-danger"><i class="fas fa-times"></i></span></td>
-          <td>
-            <button class="btn btn-outline-success btn-sm"><i class="fas fa-download"></i> Descargar</button>
-          </td>
-          <td>
-            
-          </td>
-          <td>
-            <button class="btn btn-info btn-sm me-1">
-  <i class="fas fa-clock"></i> Pendiente
-</button>
-        </td>  
-        </tr>
-
-      </tbody>
-    </table>
+<div class="main-content">
+  <!-- Top sticky header -->
+  <div class="sticky-topbar">
+    <div class="container container-narrow py-3 d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <span class="badge rounded-pill text-bg-success">Coordinador</span>
+        <h1 class="h5 m-0">Gestión de asignaciones</h1>
+      </div>
+    </div>
   </div>
 
-    <!-- Modal de Rechazo -->
-  <div class="modal fade" id="rechazarModal" tabindex="-1" aria-labelledby="rechazarModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+  <main class="container container-narrow my-4">
+
+    <!-- Mensaje de uso / explicación -->
+    <div class="alert explain card-rounded" role="alert">
+      <div class="d-flex">
+        <i class="fa-solid fa-circle-info me-2 mt-1"></i>
+        <div>
+          <div class="fw-semibold mb-1">Cómo usar esta pantalla</div>
+          Coordine las asignaciones de práctica. Seleccione la <strong>modalidad</strong> (Escenario / Autónoma). En <strong>Escenario</strong>, elija una <strong>empresa</strong> (NIT, nombre, # asignados / # vacantes solicitadas) desde la tira horizontal; al seleccionarla verá sus <strong>estudiantes asignados</strong>. En <strong>Autónoma</strong>, el escenario mostrado es el <strong>Tecnológico de Antioquia</strong>. Luego, desde <strong>Estudiantes en solicitud</strong>, puede seleccionar uno o varios estudiantes, definir el <strong>tipo</strong>, <strong>fechas</strong> y <strong>dependencia</strong> (lista por empresa), y confirmar la asignación. El progreso y documentos quedan visibles para <span class="badge badge-role">Coordinación</span>, <span class="badge badge-role">Monitores/docentes</span>, <span class="badge badge-role">Estudiantes</span> y <span class="badge badge-role">Empresa receptora</span> según permisos.
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtros y modalidad -->
+    <div class="card card-rounded shadow-sm mb-3">
+      <div class="card-body row g-3 align-items-end">
+        <div class="col-lg-3">
+          <label class="form-label">Facultad a cargo</label>
+          <select id="filtroFacultad" class="form-select">
+            <option value="">Todas</option>
+            <option>Ingenierías</option>
+            <option>Ciencias Sociales</option>
+            <option>Administración y Negocios</option>
+          </select>
+        </div>
+        <div class="col-lg-3">
+          <label class="form-label">Programa</label>
+          <input id="filtroPrograma" class="form-control" placeholder="Filtrar por programa…">
+        </div>
+        <div class="col-lg-6">
+          <label class="form-label">Modalidad</label>
+          <div class="d-flex align-items-center gap-2">
+            <div class="btn-group" role="group" aria-label="Modalidad">
+              <input type="radio" class="btn-check" name="modalidad" id="modEscenario" value="Escenario" checked>
+              <label class="btn btn-outline-secondary" for="modEscenario"><i class="fa-solid fa-city me-1"></i> Escenario</label>
+              <input type="radio" class="btn-check" name="modalidad" id="modAutonoma" value="Autónoma">
+              <label class="btn btn-outline-secondary" for="modAutonoma"><i class="fa-solid fa-user-graduate me-1"></i> Autónoma</label>
+            </div>
+            <span class="badge text-bg-primary" id="badgeModo">Modo: Escenario</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-3">
+        <div class="kpi text-center">
+          <div class="label text-muted">Estudiantes en solicitud</div>
+          <div class="value" id="kpiSolicitudes">0</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="kpi text-center">
+          <div class="label text-muted">Estudiantes asignados</div>
+          <div class="value" id="kpiAsignados">0</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="kpi text-center">
+          <div class="label text-muted">Empresas / Solicitudes</div>
+          <div class="value"><span id="kpiEmpresas">0</span> / <span id="kpiSolicitudesEmp">0</span></div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="kpi text-center">
+          <div class="label text-muted">Solicitudes disponibles</div>
+          <div class="value" id="kpiVacantes">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOQUE 1: Empresas / Escenarios (tira horizontal) -->
+    <section class="card card-rounded shadow-sm mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h2 class="h6 text-uppercase text-muted m-0">Escenarios disponibles</h2>
+          <small class="text-muted">Desplácese horizontalmente para ver más</small>
+        </div>
+        <div id="companiesStrip" class="companies-strip"></div>
+      </div>
+    </section>
+
+    <!-- BLOQUE 2: Asignados en la empresa/escenario seleccionado -->
+    <section class="card card-rounded shadow-sm mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h2 class="h6 text-uppercase text-muted m-0">Asignados en <span id="lblEmpresaSel">—</span></h2>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-success btn-sm" id="btnExportCsv"><i class="fa-solid fa-file-csv me-1"></i> Exportar CSV</button>
+            <button class="btn btn-outline-primary btn-sm" id="btnPublicar"><i class="fa-solid fa-upload me-1"></i> Publicar</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-sm table-hover align-middle" id="tablaAsignadosEmpresa">
+            <thead class="table-light">
+              <tr>
+                <th>Estudiante</th>
+                <th>Programa</th>
+                <th>Disponibilidad</th>
+                <th>Modalidad</th>
+                <th>Tipo</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Área</th>
+                <th>Estado</th>
+                <th>Docs</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOQUE 3: Estudiantes en solicitud -->
+    <section class="card card-rounded shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h2 class="h6 text-uppercase text-muted m-0">Estudiantes en solicitud</h2>
+          <div class="d-flex gap-2">
+            <button id="btnAsignarSel" class="btn btn-success btn-sm" disabled><i class="fa-solid fa-paper-plane me-1"></i>Asignar a escenario seleccionado</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-sm table-striped align-middle">
+            <thead class="table-light">
+              <tr>
+                <th></th>
+                <th>Estudiante</th>
+                <th>Programa</th>
+                <th>Disponibilidad</th>
+                <th>Doc. Trabajador</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tblEstudiantes"></tbody>
+          </table>
+        </div>
+        <div class="pager mt-2">
+          <button class="btn btn-outline-secondary btn-sm" id="pgPrev" disabled><i class="fa-solid fa-angle-left"></i></button>
+          <span class="small text-muted" id="pgLabel">Página 1 de 1</span>
+          <button class="btn btn-outline-secondary btn-sm" id="pgNext" disabled><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Asignar -->
+  <div class="modal fade" id="modalAsignar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="rechazarModalLabel">Rechazar Solicitud</h5>
+          <h5 class="modal-title"><i class="fa-solid fa-right-left me-2"></i>Asignar estudiantes al escenario</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
         <div class="modal-body">
-          <div class="mb-3">
-            <label for="motivo" class="form-label">Motivo del rechazo</label>
-            <textarea class="form-control" id="motivo" rows="3" placeholder="Ingrese el motivo del rechazo..."></textarea>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Escenario</label>
+              <input id="asigEmpresa" class="form-control" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Capacidad</label>
+              <input id="asigVacantes" class="form-control" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Tipo de práctica (<span id="lblModalidad">Escenario</span>)</label>
+              <select id="asigTipo" class="form-select"></select>
+              <div class="form-text">El tipo lo define el coordinador.</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Dependencia / área</label>
+              <select id="asigAreaSel" class="form-select"></select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Fecha de inicio</label>
+              <input type="date" id="asigInicio" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Fecha de finalización</label>
+              <input type="date" id="asigFin" class="form-control">
+            </div>
+          </div>
+
+          <div class="alert alert-warning mt-3 d-none" id="warnTrabajador">
+            <i class="fa-solid fa-triangle-exclamation me-2"></i>
+            Para <strong>Practicante trabajador</strong>, debe aprobar el documento cargado por cada estudiante antes de confirmar.
+          </div>
+
+          <div id="listaSelPrev" class="mt-3">
+            <div class="fw-semibold mb-1">Estudiantes seleccionados</div>
+            <ul class="list-group" id="ulSelPrev"></ul>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" id="guardarMotivoBtn">Guardar</button>
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-success" id="btnConfirmarAsignacion">Confirmar asignación</button>
         </div>
       </div>
     </div>
   </div>
 
-  <script>
-  const guardarMotivoBtn = document.getElementById('guardarMotivoBtn');
-  guardarMotivoBtn.addEventListener('click', () => {
-    const motivo = document.getElementById('motivo').value;
-    if(motivo.trim() === "") {
-      alert("Debe ingresar un motivo para el rechazo.");
-      return;
-    }
-    alert("Solicitud rechazada con motivo: " + motivo);
-    const modal = bootstrap.Modal.getInstance(document.getElementById('rechazarModal'));
-    modal.hide();
-  });
-</script>
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="procesoModal" tabindex="-1" aria-labelledby="procesoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered" style="max-width:90%;">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="procesoModalLabel">Proceso de Práctica</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body" style="height:80vh;">
-                <!-- iframe que carga la página -->
-                <iframe src="../Fase2/procesoPractica.html" style="width:100%; height:100%; border:none;"></iframe>
-            </div>
-            </div>
+  <!-- Modal TW -->
+  <div class="modal fade" id="modalTrabajador" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa-solid fa-file-check me-2"></i>Validar documento: Practicante trabajador</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
+        <div class="modal-body">
+          <div class="mb-2"><span class="fw-semibold">Estudiante:</span> <span id="twEst"></span></div>
+          <a id="twLink" href="#" target="_blank" class="btn btn-outline-primary btn-sm mb-3"><i class="fa-solid fa-file-lines me-1"></i> Ver documento</a>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="twAprobar">
+            <label class="form-check-label" for="twAprobar">Aprobar documento</label>
+          </div>
         </div>
-
-
-      <!-- Agrega más tarjetas según sea necesario -->
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button class="btn btn-success" id="btnGuardarTW" disabled>Guardar aprobación</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Modal Docs -->
+  <div class="modal fade" id="modalDocs" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa-solid fa-file-signature me-2"></i>Documentos de la práctica</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-2"><span class="fw-semibold">Estudiante:</span> <span id="docEst"></span></div>
+          <div id="docsList"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-window.addEventListener('message', (event) => {
-  if (event.data && event.data.action === 'closeModal') {
-    const modalEl = document.getElementById('procesoModal');
-    if (modalEl) {
-      const modalInstance = bootstrap.Modal.getInstance(modalEl);
-      if (modalInstance) {
-        modalInstance.hide();
+    // ====== Datos demo ======
+    const TIPOS_ESCENARIO = [
+      'Escenario interno',
+      'Contrato de aprendizaje SENA',
+      'Prácticas por Resolución',
+      'Convenio de cooperación voluntariado',
+      'Practicante trabajador',
+      'Pasantía remunerada',
+      'Convenio Docencia Servicio'
+    ];
+    const TIPOS_AUTONOMA = [
+      'Investigativa',
+      'Práctica de Emprendimiento, Transferencia e Innovación',
+      'Práctica de creación'
+    ];
+
+    // 20 empresas (vacantes) — una entrada por empresa para mostrar NIT, solicitadas y disponibles
+    const VACANTES = [
+      { id:'V-001', nit:'900.001.001-0', empresa:'Artifex Tech S.A.S', convenio:'Convenio Desarrollo Software', programa:'Ing. Sistemas', disponibilidad:'Tiempo completo', tipoSolicitado:'Pasantía remunerada', vacantes:3, asignadas:1 },
+      { id:'V-002', nit:'900.001.002-0', empresa:'Nova Solutions', convenio:'Convenio Innovación', programa:'Ing. Industrial', disponibilidad:'Medio tiempo', tipoSolicitado:'Contrato de aprendizaje SENA', vacantes:2, asignadas:0 },
+      { id:'V-003', nit:'900.001.003-0', empresa:'Clínica Santa Aurora', convenio:'Convenio Clínico', programa:'Administración', disponibilidad:'Tiempo completo', tipoSolicitado:'Convenio Docencia Servicio', vacantes:4, asignadas:2 },
+      { id:'V-004', nit:'900.001.004-0', empresa:'DataMind', convenio:'Convenio Analítica', programa:'Ing. Sistemas', disponibilidad:'Medio tiempo', tipoSolicitado:'Prácticas por Resolución', vacantes:1, asignadas:0 },
+      { id:'V-005', nit:'900.001.005-0', empresa:'GreenFoods Ltda.', convenio:'Convenio Agro', programa:'Administración', disponibilidad:'Tiempo completo', tipoSolicitado:'Escenario interno', vacantes:2, asignadas:0 },
+      { id:'V-006', nit:'900.001.006-0', empresa:'MedCare IPS', convenio:'Convenio Salud', programa:'Administración', disponibilidad:'Medio tiempo', tipoSolicitado:'Convenio Docencia Servicio', vacantes:3, asignadas:1 },
+      { id:'V-007', nit:'900.001.007-0', empresa:'FinCore S.A.', convenio:'Convenio Finanzas', programa:'Contaduría', disponibilidad:'Tiempo completo', tipoSolicitado:'Pasantía remunerada', vacantes:2, asignadas:0 },
+      { id:'V-008', nit:'900.001.008-0', empresa:'EduPlus', convenio:'Convenio Educación', programa:'Administración', disponibilidad:'Medio tiempo', tipoSolicitado:'Prácticas por Resolución', vacantes:2, asignadas:0 },
+      { id:'V-009', nit:'900.001.009-0', empresa:'SoftBridge', convenio:'Convenio QA', programa:'Ing. Sistemas', disponibilidad:'Tiempo completo', tipoSolicitado:'Contrato de aprendizaje SENA', vacantes:3, asignadas:1 },
+      { id:'V-010', nit:'900.001.010-0', empresa:'LogiTrack', convenio:'Convenio Logística', programa:'Ing. Industrial', disponibilidad:'Tiempo completo', tipoSolicitado:'Pasantía remunerada', vacantes:2, asignadas:0 },
+      { id:'V-011', nit:'900.001.011-0', empresa:'BioGen', convenio:'Convenio Bio', programa:'Ing. Industrial', disponibilidad:'Medio tiempo', tipoSolicitado:'Escenario interno', vacantes:1, asignadas:0 },
+      { id:'V-012', nit:'900.001.012-0', empresa:'CloudWare', convenio:'Convenio Cloud', programa:'Ing. Sistemas', disponibilidad:'Tiempo completo', tipoSolicitado:'Pasantía remunerada', vacantes:4, asignadas:2 },
+      { id:'V-013', nit:'900.001.013-0', empresa:'Café Andino', convenio:'Convenio Comercial', programa:'Administración', disponibilidad:'Medio tiempo', tipoSolicitado:'Convenio de cooperación voluntariado', vacantes:2, asignadas:0 },
+      { id:'V-014', nit:'900.001.014-0', empresa:'MetroCity', convenio:'Convenio Urbano', programa:'Administración', disponibilidad:'Tiempo completo', tipoSolicitado:'Prácticas por Resolución', vacantes:3, asignadas:0 },
+      { id:'V-015', nit:'900.001.015-0', empresa:'EnerCol', convenio:'Convenio Energía', programa:'Ing. Industrial', disponibilidad:'Tiempo completo', tipoSolicitado:'Pasantía remunerada', vacantes:3, asignadas:1 },
+      { id:'V-016', nit:'900.001.016-0', empresa:'Sistemas Ágiles', convenio:'Convenio DevOps', programa:'Ing. Sistemas', disponibilidad:'Medio tiempo', tipoSolicitado:'Contrato de aprendizaje SENA', vacantes:2, asignadas:0 },
+      { id:'V-017', nit:'900.001.017-0', empresa:'Clinimed', convenio:'Convenio Clínico II', programa:'Administración', disponibilidad:'Tiempo completo', tipoSolicitado:'Convenio Docencia Servicio', vacantes:2, asignadas:0 },
+      { id:'V-018', nit:'900.001.018-0', empresa:'EcoTrans', convenio:'Convenio Transporte', programa:'Ing. Industrial', disponibilidad:'Medio tiempo', tipoSolicitado:'Prácticas por Resolución', vacantes:2, asignadas:0 },
+      { id:'V-019', nit:'900.001.019-0', empresa:'Banco Andino', convenio:'Convenio Banca', programa:'Contaduría', disponibilidad:'Tiempo completo', tipoSolicitado:'Pasantía remunerada', vacantes:2, asignadas:0 },
+      { id:'V-020', nit:'900.001.020-0', empresa:'NetGuard', convenio:'Convenio Ciberseguridad', programa:'Ing. Sistemas', disponibilidad:'Tiempo completo', tipoSolicitado:'Pasantía remunerada', vacantes:3, asignadas:1 }
+    ];
+
+    // Mapeo de dependencias/áreas por empresa (id)
+    const AREAS_BY_EMPRESA = {
+      'V-001': ['Sistemas','QA','DevOps','Soporte TI','Recursos Humanos','Contabilidad'],
+      'V-002': ['Producción','Mejora Continua','Seguridad y Salud','Recursos Humanos','Compras'],
+      'V-003': ['Clínica','Auxiliar Administrativo','Biblioteca','Archivo Clínico','Recursos Humanos'],
+      'V-004': ['Analítica','Ciencia de Datos','Infraestructura','Contabilidad'],
+      'V-005': ['Comercial','Recursos Humanos','Contabilidad','Logística'],
+      'V-006': ['Admisiones','Farmacia','Archivo','Recursos Humanos'],
+      'V-007': ['Riesgo','Tesorería','Contabilidad','Auditoría Interna'],
+      'V-008': ['Biblioteca','Bienestar','Registro Académico','Contabilidad'],
+      'V-009': ['QA','Soporte TI','Sistemas','Automatización'],
+      'V-010': ['Operaciones','Logística','Planeación','Recursos Humanos'],
+      'V-011': ['I+D','Procesos','Calidad','Contabilidad'],
+      'V-012': ['Arquitectura Cloud','SRE','Seguridad','Soporte TI'],
+      'V-013': ['Comercial','Mercadeo','Logística','Contabilidad'],
+      'V-014': ['Planeación','Proyectos Urbanos','Tesorería','Recursos Humanos'],
+      'V-015': ['Operaciones','Mantenimiento','HSE','Contabilidad'],
+      'V-016': ['DevOps','Plataforma','Backoffice','Recursos Humanos'],
+      'V-017': ['Clínica','Gestión Paciente','SIAU','Recursos Humanos'],
+      'V-018': ['Operaciones','Logística','Planeación','Compras'],
+      'V-019': ['Banca Personas','Banca Empresas','Riesgo','Contabilidad'],
+      'V-020': ['Ciberseguridad','Redes','Sistemas','Soporte TI'],
+      'AUTO-TDEA': ['Investigación','Bienestar Institucional','Biblioteca','Laboratorios','Emprendimiento']
+    };
+    const DEFAULT_AREAS = ['Recursos Humanos','Contabilidad','Sistemas','Administración','Atención al usuario'];
+
+    // 30 estudiantes con variaciones
+    const ESTUDIANTES = (()=>{
+      const progs = ['Ing. Sistemas','Ing. Industrial','Administración','Contaduría'];
+      const facs  = ['Ingenierías','Ingenierías','Administración y Negocios','Administración y Negocios'];
+      const disp  = ['Tiempo completo','Medio tiempo'];
+      const list = [];
+      for(let i=1;i<=30;i++){
+        const idx = (i-1)%4;
+        const hasDoc = (i%3===0); // cada 3 tiene doc trabajador
+        list.push({
+          id: 'ST-' + String(i).padStart(2,'0'),
+          nombre: `Estudiante ${i}`,
+          programa: progs[idx],
+          disponibilidad: disp[i%2],
+          docTW: hasDoc ? 'sandbox:/mnt/data/doc_trabajador_demo.pdf' : null,
+          estado: 'Solicitud iniciada por el estudiante',
+          facultad: facs[idx]
+        });
+      }
+      return list;
+    })();
+
+    const AUTO_ESCENARIO = { id:'AUTO-TDEA', nit:'890.980.138-2', empresa:'Tecnológico de Antioquia', convenio:'Escenario Autónomo', esAutonomo:true };
+    const ASIGNACIONES = [];
+
+    // ====== Estado UI ======
+    let modalidadActual = 'Escenario';
+    let empresaSeleccionada = null;
+    const SELECTED_EST_IDS = new Set();
+
+    // ====== Modalidad ======
+    function setModalidad(m){
+      modalidadActual = m;
+      document.getElementById('badgeModo').textContent = 'Modo: ' + m;
+      empresaSeleccionada = null; // fuerza nueva selección
+      renderCompaniesStrip();
+      renderAsignadosEmpresa();
+      goToPage(1);
+      renderKPIs();
+      updateAssignBtnState();
+    }
+
+    // ====== Empresas (agregadas) ======
+    function getEmpresasAgregadas(){
+      if(modalidadActual === 'Autónoma'){
+        const assigned = ASIGNACIONES.filter(a => a.empresaId === AUTO_ESCENARIO.id).length;
+        return [{ id: AUTO_ESCENARIO.id, nit: AUTO_ESCENARIO.nit, empresa: AUTO_ESCENARIO.empresa, convenio: AUTO_ESCENARIO.convenio, vacantes: null, asignadas: assigned, disponibles: null, esAutonomo:true }];
+      }
+      return VACANTES.map(v => {
+        const asignadas = ASIGNACIONES.filter(a => a.empresa === v.empresa && a.nit === v.nit).length;
+        return { id:v.id, nit:v.nit, empresa:v.empresa, convenio:v.convenio, vacantes:v.vacantes, asignadas, disponibles: Math.max(0, v.vacantes - asignadas), esAutonomo:false };
+      });
+    }
+
+    function renderCompaniesStrip(){
+      const strip = document.getElementById('companiesStrip');
+      strip.innerHTML = '';
+      const empresas = getEmpresasAgregadas();
+      empresas.forEach(e => {
+        const div = document.createElement('div');
+        div.className = 'company-card';
+        if(empresaSeleccionada && empresaSeleccionada.key === e.id) div.classList.add('active');
+        div.innerHTML = `
+          <div class="company-header">
+            <div>
+              <div class="company-title">${e.empresa}</div>
+              <div class="company-sub">${e.nit ? 'NIT: ' + e.nit : ''} ${e.convenio ? ' • ' + e.convenio : ''}</div>
+            </div>
+            <span class="badge ${e.esAutonomo ? 'text-bg-secondary' : 'text-bg-primary'}">${e.esAutonomo?'Autónoma':'Escenario'}</span>
+          </div>
+          <div class="stats">
+            <div class="stat"><i class="fa-solid fa-user-check me-1"></i> Asignados: <strong>${e.asignadas}</strong></div>
+            <div class="stat"><i class="fa-solid fa-list-ol me-1"></i> Solicitadas: <strong>${e.vacantes ?? '—'}</strong></div>
+            <div class="stat"><i class="fa-solid fa-square-plus me-1"></i> Disp.: <strong>${e.disponibles ?? '—'}</strong></div>
+          </div>
+        `;
+        div.addEventListener('click', ()=>{
+          empresaSeleccionada = {
+            key: e.id,
+            empresa: e.empresa,
+            nit: e.nit || AUTO_ESCENARIO.nit,
+            convenio: e.convenio,
+            esAutonomo: e.esAutonomo,
+            vacantes: e.vacantes,
+            disponibles: e.disponibles
+          };
+          document.querySelectorAll('.company-card').forEach(c=>c.classList.remove('active'));
+          div.classList.add('active');
+          renderAsignadosEmpresa();
+          updateAssignBtnState();
+        });
+        strip.appendChild(div);
+      });
+      // Seleccionar primera por defecto
+      if(!empresaSeleccionada && empresas.length){
+        empresaSeleccionada = {
+          key: empresas[0].id,
+          empresa: empresas[0].empresa,
+          nit: empresas[0].nit || AUTO_ESCENARIO.nit,
+          convenio: empresas[0].convenio,
+          esAutonomo: empresas[0].esAutonomo,
+          vacantes: empresas[0].vacantes,
+          disponibles: empresas[0].disponibles
+        };
+        const firstCard = strip.querySelector('.company-card'); if(firstCard) firstCard.classList.add('active');
+      }
+      document.getElementById('lblEmpresaSel').textContent = empresaSeleccionada ? (empresaSeleccionada.empresa) : '—';
+    }
+
+    // ====== Filtros / KPIs ======
+    function getEstudiantesFiltrados(){
+      const fac = document.getElementById('filtroFacultad').value;
+      const prog = document.getElementById('filtroPrograma').value.toLowerCase();
+      return ESTUDIANTES.filter(e => (!fac || e.facultad === fac) && (!prog || e.programa.toLowerCase().includes(prog)));
+    }
+
+    function renderKPIs(){
+      const estFil = getEstudiantesFiltrados();
+      const empresasUnicas = modalidadActual==='Autónoma' ? 1 : getEmpresasAgregadas().length;
+      const solicitudesTotales = modalidadActual==='Autónoma' ? '—' : getEmpresasAgregadas().reduce((a,b)=>a + (b.vacantes||0),0);
+      const disp = modalidadActual==='Autónoma' ? '—' : getEmpresasAgregadas().reduce((a,b)=>a + (b.disponibles||0),0);
+      const asignados = ASIGNACIONES.length;
+      document.getElementById('kpiSolicitudes').textContent = estFil.length;
+      document.getElementById('kpiAsignados').textContent = asignados;
+      document.getElementById('kpiEmpresas').textContent = empresasUnicas;
+      document.getElementById('kpiSolicitudesEmp').textContent = solicitudesTotales;
+      document.getElementById('kpiVacantes').textContent = disp;
+    }
+
+    document.getElementById('filtroFacultad').addEventListener('change', ()=>{ goToPage(1); renderKPIs(); });
+    document.getElementById('filtroPrograma').addEventListener('input', ()=>{ goToPage(1); renderKPIs(); });
+    document.querySelectorAll('input[name="modalidad"]').forEach(r=> r.addEventListener('change', (e)=>{ setModalidad(e.target.value); }));
+
+    // ====== Estudiantes en solicitud (paginado) ======
+    const tblEst = document.getElementById('tblEstudiantes');
+    const pgLabel = document.getElementById('pgLabel');
+    const pgPrev  = document.getElementById('pgPrev');
+    const pgNext  = document.getElementById('pgNext');
+    const PAGE_SIZE = 5;
+    let currentPage = 1;
+    let cachedList = [];
+
+    function matchScoreEmpresa(est, emp){
+      if(modalidadActual === 'Autónoma') return 1;
+      const vac = VACANTES.find(v => v.id === emp.key);
+      if(!vac) return 0;
+      const hasProg = (vac.programa === est.programa);
+      const hasDisp = (vac.disponibilidad === est.disponibilidad);
+      return (hasProg?1:0) + (hasDisp?1:0);
+    }
+
+    function goToPage(p){
+      currentPage = p;
+      renderEstudiantes();
+    }
+
+    function renderEstudiantes(){
+      cachedList = getEstudiantesFiltrados();
+      const total = cachedList.length;
+      const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+      if(currentPage > totalPages) currentPage = totalPages;
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const pageItems = cachedList.slice(start, start + PAGE_SIZE);
+
+      tblEst.innerHTML='';
+      pageItems.forEach(e => {
+        const assigned = ASIGNACIONES.find(a=>a.estudianteId===e.id);
+        const disable = !!assigned;
+        const ms = empresaSeleccionada ? matchScoreEmpresa(e, empresaSeleccionada) : 0;
+        const cls = empresaSeleccionada ? (ms>=2 ? 'match-good' : (ms===0 && modalidadActual==='Escenario' ? 'match-bad' : '')) : '';
+        const iconDoc = e.docTW ? '<span class="text-success"><i class="fa-solid fa-file-check"></i></span>' : '<span class="text-muted"><i class="fa-regular fa-file"></i></span>';
+        const checked = SELECTED_EST_IDS.has(e.id) ? 'checked' : '';
+        const tr = document.createElement('tr');
+        tr.className = cls;
+        tr.innerHTML = `
+          <td><input type="checkbox" class="selEst" value="${e.id}" ${disable?'disabled':''} ${checked}></td>
+          <td>${e.nombre}</td>
+          <td>${e.programa}</td>
+          <td>${e.disponibilidad}</td>
+          <td>${iconDoc}</td>
+          <td>${assigned ? '<span class="badge bg-secondary">Asignado</span>' : e.estado}</td>`;
+        tblEst.appendChild(tr);
+      });
+
+      // Paginador
+      pgLabel.textContent = `Página ${currentPage} de ${totalPages}`;
+      pgPrev.disabled = (currentPage === 1);
+      pgNext.disabled = (currentPage === totalPages);
+
+      updateAssignBtnState();
+    }
+
+    pgPrev.addEventListener('click', ()=>{ if(currentPage>1){ goToPage(currentPage-1); } });
+    pgNext.addEventListener('click', ()=>{ const totalPages = Math.max(1, Math.ceil(getEstudiantesFiltrados().length / PAGE_SIZE)); if(currentPage<totalPages){ goToPage(currentPage+1); } });
+
+    function selectedEstudiantesIds(){
+      return Array.from(SELECTED_EST_IDS);
+    }
+    function updateAssignBtnState(){
+      document.getElementById('btnAsignarSel').disabled = !(selectedEstudiantesIds().length>0 && empresaSeleccionada);
+    }
+    tblEst.addEventListener('change', (e)=>{
+      if(e.target.classList.contains('selEst')){
+        const id = e.target.value;
+        if(e.target.checked){ SELECTED_EST_IDS.add(id); } else { SELECTED_EST_IDS.delete(id); }
+        updateAssignBtnState();
+      }
+    });
+
+    // ====== Asignados por empresa seleccionada ======
+    const tablaAsignadosEmpresa = document.querySelector('#tablaAsignadosEmpresa tbody');
+    function renderAsignadosEmpresa(){
+      tablaAsignadosEmpresa.innerHTML = '';
+      document.getElementById('lblEmpresaSel').textContent = empresaSeleccionada ? (empresaSeleccionada.empresa) : '—';
+      if(!empresaSeleccionada) return;
+      const rows = ASIGNACIONES.filter(a => a.empresaId === empresaSeleccionada.key);
+      rows.forEach(a => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${a.estudiante}</td>
+          <td>${a.programa}</td>
+          <td>${a.disponibilidad}</td>
+          <td>${a.modalidad}</td>
+          <td>${a.tipo}</td>
+          <td>${a.inicio}</td>
+          <td>${a.fin}</td>
+          <td>${a.area}</td>
+          <td><span class="badge ${badgeForEstado(a.estado)}">${a.estado}</span></td>
+          <td><button class="btn btn-outline-primary btn-sm btn-docs" data-id="${a.id}"><i class="fa-solid fa-file-pen"></i></button></td>
+          <td class="d-flex gap-1">
+            <button class="btn btn-outline-success btn-sm btn-advance" data-id="${a.id}"><i class="fa-solid fa-forward"></i></button>
+            <button class="btn btn-outline-danger btn-sm btn-cancel" data-id="${a.id}"><i class="fa-solid fa-ban"></i></button>
+          </td>`;
+        tablaAsignadosEmpresa.appendChild(tr);
+      });
+    }
+
+    function badgeForEstado(estado){
+      switch(estado){
+        case 'Solicitud iniciada por el estudiante': return 'text-bg-secondary';
+        case 'Procesada y Asignada por el Coordinador': return 'text-bg-primary';
+        case 'En Proceso de Legalización': return 'text-bg-warning';
+        case 'Consertación de la practica': return 'text-bg-info';
+        case 'Ejecución de la Practica': return 'text-bg-success';
+        case 'Finalizada': return 'text-bg-dark';
+        case 'Cancelada': return 'text-bg-danger';
+        default: return 'text-bg-light';
       }
     }
-  }
-});
-</script>
 
-<!-- Modal Observaciones -->
-<div class="modal fade" id="observacionesFormulariosModal" tabindex="-1" aria-labelledby="observacionesFormulariosLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      
-      <div class="modal-header bg-info text-white">
-        <h5 class="modal-title" id="observacionesFormulariosLabel">
-          <i class="fas fa-comment-dots"></i> Observaciones a los formularios
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
+    // ====== Modales ======
+    const modalAsignar = new bootstrap.Modal(document.getElementById('modalAsignar'));
+    const modalTW = new bootstrap.Modal(document.getElementById('modalTrabajador'));
+    const modalDocs = new bootstrap.Modal(document.getElementById('modalDocs'));
 
-      <div class="modal-body">
-        <!-- Campo para agregar nueva observación -->
-        <div class="mb-3">
-          <label for="observacionInput" class="form-label fw-bold">Agregar observación:</label>
-          <textarea class="form-control" id="observacionInput" rows="3" placeholder="Escriba aquí el motivo o la observación..."></textarea>
-        </div>
-        <div class="d-flex justify-content-end">
-          <button class="btn btn-info" id="guardarObservacionBtn">
-            <i class="fas fa-save"></i> Guardar
-          </button>
-        </div>
-
-        <hr class="my-4">
-
-        <!-- Panel de histórico -->
-        <h6 class="fw-bold"><i class="fas fa-history"></i> Histórico de Observaciones</h6>
-        <div class="table-responsive mt-3">
-          <table class="table table-bordered table-striped align-middle">
-            <thead class="table-light">
-              <tr>
-                <th>Fecha de Observación</th>
-                <th>Observación</th>
-                <th>Visto por el Solicitante</th>
-                <th>Respondido Solicitante</th>
-                <th>Fecha de Respuesta</th>
-              </tr>
-            </thead>
-            <tbody id="historialObservaciones">
-              <tr>
-                <td>2025-10-06</td>
-                <td>Faltan datos de ARL en el formulario 3.</td>
-                <td><i class="fas fa-times text-danger"></i> No</td>
-                <td></td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>2025-09-30</td>
-                <td>Faltan datos en el formulario 2</td>
-                <td><i class="fas fa-check text-success"></i> Sí</td>
-                <td>Datos actualizados</td>
-                <td>2025-10-02</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          <i class="fas fa-times"></i> Cerrar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  document.getElementById('guardarObservacionBtn').addEventListener('click', () => {
-    const observacion = document.getElementById('observacionInput').value.trim();
-    if (!observacion) {
-      alert("Por favor ingrese una observación antes de guardar.");
-      return;
+    function populateAreasSelect(selectEl, empresaKey){
+      const areas = AREAS_BY_EMPRESA[empresaKey] || DEFAULT_AREAS;
+      selectEl.innerHTML = '';
+      const placeholder = document.createElement('option'); placeholder.value=''; placeholder.textContent='Seleccione dependencia / área…'; placeholder.disabled = true; placeholder.selected = true;
+      selectEl.appendChild(placeholder);
+      areas.forEach(a => {
+        const opt = document.createElement('option'); opt.value = a; opt.textContent = a; selectEl.appendChild(opt);
+      });
     }
 
-    const fecha = new Date().toLocaleDateString();
-    const nuevaFila = `
-      <tr>
-        <td>${fecha}</td>
-        <td>${observacion}</td>
-        <td><i class="fas fa-times text-danger"></i> No</td>
-        <td><i class="fas fa-times text-danger"></i> No</td>
-        <td>—</td>
-      </tr>
-    `;
-    document.getElementById('historialObservaciones').insertAdjacentHTML('beforeend', nuevaFila);
-    document.getElementById('observacionInput').value = '';
-    alert("Observación guardada correctamente.");
-  });
-</script>
+    document.getElementById('btnAsignarSel').addEventListener('click', ()=>{
+      if(!empresaSeleccionada) return;
+      document.getElementById('asigEmpresa').value = empresaSeleccionada.empresa + (empresaSeleccionada.nit ? (' — ' + empresaSeleccionada.nit) : '');
+      document.getElementById('asigVacantes').value = (empresaSeleccionada.esAutonomo ? 'Sin tope' : (empresaSeleccionada.disponibles ?? 0));
+      document.getElementById('lblModalidad').textContent = modalidadActual;
+      const selTipo = document.getElementById('asigTipo');
+      selTipo.innerHTML = '';
+      (modalidadActual==='Escenario' ? TIPOS_ESCENARIO : TIPOS_AUTONOMA).forEach(t=>{
+        const opt = document.createElement('option'); opt.value=t; opt.textContent=t; selTipo.appendChild(opt);
+      });
+      document.getElementById('warnTrabajador').classList.toggle('d-none', !(modalidadActual==='Escenario' && selTipo.value==='Practicante trabajador'));
 
-<!-- Modal Relacionar Ofertas -->
-<div class="modal fade" id="relacionarModal" tabindex="-1" aria-labelledby="relacionarModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header bg-info text-white">
-        <h5 class="modal-title" id="relacionarModalLabel">
-          <i class="fas fa-building me-2"></i> Relacionar Ofertas
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
+      // Dependencias por empresa
+      const selArea = document.getElementById('asigAreaSel');
+      populateAreasSelect(selArea, empresaSeleccionada.key);
 
-      <div class="modal-body">
-        <div class="table-responsive">
-          <table class="table table-sm table-bordered text-center align-middle">
-            <thead class="table-light">
-              <tr>
-                <th>Seleccionar</th>
-                <th>Nombre Empresa</th>
-                <th>NIT</th>
-                <th>Nombre Oferta</th>
-                <th>Observaciones</th>
-                <th>Fecha Inicio</th>
-                <th>Fecha Finalización</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input type="radio"></td>
-                <td>Artifex Tech S.A.S</td>
-                <td>900123456</td>
-                <td>Pasantía Remunerada</td>
-                <td>Apoyo en desarrollo de software</td>
-                <td>2025-08-01</td>
-                <td>2025-11-30</td>
-              </tr>
-              <tr>
-                <td><input type="radio"></td>
-                <td>Nova Solutions</td>
-                <td>901234567</td>
-                <td>Práctica de Innovación</td>
-                <td>Proyecto de emprendimiento</td>
-                <td>2025-09-01</td>
-                <td>2025-12-15</td>
-              </tr>
-              <tr>
-                <td><input type="radio"></td>
-                <td>Global Tech</td>
-                <td>900987654</td>
-                <td>Escenario Interno</td>
-                <td>Soporte en infraestructura TI</td>
-                <td>2025-07-15</td>
-                <td>2025-10-15</td>
-              </tr>
-              <tr>
-                <td><input type="radio"></td>
-                <td>EcoEnergy</td>
-                <td>901112233</td>
-                <td>Práctica Ambiental</td>
-                <td>Monitoreo de impacto ambiental</td>
-                <td>2025-08-15</td>
-                <td>2025-11-15</td>
-              </tr>
-              <tr>
-                <td><input type="radio"></td>
-                <td>DataMind</td>
-                <td>900334455</td>
-                <td>Analítica de Datos</td>
-                <td>Procesamiento de información</td>
-                <td>2025-09-01</td>
-                <td>2025-12-01</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      // lista seleccionados
+      const ul = document.getElementById('ulSelPrev'); ul.innerHTML='';
+      selectedEstudiantesIds().forEach(id=>{
+        const e = ESTUDIANTES.find(x=>x.id===id);
+        const li = document.createElement('li'); li.className='list-group-item d-flex justify-content-between align-items-center';
+        li.innerHTML = `<span>${e.nombre} — <span class="text-muted">${e.programa} / ${e.disponibilidad}</span></span>
+                        <span class="small ${e.docTW?'text-success':'text-danger'}">${e.docTW?'Soporte trabajador cargado':'Sin soporte trabajador'}</span>`;
+        ul.appendChild(li);
+      });
+      modalAsignar.show();
+    });
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          <i class="fas fa-times"></i> Cancelar
-        </button>
-        <button type="button" class="btn btn-success">
-          <i class="fas fa-save"></i> Guardar Selección
-        </button>
-      </div>
-    </div>
-  </div>
+    document.getElementById('asigTipo').addEventListener('change', (e)=>{
+      const isTW = (modalidadActual==='Escenario' && e.target.value==='Practicante trabajador');
+      document.getElementById('warnTrabajador').classList.toggle('d-none', !isTW);
+    });
+
+    let twContext = null;
+    document.getElementById('twAprobar').addEventListener('change', (ev)=>{
+      document.getElementById('btnGuardarTW').disabled = !ev.target.checked;
+    });
+    document.getElementById('btnGuardarTW').addEventListener('click', ()=>{
+      if(!twContext) return;
+      const est = ESTUDIANTES.find(e=>e.id===twContext.estudianteId);
+      est.twApproved = true;
+      modalTW.hide();
+    });
+
+    document.getElementById('btnConfirmarAsignacion').addEventListener('click', ()=>{
+      const tipo = document.getElementById('asigTipo').value;
+      const area = document.getElementById('asigAreaSel').value;
+      const inicio = document.getElementById('asigInicio').value;
+      const fin = document.getElementById('asigFin').value;
+      if(!inicio || !fin){ alert('Defina las fechas de inicio y finalización.'); return; }
+      if(!area){ alert('Seleccione la dependencia / área.'); return; }
+      if(modalidadActual==='Escenario' && tipo==='Practicante trabajador'){
+        const ids = selectedEstudiantesIds();
+        for(const id of ids){
+          const e = ESTUDIANTES.find(x=>x.id===id);
+          if(!e.docTW){ alert(`El estudiante ${e.nombre} no tiene documento de trabajador cargado.`); return; }
+          if(!e.twApproved){
+            twContext = { estudianteId: e.id };
+            document.getElementById('twEst').textContent = e.nombre;
+            document.getElementById('twLink').href = e.docTW;
+            document.getElementById('twAprobar').checked = false;
+            document.getElementById('btnGuardarTW').disabled = true;
+            modalTW.show();
+            return;
+          }
+        }
+      }
+      const ids = selectedEstudiantesIds();
+      const disp = empresaSeleccionada.esAutonomo ? Infinity : (empresaSeleccionada.disponibles ?? 0);
+      if(ids.length > disp){ alert('No hay suficientes vacantes disponibles.'); return; }
+      ids.forEach(id=>{
+        const e = ESTUDIANTES.find(x=>x.id===id);
+        ASIGNACIONES.push({
+          id: 'ASG-' + (ASIGNACIONES.length+1).toString().padStart(3,'0'),
+          empresaId: empresaSeleccionada.key,
+          empresa: empresaSeleccionada.empresa,
+          nit: empresaSeleccionada.nit,
+          convenio: empresaSeleccionada.convenio,
+          estudianteId: e.id,
+          estudiante: e.nombre,
+          programa: e.programa,
+          disponibilidad: e.disponibilidad,
+          modalidad: modalidadActual,
+          tipo: tipo,
+          inicio: inicio,
+          fin: fin,
+          area: area || '(sin definir)',
+          estado: 'Procesada y Asignada por el Coordinador',
+          docs: {
+            presentacion: { nombre:'Carta Presentación', requiere:'Tutor', estado:'Pendiente' },
+            aval: { nombre:'Carta Aval', requiere:'Coordinador', estado:'Pendiente' },
+            acuerdo: { nombre:'Acuerdo de Aprendizaje', requiere:'Estudiante', estado:'Pendiente' }
+          }
+        });
+        e.estado = 'Procesada y Asignada por el Coordinador';
+        SELECTED_EST_IDS.delete(e.id);
+      });
+      if(!empresaSeleccionada.esAutonomo){
+        empresaSeleccionada.disponibles = Math.max(0, (empresaSeleccionada.disponibles ?? 0) - ids.length);
+      }
+      modalAsignar.hide();
+      goToPage(1);
+      renderCompaniesStrip(); renderAsignadosEmpresa(); renderKPIs(); updateAssignBtnState();
+    });
+
+    // ====== Docs y workflow desde tabla de asignados ======
+    document.getElementById('tablaAsignadosEmpresa').addEventListener('click', (e)=>{
+      if(e.target.closest('.btn-docs')){
+        const id = e.target.closest('.btn-docs').dataset.id;
+        const a = ASIGNACIONES.find(x=>x.id===id);
+        openDocsFor(a);
+      }
+      if(e.target.closest('.btn-cancel')){
+        const id = e.target.closest('.btn-cancel').dataset.id;
+        const a = ASIGNACIONES.find(x=>x.id===id);
+        if(confirm('¿Cancelar esta asignación?')){ a.estado='Cancelada'; renderAsignadosEmpresa(); renderKPIs(); }
+      }
+      if(e.target.closest('.btn-advance')){
+        const id = e.target.closest('.btn-advance').dataset.id;
+        const a = ASIGNACIONES.find(x=>x.id===id);
+        avanzarEstado(a);
+      }
+    });
+
+    function openDocsFor(a){
+      document.getElementById('docEst').textContent = a.estudiante;
+      const holder = document.getElementById('docsList'); holder.innerHTML='';
+      [
+        {key:'presentacion', desc:'Carta Presentación', req:a.docs.presentacion.requiere},
+        {key:'aval', desc:'Carta Aval', req:a.docs.aval.requiere},
+        {key:'acuerdo', desc:'Acuerdo de Aprendizaje', req:a.docs.acuerdo.requiere},
+      ].forEach(item => {
+        const d = a.docs[item.key];
+        const row = document.createElement('div');
+        row.className='border rounded p-2 mb-2 bg-white d-flex justify-content-between align-items-center';
+        row.innerHTML = `
+          <div>
+            <div class="fw-semibold">${item.desc}</div>
+            <div class="small text-muted">Requiere aprobación de: ${item.req}</div>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge ${d.estado==='Firmado'?'text-bg-success': (d.estado==='Enviado'?'text-bg-primary':'text-bg-secondary')}">${d.estado}</span>
+            <button class="btn btn-outline-primary btn-sm" data-act="enviar" data-doc="${item.key}" data-id="${a.id}"><i class="fa-solid fa-paper-plane"></i> Solicitar firma</button>
+            <button class="btn btn-outline-success btn-sm" data-act="firmar" data-doc="${item.key}" data-id="${a.id}"><i class="fa-solid fa-pen-nib"></i> Marcar firmado</button>
+          </div>`;
+        holder.appendChild(row);
+      });
+      holder.addEventListener('click', onDocsAction, { once:true });
+      modalDocs.show();
+    }
+    function onDocsAction(e){
+      const btn = e.target.closest('button'); if(!btn) return;
+      const action = btn.dataset.act;
+      const id = btn.dataset.id;
+      const docKey = btn.dataset.doc;
+      const a = ASIGNACIONES.find(x=>x.id===id); if(!a) return;
+      if(action==='enviar'){ a.docs[docKey].estado='Enviado'; }
+      if(action==='firmar'){ a.docs[docKey].estado='Firmado'; }
+      modalDocs.hide(); setTimeout(()=>openDocsFor(a), 50);
+      renderAsignadosEmpresa();
+    }
+
+    function avanzarEstado(a){
+      const current = a.estado;
+      if(current === 'Procesada y Asignada por el Coordinador'){
+        a.estado = 'En Proceso de Legalización';
+      } else if(current === 'En Proceso de Legalización'){
+        const allSigned = ['presentacion','aval','acuerdo'].every(k => a.docs[k].estado==='Firmado');
+        if(!allSigned){ alert('Para avanzar, todos los documentos deben estar firmados.'); return; }
+        a.estado = 'Consertación de la practica';
+      } else if(current === 'Consertación de la practica'){
+        a.estado = 'Ejecución de la Practica';
+      } else if(current === 'Ejecución de la Practica'){
+        a.estado = 'Finalizada';
+      }
+      renderAsignadosEmpresa();
+    }
+
+    // Export CSV de la empresa seleccionada
+    document.getElementById('btnExportCsv').addEventListener('click', ()=>{
+      if(!empresaSeleccionada) return;
+      const rows = [['Empresa','NIT','Estudiante','Programa','Disponibilidad','Modalidad','Tipo','Inicio','Fin','Área','Estado']];
+      document.querySelectorAll('#tablaAsignadosEmpresa tbody tr').forEach(tr=>{
+        const tds = Array.from(tr.children).map(td=>td.innerText.replace(/(\r\n|\n|\r)/gm, ' ').trim());
+        rows.push([empresaSeleccionada.empresa, empresaSeleccionada.nit||'', tds[0], tds[1], tds[2], tds[3], tds[4], tds[5], tds[6], tds[7], tds[8]]);
+      });
+      const csv = rows.map(r=>r.map(v=>`"${(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download=`asignados_${empresaSeleccionada.empresa.replace(/\s+/g,'_')}.csv`; a.click();
+      URL.revokeObjectURL(url);
+    });
+    document.getElementById('btnPublicar').addEventListener('click', ()=>{
+      alert('Asignaciones publicadas para los roles permitidos (demo).');
+    });
+
+    // Init
+    setModalidad('Escenario');
+  </script>
 </div>
-
-
 </body>
 </html>
+

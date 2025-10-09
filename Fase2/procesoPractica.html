@@ -2,127 +2,92 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Proceso de Práctica</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proceso de Práctica — nuevo diseño (3 pasos)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
-    body {
-      background-color: #f8f9fa;
-      padding: 1rem;
-    }
-    .step-menu {
-      display: flex;
-      align-items: center;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-    .step {
-      display: flex;
-      align-items: center;
-      padding: 0.5rem 1rem;
-      background-color: #0d6efd;
-      color: white;
-      border-radius: 0.5rem;
-      margin-right: 0.5rem;
-      font-weight: 500;
-    }
-    .step i {
-      margin-left: 0.5rem;
-    }
-    .step.inactive {
-      background-color: #6c757d;
-    }
-    .prereq-list {
-      list-style: none;
-      padding: 0;
-    }
-    .prereq-list li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid #dee2e6;
-    }
-    .prereq-list li:last-child {
-      border-bottom: none;
-    }
+    body{ background:#f7f9fb; }
+    .container-narrow{ max-width: 1100px; }
+    .stepper{ display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; }
+    .step{ padding:.35rem .7rem; border-radius:.6rem; background:#6c757d; color:#fff; font-weight:600; }
+    .step.active{ background:#198754; }
+    .card-rounded{ border-radius:1rem; }
+    .prereq-list{ list-style:none; padding:0; margin:0; }
+    .prereq-list li{ display:flex; justify-content:space-between; align-items:center; padding:.5rem 0; border-bottom:1px solid #dee2e6; }
+    .prereq-list li:last-child{ border-bottom:none; }
   </style>
 </head>
 <body>
-
-  <!-- Menú de pasos -->
-  <div class="step-menu">
-    <div class="step active">1. Validación de Prerrequisitos <i class="fas fa-arrow-right"></i></div>
-    <div class="step inactive">2. Actualizar datos <i class="fas fa-arrow-right"></i></div>
-    <div class="step inactive">3. Datos para la ARL</div>
-    <div class="step inactive">4. Disponibilidad, modalidad y confirmación</div>
-  </div>
-
-  <!-- Formulario: Validación de prerrequisitos -->
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <h5 class="card-title mb-3">Validación de Prerrequisitos</h5>
-
-      <!-- Lista de prerrequisitos -->
-      <ul class="prereq-list mb-3">
-        <li>Haber cursado asignatura de acercamiento <i class="fas fa-xmark text-danger"></i></li>
-        <li>Haber cursado asignaturas básicas <i class="fas fa-check text-success"></i></li>
-        <li>Estar matriculado en el programa <i class="fas fa-check text-success"></i></li>
-        <li>No tener sanciones académicas <i class="fas fa-xmark text-danger"></i></li>
-        <li>Contar con seguro estudiantil <i class="fas fa-check text-success"></i></li>
-      </ul>
-
-    <div class="alert alert-warning d-flex align-items-center" role="alert">
-        <i class="fas fa-exclamation-triangle me-2"></i>
-        Al no haber cursado la asignatura <strong>'Acercamiento a prácticas'</strong>, solo podrá acceder a la modalida Autónoma.
+  <div class="container container-narrow py-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="d-flex align-items-center gap-3">
+        <span class="badge text-bg-primary">Paso 1</span>
+        <h1 class="h5 m-0">Validación de prerrequisitos</h1>
+      </div>
+      <!-- Stepper reducido a 3 formularios -->
+      <div class="stepper">
+        <span class="step active">1</span>
+        <span class="step">2</span>
+        <span class="step">3</span>
+      </div>
     </div>
 
-      <!-- Texto explicativo -->
-      <p>
-Al iniciar el proceso de práctica, usted manifiesta su intención de participar activamente en todas las actividades asignadas dentro del escenario de práctica, 
-respetando las normas y reglamentos de la institución y de la empresa o dependencia que lo acoge. 
-Se compromete a cumplir con los objetivos académicos y formativos definidos por el programa, a mantener una conducta profesional adecuada, 
-y a reportar oportunamente cualquier situación que pueda afectar el desarrollo de su práctica. 
+    <div class="card card-rounded shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Estado de prerrequisitos</h5>
 
-Es **muy importante que complete correctamente todos los datos relacionados con su ARL (Administradora de Riesgos Laborales)**, ya que estos serán requeridos para la gestión de su seguridad durante la práctica. 
-Asimismo, se recuerda que para acceder a las modalidades supervisadas es obligatorio haber cursado previamente la asignatura <strong>'Acercamiento a Prácticas'</strong>; 
-en caso contrario, solo podrá acceder a la modalidad <strong>Autónoma</strong>.  
+        <ul class="prereq-list mb-3">
+          <li>Haber cursado asignatura de acercamiento <i class="fas fa-xmark text-danger"></i></li>
+          <li>Haber cursado asignaturas básicas <i class="fas fa-check text-success"></i></li>
+          <li>Estar matriculado en el programa <i class="fas fa-check text-success"></i></li>
+          <li>No tener sanciones académicas <i class="fas fa-xmark text-danger"></i></li>
+          <li>Contar con seguro estudiantil <i class="fas fa-check text-success"></i></li>
+        </ul>
 
-Al participar en este proceso, reconoce que la información proporcionada será utilizada exclusivamente con fines académicos y de gestión administrativa, 
-y que debe cumplir con los lineamientos establecidos para la evaluación, seguimiento y entrega de informes dentro de la práctica.
-</p>
+        <div class="alert alert-warning d-flex align-items-center" role="alert">
+          <i class="fas fa-exclamation-triangle me-2"></i>
+          Al no haber cursado la asignatura <strong>“Acercamiento a prácticas”</strong>, solo podrá acceder a la <strong>modalidad Autónoma</strong>.
+        </div>
 
-      <!-- Checkbox de aceptación -->
-      <div class="form-check mb-3">
-        <input class="form-check-input" type="checkbox" id="acceptCheck">
-        <label class="form-check-label" for="acceptCheck">
-          He leído, entiendo y acepto las condiciones del proceso de práctica
-        </label>
+        <p class="mb-3">
+          Al iniciar el proceso, usted manifiesta su intención de participar activamente en todas las actividades del escenario de práctica, cumplir con los objetivos académicos y
+          reportar oportunamente cualquier situación que afecte su desarrollo. Los datos suministrados se usarán con fines académicos y administrativos conforme a las políticas institucionales.
+        </p>
+
+        <div class="alert alert-info" role="alert">
+          <i class="fa-solid fa-circle-info me-2"></i>
+          Recuerde que en el <strong>Paso 2</strong> deberá verificar/actualizar sus datos y la información requerida para la <strong>ARL</strong>. La exactitud de la información permite la gestión oportuna del inicio de su práctica.
+        </div>
+
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="acceptCheck">
+          <label class="form-check-label" for="acceptCheck">
+            He leído, entiendo y acepto las condiciones del proceso de práctica
+          </label>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-success" id="btnContinue" disabled>
+            <i class="fas fa-arrow-right me-1"></i> Continuar al Paso 2
+          </button>
+        </div>
       </div>
-
-      <!-- Botón continuar -->
-      <button class="btn btn-primary" id="btnContinue" disabled>
-  <i class="fas fa-arrow-right"></i> Continuar
-</button>
-
-<script>
-  // Habilitar botón solo si el checkbox está marcado
-  const acceptCheck = document.getElementById('acceptCheck');
-  const btnContinue = document.getElementById('btnContinue');
-
-  acceptCheck.addEventListener('change', () => {
-    btnContinue.disabled = !acceptCheck.checked;
-  });
-
-  // Redirigir al siguiente formulario al hacer clic
-  btnContinue.addEventListener('click', () => {
-    window.location.href = "actualizarDatos.html";
-  });
-</script>
-
+    </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Habilitar botón solo si se acepta
+    const acceptCheck = document.getElementById('acceptCheck');
+    const btnContinue = document.getElementById('btnContinue');
+    acceptCheck.addEventListener('change', () => btnContinue.disabled = !acceptCheck.checked);
+
+    // Ir al Paso 2 (Actualizar datos + ARL)
+    btnContinue.addEventListener('click', () => {
+      window.location.href = "actualizarDatos.html";
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
