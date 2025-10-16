@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="es" data-bs-theme="light">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Portal Empresa – Convenios & Solicitudes (v1.2)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <style>
+    :root{--shadow-1:0 8px 24px rgba(0,0,0,.08);--shadow-2:0 12px 28px rgba(0,0,0,.12)}
+    body{background:var(--bs-body-bg)}
+    .app-header{position:sticky;top:0;z-index:1030;background:var(--bs-body-bg);border-bottom:1px solid var(--bs-border-color);box-shadow:0 4px 12px rgba(0,0,0,.04)}
+    .kpi-card{position:relative;border:0;box-shadow:var(--shadow-1);transition:transform .25s ease,box-shadow .25s ease}
+    .kpi-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-2)}
+    .kpi-card::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;border-radius:6px 0 0 6px;background:var(--bs-primary)}
+    .kpi-meta{font-size:.8rem;opacity:.8}
+    .sticky-toolbar{position:sticky;top:64px;z-index:10;background:var(--bs-body-bg);border-bottom:1px solid var(--bs-border-color)}
+    .sidepanel{position:fixed;top:0;right:-520px;width:520px;height:100vh;background:var(--bs-body-bg);box-shadow:-8px 0 24px rgba(0,0,0,.08);transition:right .3s ease;z-index:1055}
+    .sidepanel.open{right:0}
+    .sidepanel-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;border-bottom:1px solid var(--bs-border-color)}
+    .sidepanel-body{padding:1rem;overflow:auto;height:calc(100vh - 56px)}
+    .dep-row{background:var(--bs-tertiary-bg);border-radius:.5rem;padding:.75rem}
+    .file-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.25rem .5rem;border:1px dashed var(--bs-border-color);border-radius:1rem}
+    .doc-pill{display:flex;align-items:center;gap:.5rem;border:1px dashed var(--bs-border-color);border-radius:.5rem;padding:.25rem .5rem}
+    .alert-inline{border-left:4px solid var(--bs-warning-border-subtle)}
+    @media (max-width:576px){.sidepanel{width:100%}}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="container-fluid py-2 d-flex align-items-center gap-2">
+      <i class="bi bi-handshake fs-4 text-primary" aria-hidden="true"></i>
+      <div>
+        <h1 class="h5 mb-0">Portal Empresa</h1>
+        <div class="text-body-secondary small">Convenios y Solicitudes de Practicantes</div>
+      </div>
+      <div class="ms-auto d-flex align-items-center gap-3">
+        <div class="form-check form-switch m-0">
+          <input class="form-check-input" type="checkbox" id="darkModeSwitch"/>
+          <label class="form-check-label" for="darkModeSwitch">Modo oscuro</label>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-fluid my-3">
+    <!-- Guía de uso -->
+    <section class="mb-3" id="guide" aria-labelledby="guideTitle">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-start gap-3">
+            <i class="bi bi-compass fs-3 text-primary" aria-hidden="true"></i>
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <h2 class="h6 mb-0" id="guideTitle">Guía rápida – Gestión institucional de convenios</h2>
+                <span class="badge text-bg-success" id="guideState">Visible</span>
+                <button id="btnHideGuide" class="btn btn-outline-secondary btn-sm ms-auto" type="button" aria-controls="guideBody" aria-expanded="true" aria-label="Ocultar guía">
+                  <i class="bi bi-eye-slash"></i> Ocultar guía
+                </button>
+              </div>
+              <div id="guideBody" class="small">
+                <ol class="mb-2 ps-3">
+                  <li><strong>KPI superiores</strong>: resumen de convenios, vacantes y solicitudes; clic para filtrar.</li>
+                  <li><strong>Mis convenios</strong>: filtra por tipo, estado y vigencia; abre el detalle para ver documentos, comentarios e historial.</li>
+                  <li><strong>Solicitud de Practicantes</strong>: formulario con validación; si no hay convenio vigente, verás opciones para trámite o carta de excepción.</li>
+                  <li><strong>Mis solicitudes</strong>: seguimiento por estado (borrador, enviada, en proceso, con candidatos); acceso al detalle y asignaciones.</li>
+                  <li><strong>Accesos rápidos</strong>: modo oscuro, exportación a XLSX/PDF, y persistencia local de tus datos de prueba.</li>
+                </ol>
+                <div class="alert alert-info py-2 mb-0">Tip: usa la columna <em>Acciones</em> para abrir el panel lateral de detalle.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- KPIs -->
+    <section class="mb-3">
+      <div class="row g-3 row-cols-1 row-cols-md-4">
+        <div class="col">
+          <div class="card kpi-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-1"><i class="bi bi-file-text text-primary"></i><div class="fw-semibold">Convenios</div></div>
+              <div class="d-flex align-items-center justify-content-between">
+                <div><div class="display-6" id="kpiTotal">—</div><div class="kpi-meta">Totales</div></div>
+                <div class="text-end small"><div>Vigentes: <span id="kpiVig">—</span></div><div>Por vencer: <span id="kpi60">—</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card kpi-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-1"><i class="bi bi-people text-success"></i><div class="fw-semibold">Vacantes</div></div>
+              <div class="d-flex align-items-center justify-content-between">
+                <div><div class="display-6" id="kpiVacSol">—</div><div class="kpi-meta">Solicitadas</div></div>
+                <div class="text-end small"><div>Asignadas: <span id="kpiVacAsig">—</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card kpi-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-1"><i class="bi bi-send-check text-info"></i><div class="fw-semibold">Solicitudes</div></div>
+              <div class="d-flex align-items-center justify-content-between">
+                <div><div class="display-6" id="kpiSolEnv">—</div><div class="kpi-meta">Enviadas</div></div>
+                <div class="text-end small"><div>En proceso: <span id="kpiSolProc">—</span></div><div>Con candidatos: <span id="kpiSolCand">—</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card kpi-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-1"><i class="bi bi-exclamation-triangle text-danger"></i><div class="fw-semibold">Vigencia</div></div>
+              <div class="d-flex align-items-center justify-content-between">
+                <div><div class="display-6" id="kpiPorVencer">—</div><div class="kpi-meta">Convenios ≤60 días</div></div>
+                <div class="text-end small"><div>30 días: <span id="kpi30">—</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" id="tabs" role="tablist">
+      <li class="nav-item" role="presentation"><button class="nav-link active" id="tab-lista" data-bs-toggle="tab" data-bs-target="#pane-lista" type="button" role="tab"><i class="bi bi-collection"></i> Mis convenios</button></li>
+      <li class="nav-item" role="presentation"><button class="nav-link" id="tab-solicitud" data-bs-toggle="tab" data-bs-target="#pane-solicitud" type="button" role="tab"><i class="bi bi-person-plus"></i> Solicitud de Practicantes</button></li>
+      <li class="nav-item" role="presentation"><button class="nav-link" id="tab-solicitudes" data-bs-toggle="tab" data-bs-target="#pane-solicitudes" type="button" role="tab"><i class="bi bi-list-task"></i> Mis solicitudes</button></li>
+    </ul>
+
+    <div class="tab-content border-start border-end border-bottom p-3 rounded-bottom">
+      <!-- MIS CONVENIOS -->
+      <div class="tab-pane fade show active" id="pane-lista" role="tabpanel" aria-labelledby="tab-lista">
+        <section class="sticky-toolbar py-2 px-2 rounded-3 mb-3">
+          <div class="d-flex align-items-end gap-2 flex-wrap">
+            <div>
+              <label class="form-label" for="fTipo">Tipo</label>
+              <select id="fTipo" class="form-select form-select-sm" style="min-width:14rem"><option value="">Todos</option></select>
+            </div>
+            <div>
+              <label class="form-label" for="fEstado">Estado</label>
+              <select id="fEstado" class="form-select form-select-sm" style="min-width:14rem">
+                <option value="">Todos</option>
+                <option>Solicitado</option>
+                <option>En revisión</option>
+                <option>Aprobado</option>
+                <option>Vigente</option>
+                <option>Vencido</option>
+                <option>Cerrado</option>
+                <option>Rechazado</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label" for="fRango">Vigencia</label>
+              <input id="fRango" class="form-control form-control-sm" placeholder="AAAA-MM a AAAA-MM"/>
+            </div>
+            <div class="ms-auto d-flex align-items-center gap-2">
+              <button id="btnLimpiar" class="btn btn-outline-secondary btn-sm"><i class="bi bi-eraser"></i> Limpiar</button>
+              <button id="btnBuscar" class="btn btn-primary btn-sm"><i class="bi bi-search"></i> Aplicar</button>
+              <button id="btnExportar" class="btn btn-outline-success btn-sm"><i class="bi bi-download"></i> XLSX</button>
+              <button id="btnPDF" class="btn btn-outline-dark btn-sm"><i class="bi bi-file-earmark-pdf"></i> PDF</button>
+            </div>
+          </div>
+        </section>
+
+        <div class="card">
+          <div class="card-header d-flex align-items-center gap-2"><i class="bi bi-table"></i><div class="fw-semibold">Convenios <span class="text-body-secondary small" id="lblCount"></span></div><div class="ms-auto small" id="lblPagina">Página 1</div></div>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Número</th>
+                  <th>Tipo / Dependencia</th>
+                  <th>Vigencia</th>
+                  <th>Vacantes (Asig./Sol.)</th>
+                  <th>Estado</th>
+                  <th>Comentarios</th>
+                  <th class="text-end">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyLista"></tbody>
+            </table>
+          </div>
+          <div class="card-footer d-flex align-items-center gap-2">
+            <div class="btn-group" role="group" aria-label="Paginación">
+              <button class="btn btn-outline-secondary btn-sm" id="btnPrev"><i class="bi bi-chevron-left"></i></button>
+              <span class="btn btn-light btn-sm disabled" id="lblPaginaBottom">Página 1</span>
+              <button class="btn btn-outline-secondary btn-sm" id="btnNext"><i class="bi bi-chevron-right"></i></button>
+            </div>
+            <select id="pageSize" class="form-select form-select-sm ms-auto" style="width:auto">
+              <option value="10">10</option>
+              <option value="15" selected>15</option>
+              <option value="25">25</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOLICITUD DE PRACTICANTES (FORM) -->
+      <div class="tab-pane fade" id="pane-solicitud" role="tabpanel" aria-labelledby="tab-solicitud">
+        <form id="frmSolicitud" class="needs-validation" novalidate>
+          <div class="row g-3">
+            <!-- Datos de dependencia -->
+            <div class="col-12 col-xl-6">
+              <div class="card h-100">
+                <div class="card-header"><i class="bi bi-building-add"></i> Datos de la dependencia que solicita</div>
+                <div class="card-body">
+                  <div class="mb-2">
+                    <label class="form-label">Área o Dependencia</label>
+                    <input id="sDep" class="form-control" required/>
+                    <div class="invalid-feedback">Obligatorio</div>
+                  </div>
+                  <div class="row g-2">
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Nombre completo de quien solicita</label>
+                      <input id="sNom" class="form-control" required/>
+                      <div class="invalid-feedback">Obligatorio</div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                      <label class="form-label">Teléfono</label>
+                      <input id="sTel" class="form-control" required/>
+                      <div class="invalid-feedback">Obligatorio</div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                      <label class="form-label">Correo</label>
+                      <input id="sMail" type="email" class="form-control" required/>
+                      <div class="invalid-feedback">Correo inválido</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Necesidad -->
+            <div class="col-12 col-xl-6">
+              <div class="card h-100">
+                <div class="card-header"><i class="bi bi-clipboard2-plus"></i> Necesidad</div>
+                <div class="card-body">
+                  <div class="row g-2">
+                    <div class="col-6">
+                      <label class="form-label">Fecha requerida</label>
+                      <input id="sFecha" type="date" class="form-control" required/>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label">Tipo de práctica</label>
+                      <select id="sTipo" class="form-select" required>
+                        <option value="">Seleccione</option>
+                        <option>Escenario interno</option>
+                        <option>Contrato de aprendizaje SENA</option>
+                        <option>Practicas por Resolucion</option>
+                        <option>Convenio de cooperacion voluntariado</option>
+                        <option>Pasantia remunerada</option>
+                        <option>Convenio Docencia Servicio</option>
+                      </select>
+                      <div class="invalid-feedback">Selecciona un tipo</div>
+                    </div>
+                  </div>
+                  <div class="row g-2 mt-1">
+                    <div class="col-8">
+                      <label class="form-label">Programa académico</label>
+                      <select id="sPrograma" class="form-select" required><option value="">Seleccione</option></select>
+                      <div class="invalid-feedback">Seleccione un programa</div>
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label">Cantidad</label>
+                      <input id="sCant" type="number" min="1" class="form-control" required/>
+                      <div class="invalid-feedback">Ingrese una cantidad válida</div>
+                    </div>
+                  </div>
+                  <div class="mt-2">
+                    <label class="form-label">Funciones / Perfil requerido</label>
+                    <textarea id="sDesc" class="form-control" rows="3" required></textarea>
+                    <div class="invalid-feedback">Describe las funciones / perfil</div>
+                  </div>
+                  <div class="alert alert-warning alert-inline mt-3 d-none" id="alertConvenio">No encontramos un convenio **vigente**. Puedes **iniciar trámite de convenio** o **usar Carta (excepción)** para continuar.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2 mt-3">
+            <button id="btnSolBorrador" class="btn btn-outline-secondary" type="button"><i class="bi bi-save"></i> Guardar borrador</button>
+            <button id="btnSolEnviar" class="btn btn-primary" type="submit"><i class="bi bi-send"></i> Enviar solicitud</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- MIS SOLICITUDES (LISTA) -->
+      <div class="tab-pane fade" id="pane-solicitudes" role="tabpanel" aria-labelledby="tab-solicitudes">
+        <div class="card">
+          <div class="card-header d-flex align-items-center gap-2"><i class="bi bi-list-task"></i><div class="fw-semibold">Solicitudes <span class="text-body-secondary small" id="lblCountSol"></span></div><div class="ms-auto small" id="lblPaginaSol">Página 1</div></div>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>#</th>
+                  <th>Dependencia</th>
+                  <th>Programa</th>
+                  <th>Tipo práctica</th>
+                  <th>Fecha requerida</th>
+                  <th>Cantidad</th>
+                  <th>Estado</th>
+                  <th>Asignados</th>
+                  <th class="text-end">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tbodySol"></tbody>
+            </table>
+          </div>
+          <div class="card-footer d-flex align-items-center gap-2">
+            <div class="btn-group" role="group" aria-label="Paginación">
+              <button class="btn btn-outline-secondary btn-sm" id="btnPrevSol"><i class="bi bi-chevron-left"></i></button>
+              <span class="btn btn-light btn-sm disabled" id="lblPaginaBottomSol">Página 1</span>
+              <button class="btn btn-outline-secondary btn-sm" id="btnNextSol"><i class="bi bi-chevron-right"></i></button>
+            </div>
+            <select id="pageSizeSol" class="form-select form-select-sm ms-auto" style="width:auto">
+              <option value="10">10</option>
+              <option value="15" selected>15</option>
+              <option value="25">25</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sidepanel detalle (reusa para convenio/solicitud) -->
+  <aside class="sidepanel" id="sidepanel" aria-labelledby="sideTitle" aria-modal="true" role="dialog">
+    <div class="sidepanel-header">
+      <div class="fw-semibold" id="sideTitle">Detalle</div>
+      <button class="btn btn-sm btn-light" id="btnCloseSide"><i class="bi bi-x"></i></button>
+    </div>
+    <div class="sidepanel-body" id="sideBody">
+      <!-- Dinámico -->
+    </div>
+  </aside>
+
+  <!-- Toast -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index:1080">
+    <div id="toast" class="toast align-items-center text-bg-primary border-0" role="status" aria-live="polite" aria-atomic="true">
+      <div class="d-flex"><div class="toast-body" id="toastMsg">Hecho</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ====== Utils ======
+    const toastEl=document.getElementById('toast');
+    const toastMsg=document.getElementById('toastMsg');
+    const toast=new bootstrap.Toast(toastEl);
+    const showToast=(m,v='primary')=>{toastEl.className='toast align-items-center text-bg-'+v+' border-0';toastMsg.textContent=m;toast.show();};
+    const fmt=(d)=> new Date(d).toLocaleDateString('es-CO');
+    const withinDays=(d,days)=>{const dd=new Date(d); const now=new Date(); const diff=(dd-now)/(1000*60*60*24); return diff>=0 && diff<=days;};
+
+    // ====== Demo data y catálogos ======
+    const TIPOS=['Escenario','Autónoma','Cooperación'];
+    const DOCS_BY_TIPO={
+      'Escenario':['Minuta propuesta','Política de datos','Cámara de Comercio','ARL'],
+      'Autónoma':['Carta de intención','Política de datos','RUT','ARL'],
+      'Cooperación':['Propuesta técnica','Acta de compromiso','RUT']
+    };
+    const FACULTADES={
+      'Ingeniería':['Ingeniería de Sistemas','Ingeniería Industrial','Ingeniería Civil'],
+      'Salud':['Enfermería','Fisioterapia'],
+      'Ciencias Económicas':['Administración de Empresas','Contaduría'],
+      'Educación':['Lic. Matemáticas','Lic. Lengua']
+    };
+    const PROGRAMAS=Object.values(FACULTADES).flat();
+
+    // ====== Estado persistente ======
+    const storeKey='empresa.portal.v12';
+    let DATA=JSON.parse(localStorage.getItem(storeKey)||'null');
+    if(!DATA){
+      DATA={
+        empresa:{nit:'900123456',razon:'Tecnologías Ejemplo S.A.S.',rep:'María Pérez',direccion:'Calle 123 #45-67'},
+        convenios:[
+          {id:'CNV-2025-001',tipo:'Escenario',dependencia:'Operaciones',fini:'2025-02-01',ffin:'2025-12-31',vacSol:10,vacAsig:6,estado:'Vigente',docs:['Minuta propuesta','Política de datos','Cámara de Comercio'],comentarios:[{txt:'Aprobado por jurídica',ts:'2025-01-15'}]},
+          {id:'CNV-2024-112',tipo:'Autónoma',dependencia:'TI',fini:'2024-03-01',ffin:'2025-01-31',vacSol:4,vacAsig:4,estado:'Cerrado',docs:['Carta de intención','Política de datos','RUT','ARL'],comentarios:[]},
+          {id:'CNV-2025-015',tipo:'Cooperación',dependencia:'Talento',fini:'2025-08-01',ffin:'2026-07-31',vacSol:3,vacAsig:1,estado:'Solicitado',docs:['Propuesta técnica'],comentarios:[]}
+        ],
+        solicitudes:[
+          {id:'SOL-2025-1001',dependencia:'Operaciones',solicitante:'Carlos Gómez',correo:'carlos@ejemplo.com',telefono:'3001112233',fecha:'2025-11-01',programa:'Ingeniería de Sistemas',tipo:'Contrato de aprendizaje SENA',cantidad:3,descripcion:'Soporte N1 y automatización',estado:'Enviada',asignados:0},
+          {id:'SOL-2025-1002',dependencia:'TI',solicitante:'Ana Ruiz',correo:'ana@ejemplo.com',telefono:'3002223344',fecha:'2025-10-20',programa:'Administración de Empresas',tipo:'Pasantia remunerada',cantidad:2,descripcion:'Gestión documental y BI',estado:'En proceso',asignados:1}
+        ]
+      };
+      localStorage.setItem(storeKey,JSON.stringify(DATA));
+    }
+
+    // ====== Estado UI (convenios) ======
+    let filters={tipo:'',estado:'',rango:''};
+    let page=1; let pageSize=15;
+
+    // ====== Estado UI (solicitudes) ======
+    let pageSol=1; let pageSizeSol=15;
+
+    // ====== Dark mode ======$1)();
+
+    // ====== Guía (persistencia mostrar/ocultar) ======
+    (function(){
+      const KEY='institucional.guide.hidden';
+      const sec=document.getElementById('guide');
+      const badge=document.getElementById('guideState');
+      const btn=document.getElementById('btnHideGuide');
+      const body=document.getElementById('guideBody');
+      function apply(){
+        const hidden=localStorage.getItem(KEY)==='1';
+        if(!sec||!badge||!body) return;
+        if(hidden){
+          body.classList.add('d-none'); // ocultamos SOLO el cuerpo, no toda la sección
+          badge.textContent='Oculta';
+          badge.className='badge text-bg-secondary';
+          if(btn){ btn.innerHTML='<i class="bi bi-eye"></i> Mostrar guía'; btn.setAttribute('aria-label','Mostrar guía'); btn.setAttribute('aria-expanded','false'); }
+        } else {
+          body.classList.remove('d-none');
+          badge.textContent='Visible';
+          badge.className='badge text-bg-success';
+          if(btn){ btn.innerHTML='<i class="bi bi-eye-slash"></i> Ocultar guía'; btn.setAttribute('aria-label','Ocultar guía'); btn.setAttribute('aria-expanded','true'); }
+        }
+      }
+      if(btn){
+        btn.addEventListener('click',()=>{
+          const hidden=localStorage.getItem(KEY)==='1';
+          localStorage.setItem(KEY, hidden?'0':'1');
+          apply();
+        });
+      }
+      apply();
+    })();
+
+    // ====== KPIs ======
+    function refreshKPIs(){
+      const arr=datasetConv();
+      const total=arr.length; const vig=arr.filter(c=>c.estado==='Vigente').length; const por60=arr.filter(c=>withinDays(c.ffin,60)).length; const por30=arr.filter(c=>withinDays(c.ffin,30)).length;
+      const vacSol=arr.reduce((a,c)=>a+(c.vacSol||0),0); const vacAsig=arr.reduce((a,c)=>a+(c.vacAsig||0),0);
+      const sol=DATA.solicitudes; const env=sol.filter(s=>['Enviada','Recibida por Coordinador'].includes(s.estado)).length; const proc=sol.filter(s=>s.estado==='En proceso').length; const cand=sol.filter(s=>s.estado==='Con candidatos').length;
+      document.getElementById('kpiTotal').textContent=total; document.getElementById('kpiVig').textContent=vig; document.getElementById('kpi60').textContent=por60; document.getElementById('kpiPorVencer').textContent=por60; document.getElementById('kpi30').textContent=por30;
+      document.getElementById('kpiVacSol').textContent=vacSol; document.getElementById('kpiVacAsig').textContent=vacAsig;
+      document.getElementById('kpiSolEnv').textContent=env; document.getElementById('kpiSolProc').textContent=proc; document.getElementById('kpiSolCand').textContent=cand;
+    }
+
+    // ====== Dataset convenios ======
+    function datasetConv(){
+      const fromTo=(r)=>{const m=r.match(/^(\d{4})-(\d{2})\s*a\s*(\d{4})-(\d{2})$/); if(!m) return null; return {y1:+m[1],m1:+m[2],y2:+m[3],m2:+m[4]};};
+      return DATA.convenios.filter(c=> (
+        (!filters.tipo || c.tipo===filters.tipo) &&
+        (!filters.estado || c.estado===filters.estado) &&
+        (!filters.rango || ( ()=>{ const R=fromTo(filters.rango); if(!R) return true; const ci=new Date(c.fini); const cf=new Date(c.ffin); const r1=new Date(R.y1, R.m1-1, 1); const r2=new Date(R.y2, R.m2-1, 1); return (ci<=r2 && cf>=r1); })() )
+      ));
+    }
+
+    // ====== Render tabla convenios ======
+    function renderTablaConv(){
+      const arr=datasetConv();
+      const tbody=document.getElementById('tbodyLista'); tbody.innerHTML='';
+      const totalPages=Math.max(1,Math.ceil(arr.length/pageSize)); if(page>totalPages) page=totalPages; const start=(page-1)*pageSize; const pageData=arr.slice(start,start+pageSize);
+      pageLabels(totalPages);
+      document.getElementById('lblCount').textContent=`(${arr.length})`;
+      pageData.forEach(c=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`
+          <td><div class="fw-semibold">${c.id}</div><div class="small text-body-secondary">${DATA.empresa.razon}</div></td>
+          <td><div class="fw-semibold">${c.tipo}</div><div class="small text-body-secondary">${c.dependencia}</div></td>
+          <td>${fmt(c.fini)} → ${fmt(c.ffin)}</td>
+          <td><span class="badge text-bg-primary">${c.vacAsig||0}</span> / <span class="badge text-bg-secondary">${c.vacSol||0}</span></td>
+          <td><span class="badge ${badgeEstadoConv(c.estado)}">${c.estado}</span></td>
+          <td>${(c.comentarios?.length||0)} comentarios</td>
+          <td class="text-end"><button class="btn btn-outline-secondary btn-sm" data-action="ver"><i class="bi bi-eye"></i></button></td>`;
+        tr.querySelector('[data-action="ver"]').addEventListener('click',()=> openSidepanelConvenio(c));
+        tbody.appendChild(tr);
+      });
+    }
+    function badgeEstadoConv(est){
+      const map={ 'Solicitado':'text-bg-secondary','En revisión':'text-bg-warning text-dark','Aprobado':'text-bg-info','Vigente':'text-bg-success','Vencido':'text-bg-danger','Cerrado':'text-bg-dark','Rechazado':'text-bg-danger'};
+      return map[est]||'text-bg-light';
+    }
+    function pageLabels(total){ const label=`Página ${page} de ${total}`; document.getElementById('lblPagina').textContent=label; document.getElementById('lblPaginaBottom').textContent=label; }
+
+    // ====== Sidepanel Convenio ======
+    const side=document.getElementById('sidepanel');
+    const sideBody=document.getElementById('sideBody');
+    document.getElementById('btnCloseSide').addEventListener('click',()=> side.classList.remove('open'));
+    function openSidepanelConvenio(c){
+      sideBody.innerHTML=`
+        <div class="mb-2 small text-body-secondary">Convenio</div>
+        <div class="mb-2"><b>${c.id}</b> – ${DATA.empresa.razon}</div>
+        <div><b>Tipo:</b> ${c.tipo} • <b>Dependencia:</b> ${c.dependencia}</div>
+        <div><b>Vigencia:</b> ${fmt(c.fini)} → ${fmt(c.ffin)}</div>
+        <hr/>
+        <div class="mb-2 small text-body-secondary">Documentos</div>
+        <div class="d-flex flex-column gap-2">${(c.docs||[]).map(n=>`<div class='doc-pill'><i class="bi bi-file-earmark"></i> ${n}</div>`).join('')}</div>
+        <hr/>
+        <div class="mb-2 small text-body-secondary">Comentarios</div>
+        <div class="d-flex flex-column gap-2" id="comentarios">${(c.comentarios||[]).map(cm=>`<div class='border rounded p-2 small'><b>${cm.ts}</b><br/>${cm.txt}</div>`).join('')||'<div class="text-body-secondary small">Sin comentarios</div>'}</div>
+      `;
+      side.classList.add('open');
+    }
+
+    // ====== Solicitud de Practicantes: catálogo programas ======
+    const selPrograma=document.getElementById('sPrograma');
+    PROGRAMAS.forEach(p=>{ const o=document.createElement('option'); o.value=p; o.textContent=p; selPrograma.appendChild(o); });
+
+    // ====== Helpers: convenio vigente para fecha dada ======
+    function hayConvenioVigente(fechaISO){
+      const f=new Date(fechaISO);
+      return DATA.convenios.some(c=> c.estado==='Vigente' && new Date(c.fini)<=f && f<=new Date(c.ffin));
+    }
+
+    // ====== Form Solicitud: eventos ======
+    document.getElementById('frmSolicitud').addEventListener('submit',(e)=>{
+      e.preventDefault();
+      // validación nativa
+      const form=e.target; if(!form.checkValidity()){ form.classList.add('was-validated'); return; }
+      const dep=document.getElementById('sDep').value.trim();
+      const nom=document.getElementById('sNom').value.trim();
+      const tel=document.getElementById('sTel').value.trim();
+      const mail=document.getElementById('sMail').value.trim();
+      const fecha=document.getElementById('sFecha').value;
+      const tipo=document.getElementById('sTipo').value;
+      const programa=document.getElementById('sPrograma').value;
+      const cant=+document.getElementById('sCant').value;
+      const desc=document.getElementById('sDesc').value.trim();
+
+      const id='SOL-'+ new Date().getFullYear() + '-' + String(Math.floor(Math.random()*9000)+1000);
+      const vigente=hayConvenioVigente(fecha);
+      const estado= vigente? 'Enviada':'En espera de convenio';
+      if(!vigente){ document.getElementById('alertConvenio').classList.remove('d-none'); }
+
+      DATA.solicitudes.unshift({id,dependencia:dep,solicitante:nom,correo:mail,telefono:tel,fecha:fecha,programa:programa,tipo:tipo,cantidad:cant,descripcion:desc,estado:estado,asignados:0});
+      localStorage.setItem(storeKey, JSON.stringify(DATA));
+      showToast('Solicitud registrada','success');
+      document.getElementById('tab-solicitudes').click();
+      renderTablaSol(); refreshKPIs();
+    });
+    document.getElementById('btnSolBorrador').addEventListener('click',()=>{ showToast('Borrador guardado localmente','secondary'); });
+
+    // ====== Tabla Solicitudes ======
+    function renderTablaSol(){
+      const arr=DATA.solicitudes;
+      const tbody=document.getElementById('tbodySol'); tbody.innerHTML='';
+      const totalPages=Math.max(1,Math.ceil(arr.length/pageSizeSol)); if(pageSol>totalPages) pageSol=totalPages; const start=(pageSol-1)*pageSizeSol; const pageData=arr.slice(start,start+pageSizeSol);
+      document.getElementById('lblCountSol').textContent=`(${arr.length})`;
+      const label=`Página ${pageSol} de ${totalPages}`; document.getElementById('lblPaginaSol').textContent=label; document.getElementById('lblPaginaBottomSol').textContent=label;
+      pageData.forEach(s=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`
+          <td>${s.id}</td>
+          <td>${s.dependencia}</td>
+          <td>${s.programa}</td>
+          <td>${s.tipo}</td>
+          <td>${fmt(s.fecha)}</td>
+          <td>${s.cantidad}</td>
+          <td><span class="badge ${badgeEstadoSol(s.estado)}">${s.estado}</span></td>
+          <td>${s.asignados||0}</td>
+          <td class="text-end"><button class="btn btn-outline-secondary btn-sm" data-action="ver"><i class="bi bi-eye"></i></button></td>`;
+        tr.querySelector('[data-action="ver"]').addEventListener('click',()=> openSidepanelSolicitud(s));
+        tbody.appendChild(tr);
+      });
+    }
+    function badgeEstadoSol(est){
+      const map={ 'Borrador':'text-bg-secondary','Enviada':'text-bg-info','Recibida por Coordinador':'text-bg-primary','En proceso':'text-bg-warning text-dark','Con candidatos':'text-bg-success','Cerrada':'text-bg-dark','En espera de convenio':'text-bg-danger'};
+      return map[est]||'text-bg-light';
+    }
+
+    // ====== Sidepanel Solicitud ======
+    function openSidepanelSolicitud(s){
+      sideBody.innerHTML=`
+        <div class="mb-2 small text-body-secondary">Solicitud</div>
+        <div class="mb-2"><b>${s.id}</b> – ${DATA.empresa.razon}</div>
+        <div><b>Dependencia:</b> ${s.dependencia}</div>
+        <div><b>Solicitante:</b> ${s.solicitante} • ${s.telefono} • ${s.correo}</div>
+        <div><b>Programa:</b> ${s.programa} • <b>Tipo:</b> ${s.tipo}</div>
+        <div><b>Fecha requerida:</b> ${fmt(s.fecha)} • <b>Cantidad:</b> ${s.cantidad}</div>
+        <hr/>
+        <div class="mb-2 small text-body-secondary">Descripción</div>
+        <div class="border rounded p-2 small">${s.descripcion||''}</div>
+        <hr/>
+        <div class="mb-2 small text-body-secondary">Asignaciones</div>
+        <div class="small">Estudiantes asignados: <b>${s.asignados||0}</b></div>
+      `;
+      side.classList.add('open');
+    }
+
+    // ====== Filtros y acciones de lista (convenios) ======
+    document.getElementById('btnBuscar').addEventListener('click', applyFilters);
+    document.getElementById('btnLimpiar').addEventListener('click', clearFilters);
+    document.getElementById('btnExportar').addEventListener('click', ()=> showToast('Exportación XLSX (integrar servidor/SaaS)','primary'));
+    document.getElementById('btnPDF').addEventListener('click', ()=> showToast('Exportación PDF (integrar servidor)','primary'));
+    document.getElementById('btnPrev').addEventListener('click', ()=>{ if(page>1){ page--; renderTablaConv(); }});
+    document.getElementById('btnNext').addEventListener('click', ()=>{ const totalPages=Math.max(1,Math.ceil(datasetConv().length/pageSize)); if(page<totalPages){ page++; renderTablaConv(); }});
+    document.getElementById('pageSize').addEventListener('change', (e)=>{ pageSize=+e.target.value; page=1; renderTablaConv(); });
+
+    function applyFilters(){ page=1; refreshKPIs(); renderTablaConv(); }
+    function clearFilters(){ filters={tipo:'',estado:'',rango:''}; document.getElementById('fTipo').value=''; document.getElementById('fEstado').value=''; document.getElementById('fRango').value=''; applyFilters(); }
+
+    document.getElementById('fTipo').addEventListener('change', e=>{ filters.tipo=e.target.value; });
+    document.getElementById('fEstado').addEventListener('change', e=>{ filters.estado=e.target.value; });
+    document.getElementById('fRango').addEventListener('input', e=>{ filters.rango=e.target.value.trim(); });
+
+    // ====== Paginación solicitudes ======
+    document.getElementById('btnPrevSol').addEventListener('click', ()=>{ if(pageSol>1){ pageSol--; renderTablaSol(); }});
+    document.getElementById('btnNextSol').addEventListener('click', ()=>{ const totalPages=Math.max(1,Math.ceil(DATA.solicitudes.length/pageSizeSol)); if(pageSol<totalPages){ pageSol++; renderTablaSol(); }});
+    document.getElementById('pageSizeSol').addEventListener('change', (e)=>{ pageSizeSol=+e.target.value; pageSol=1; renderTablaSol(); });
+
+    // ====== Init ======
+    function init(){
+      // fill filtros tipo
+      TIPOS.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; document.getElementById('fTipo').appendChild(o); });
+      refreshKPIs(); renderTablaConv(); renderTablaSol();
+    }
+    init();
+  </script>
+</body>
+</html>
